@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Three — Brandon Copeland</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script>
+      (() => {
+        document.documentElement.classList.add("is-loading");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        let storedTheme = null;
+        try {
+          storedTheme = localStorage.getItem("theme");
+        } catch {
+          storedTheme = null;
+        }
+        document.documentElement.dataset.theme = storedTheme || (prefersDark ? "dark" : "light");
+        window.setTimeout(() => {
+          document.documentElement.classList.remove("is-loading", "is-leaving");
+          document.documentElement.classList.add("is-ready");
+        }, 1200);
+      })();
+    </script>
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body class="case-study-page case-study-page--image-header">
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="site-nav__logo" href="/#hero" aria-label="Go to hero section"><span>B</span><span>C</span></a>
+        <ul class="site-nav__list" id="site-nav-list">
+          <li><a href="/#hero">Home</a></li>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Switch to dark mode"
+          >
+            <span class="theme-toggle__option theme-toggle__option--light" aria-hidden="true">
+              <span class="material-symbols-outlined">light_mode</span>
+            </span>
+            <span class="theme-toggle__option theme-toggle__option--dark" aria-hidden="true">
+              <span class="material-symbols-outlined">dark_mode</span>
+            </span>
+          </button>
+          <button
+            class="nav-toggle"
+            type="button"
+            data-nav-toggle
+            aria-label="Open navigation menu"
+            aria-controls="site-nav-list"
+            aria-expanded="false"
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="case-study">
+        <header class="case-study-header case-study-header--image case-study-header--project-three">
+          <div class="container">
+            <nav class="case-study-breadcrumb" aria-label="Breadcrumb">
+              <a href="/">Home</a>
+              <span aria-hidden="true">→</span>
+              <a href="/#work">Work</a>
+              <span aria-hidden="true">→</span>
+              <span>Project Three</span>
+            </nav>
+            <h1>Project Three — Featured case study title</h1>
+            <div class="case-study-company">
+              <span>Completed while at</span>
+              <strong>Company</strong>
+            </div>
+          </div>
+        </header>
+
+        <div class="case-study-content container">
+          <section class="case-study-overview" aria-labelledby="overview-heading">
+            <div class="case-study-copy">
+              <h2 id="overview-heading">Overview</h2>
+              <p>
+                A short introduction to the product, audience, and problem space.
+                Explain what was happening, why it mattered, and what the team
+                needed to improve.
+              </p>
+              <p>
+                Use this section to frame the challenge in plain language before
+                moving into your process. Keep the focus on user needs, business
+                context, and the design decisions that shaped the work.
+              </p>
+            </div>
+
+            <dl class="case-study-meta">
+              <div>
+                <dt>My contribution</dt>
+                <dd>Design systems</dd>
+                <dd>Product design</dd>
+                <dd>Developer collaboration</dd>
+              </div>
+              <div>
+                <dt>The team</dt>
+                <dd>Design lead</dd>
+                <dd>Product partners</dd>
+                <dd>Engineering team</dd>
+              </div>
+              <div>
+                <dt>Year</dt>
+                <dd>2024</dd>
+              </div>
+            </dl>
+          </section>
+
+          <figure class="case-study-visual">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <section class="case-study-section" aria-labelledby="context-heading">
+            <div class="case-study-copy">
+              <h2 id="context-heading">Context</h2>
+              <p>
+                Introduce the company, product, or market this work sits within so
+                a reader unfamiliar with it can follow along.
+              </p>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--wide">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <section
+            class="case-study-section case-study-section--split"
+            aria-labelledby="problem-heading"
+          >
+            <div class="case-study-copy">
+              <h2 id="problem-heading">Problem</h2>
+              <p>
+                Describe the core problem in plain language. What was breaking
+                down for users, and where did the existing experience fall short?
+              </p>
+              <p>
+                Add supporting detail about the friction, the cost of the problem,
+                and why it was worth solving now.
+              </p>
+            </div>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+          </section>
+
+          <section class="case-study-section" aria-labelledby="goal-heading">
+            <div class="case-study-copy">
+              <h2 id="goal-heading">Goal</h2>
+              <ul class="case-study-list">
+                <li>
+                  <strong>First goal:</strong> describe the primary outcome you
+                  set out to achieve with this work.
+                </li>
+                <li>
+                  <strong>Second goal:</strong> capture a secondary objective that
+                  shaped the direction of the design.
+                </li>
+                <li>
+                  <strong>Third goal:</strong> note any guiding principle or
+                  constraint the team aligned on.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <div class="case-study-image-grid case-study-image-grid--three" aria-label="Goal visuals">
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+          </div>
+
+          <section class="case-study-section" aria-labelledby="process-heading">
+            <div class="case-study-copy">
+              <h2 id="process-heading">Process</h2>
+              <p>
+                Walk through how you approached the work: how you broke it down,
+                what you researched, and how you moved from problem to direction.
+              </p>
+              <p>
+                This is a good place to show how research, stakeholder alignment,
+                and technical constraints shaped the initial direction.
+              </p>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--inline">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <section
+            class="case-study-section case-study-section--split case-study-section--split-reverse"
+            aria-labelledby="explorations-heading"
+          >
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+            <div class="case-study-copy">
+              <h2 id="explorations-heading">Explorations</h2>
+              <p>
+                Show the options you considered and the thinking behind the
+                direction you chose. Highlight key decisions and tradeoffs.
+              </p>
+            </div>
+          </section>
+
+          <section class="case-study-section" aria-labelledby="outcome-heading">
+            <div class="case-study-copy">
+              <h2 id="outcome-heading">Outcome</h2>
+              <ul class="case-study-list">
+                <li>
+                  <strong>Result one:</strong> summarize a concrete outcome, with
+                  a metric or qualitative impact where possible.
+                </li>
+                <li>
+                  <strong>Result two:</strong> describe another way the work moved
+                  the product, team, or users forward.
+                </li>
+                <li>
+                  <strong>Result three:</strong> capture validation, adoption, or
+                  feedback that confirmed the direction.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--wide">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <div class="case-study-image-grid" aria-label="Outcome visuals">
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+          </div>
+
+          <section class="case-study-section" aria-labelledby="reflections-heading">
+            <div class="case-study-copy">
+              <h2 id="reflections-heading">Reflections</h2>
+              <ul class="case-study-list">
+                <li>
+                  Capture what you learned and what you would approach differently
+                  next time.
+                </li>
+                <li>
+                  Note any longer-term impact, follow-on work, or decisions that
+                  shaped how the team works today.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--wide">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <a class="next-project" href="/case-studies/project-four.html">
+            <span>Next project</span>
+            <strong>Project Four →</strong>
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer site-footer--simple">
+      <div class="container site-footer__meta">
+        <p>© <span id="year"></span> Brandon Copeland. All rights reserved.</p>
+        <a href="/#work">Back to work</a>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

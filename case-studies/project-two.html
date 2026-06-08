@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add to list UX case study — Brandon Copeland</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script>
+      (() => {
+        document.documentElement.classList.add("is-loading");
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        let storedTheme = null;
+        try {
+          storedTheme = localStorage.getItem("theme");
+        } catch {
+          storedTheme = null;
+        }
+        document.documentElement.dataset.theme = storedTheme || (prefersDark ? "dark" : "light");
+        window.setTimeout(() => {
+          document.documentElement.classList.remove("is-loading", "is-leaving");
+          document.documentElement.classList.add("is-ready");
+        }, 1200);
+      })();
+    </script>
+    <link rel="stylesheet" href="/src/styles/main.css" />
+  </head>
+  <body class="case-study-page case-study-page--image-header">
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="site-nav__logo" href="/#hero" aria-label="Go to hero section"><span>B</span><span>C</span></a>
+        <ul class="site-nav__list" id="site-nav-list">
+          <li><a href="/#hero">Home</a></li>
+          <li><a href="/#work">Work</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Switch to dark mode"
+          >
+            <span class="theme-toggle__option theme-toggle__option--light" aria-hidden="true">
+              <span class="material-symbols-outlined">light_mode</span>
+            </span>
+            <span class="theme-toggle__option theme-toggle__option--dark" aria-hidden="true">
+              <span class="material-symbols-outlined">dark_mode</span>
+            </span>
+          </button>
+          <button
+            class="nav-toggle"
+            type="button"
+            data-nav-toggle
+            aria-label="Open navigation menu"
+            aria-controls="site-nav-list"
+            aria-expanded="false"
+          >
+            <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="case-study">
+        <header class="case-study-header case-study-header--image case-study-header--project-two">
+          <div class="container">
+            <nav class="case-study-breadcrumb" aria-label="Breadcrumb">
+              <a href="/">Home</a>
+              <span aria-hidden="true">→</span>
+              <a href="/#work">Work</a>
+              <span aria-hidden="true">→</span>
+              <span>Add to list UX case study</span>
+            </nav>
+            <h1>Add to list UX case study</h1>
+            <div class="case-study-company">
+              <span>Completed while at</span>
+              <img
+                class="case-study-company__logo"
+                src="/src/assets/logos/flipp.png"
+                alt=""
+                width="24"
+                height="24"
+                loading="lazy"
+                decoding="async"
+              />
+              <strong>Flipp</strong>
+            </div>
+          </div>
+        </header>
+
+        <div class="case-study-content container">
+          <section class="case-study-overview" aria-labelledby="overview-heading">
+            <div class="case-study-copy">
+              <h2 id="overview-heading">Overview</h2>
+              <p>
+                This project aimed to improve the clipping experience and
+                strengthen its connection to the shopping list for better user
+                outcomes.
+              </p>
+              <p>
+                57% of MAU clip items, but only 38% navigate to the shopping
+                list, revealing a disconnect. Users struggled with clipping
+                awareness, unclear feedback, and finding clipped items in a busy
+                list.
+              </p>
+              <p>
+                The greatest opportunity was converting engaged visits into
+                EV+Clip sessions by encouraging clipping during shopping sessions
+                and making the relationship between clipped items and lists more
+                intuitive.
+              </p>
+            </div>
+
+            <dl class="case-study-meta">
+              <div>
+                <dt>My contribution</dt>
+                <dd>UX design / research</dd>
+                <dd>Product design</dd>
+                <dd>UI / visual design</dd>
+              </div>
+              <div>
+                <dt>The team</dt>
+                <dd>Product designer</dd>
+                <dd>Product partners</dd>
+                <dd>Engineering partners</dd>
+              </div>
+              <div>
+                <dt>Year</dt>
+                <dd>2025</dd>
+              </div>
+            </dl>
+          </section>
+
+          <figure class="case-study-visual">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <section class="case-study-section" aria-labelledby="flipp-heading">
+            <div class="case-study-copy">
+              <h2 id="flipp-heading">What is Flipp?</h2>
+              <p>
+                Flipp is a shopping platform that lets users discover deals,
+                coupons, and flyers from local retailers to save money on
+                products.
+              </p>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--wide">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <section
+            class="case-study-section case-study-section--split"
+            aria-labelledby="problem-heading"
+          >
+            <div class="case-study-copy">
+              <h2 id="problem-heading">Problem</h2>
+              <p>
+                Adding items to a list across the app can be challenging. While
+                it seems straightforward, users often struggle to complete the
+                action successfully.
+              </p>
+              <p>
+                The add interaction lacked clarity, failed to show where items
+                went after being added, and created inconsistencies that hindered
+                effective shopping list management.
+              </p>
+            </div>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+          </section>
+
+          <section class="case-study-section" aria-labelledby="goal-heading">
+            <div class="case-study-copy">
+              <h2 id="goal-heading">Goal</h2>
+              <ul class="case-study-list">
+                <li>
+                  <strong>Increase clipping awareness:</strong> enhance
+                  visibility and discoverability of the clipping functionality
+                  across the app.
+                </li>
+                <li>
+                  <strong>Provide clear feedback:</strong> introduce user
+                  feedback that clearly indicates where clipped items are saved.
+                </li>
+                <li>
+                  <strong>Strengthen user understanding:</strong> educate users
+                  on the connection between clipping and their shopping list
+                  through intuitive design and prompts.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <div class="case-study-image-grid case-study-image-grid--three" aria-label="Goal visuals">
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+          </div>
+
+          <section class="case-study-section" aria-labelledby="process-heading">
+            <div class="case-study-copy">
+              <h2 id="process-heading">Process</h2>
+              <p>
+                The process moved through define, research, ideate, test,
+                refine, and ship. To assess the significant design changes, I
+                conducted two rounds of unmoderated user testing.
+              </p>
+              <p>
+                This approach provided valuable insights and confidence for
+                further refinement and development.
+              </p>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--inline">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <section
+            class="case-study-section case-study-section--split case-study-section--split-reverse"
+            aria-labelledby="ux-heading"
+          >
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+            <div class="case-study-copy">
+              <h2 id="ux-heading">UX explorations</h2>
+              <p>
+                The UX explored clearer add states, item quantity controls,
+                list-level feedback, and confirmation patterns that help users
+                understand when items have been added successfully.
+              </p>
+            </div>
+          </section>
+
+          <section class="case-study-section" aria-labelledby="outcome-heading">
+            <div class="case-study-copy">
+              <h2 id="outcome-heading">Outcome</h2>
+              <ul class="case-study-list">
+                <li>
+                  <strong>High completion rates:</strong> all users (100%)
+                  successfully added items from search results and in-flyer tasks,
+                  with average satisfaction ratings of 6.8–6.9 out of 7.
+                </li>
+                <li>
+                  <strong>Positive feedback on visual elements:</strong>
+                  animations, checkmarks, and number badges were widely
+                  appreciated for confirming actions, with 17/20 users noticing
+                  these indicators in the in-flyer task.
+                </li>
+                <li>
+                  <strong>Ease of removing items:</strong> users consistently
+                  identified multiple ways to remove items from their list,
+                  showcasing clarity in the design.
+                </li>
+                <li>
+                  <strong>Expanded actions well understood:</strong> users
+                  instinctively expanded the bottom sheet to access additional
+                  actions like share and easily located options to adjust
+                  quantities or remove items.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--wide">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <div class="case-study-image-grid" aria-label="Outcome and reflection visuals">
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+            </figure>
+          </div>
+
+          <section class="case-study-section" aria-labelledby="reflections-heading">
+            <div class="case-study-copy">
+              <h2 id="reflections-heading">Reflections</h2>
+              <ul class="case-study-list">
+                <li>
+                  Initially, we considered a full revamp of the swipe and flyer
+                  viewing experience. However, exploring various options showed
+                  that a redesign was not essential. Instead, I leveraged native
+                  components and common practices to solve the problem.
+                </li>
+                <li>
+                  I was confident skipping usability testing before the experiment
+                  due to the use of common design practices and components, which
+                  positively impacted development time and user interaction.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--wide">
+            <div class="case-study-visual__placeholder" aria-label="Image placeholder"></div>
+          </figure>
+
+          <a class="next-project" href="/case-studies/project-three.html">
+            <span>Next project</span>
+            <strong>Project Three →</strong>
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer site-footer--simple">
+      <div class="container site-footer__meta">
+        <p>© <span id="year"></span> Brandon Copeland. All rights reserved.</p>
+        <a href="/#work">Back to work</a>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
