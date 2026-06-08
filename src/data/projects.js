@@ -1,8 +1,8 @@
-const addToListThumbnail = "/case-studies/project-two/images/Intro1.png";
-const flippLogo = "/src/assets/logos/flipp.png";
-const innosoftLogo = "/src/assets/logos/innosoft.png";
-const trapezeLogo = "/src/assets/logos/trapeze.svg";
-const lawlabsLogo = "/src/assets/logos/lawlabs.png";
+const addToListThumbnail = "/assets/Intro1.png";
+const flippLogo = "/assets/logos/flipp.png";
+const innosoftLogo = "/assets/logos/innosoft.png";
+const trapezeLogo = "/assets/logos/trapeze.svg";
+const lawlabsLogo = "/assets/logos/lawlabs.png";
 
 /**
  * Case studies shown in the masonry/bento grid and used to drive the

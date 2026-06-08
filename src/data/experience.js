@@ -1,11 +1,11 @@
-const flippLogo = "/src/assets/logos/flipp.png";
-const lawlabsLogo = "/src/assets/logos/lawlabs.png";
-const innosoftLogo = "/src/assets/logos/innosoft.png";
-const trapezeLogo = "/src/assets/logos/trapeze.svg";
-const brandAndMortarLogo = "/src/assets/logos/brand-and-mortar.png";
+const flippLogo = "/assets/logos/flipp.png";
+const lawlabsLogo = "/assets/logos/lawlabs.png";
+const innosoftLogo = "/assets/logos/innosoft.png";
+const trapezeLogo = "/assets/logos/trapeze.svg";
+const brandAndMortarLogo = "/assets/logos/brand-and-mortar.png";
 
 /**
- * Work history — logos in /src/assets/logos/
+ * Work history — logos published from /assets/logos/
  */
 export const experience = [
   {
