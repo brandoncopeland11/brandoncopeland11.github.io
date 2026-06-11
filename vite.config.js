@@ -4,8 +4,30 @@ import { defineConfig } from "vite";
 const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
 const isUserPage = repositoryName.endsWith(".github.io");
 
+const cssBeforeJs = () => ({
+  name: "css-before-js",
+  transformIndexHtml: {
+    order: "post",
+    handler(html) {
+      const cssLink = html.match(
+        /<link rel="stylesheet" crossorigin href="\/assets\/[^"]+\.css">/
+      )?.[0];
+      const jsScript = html.match(
+        /<script type="module" crossorigin src="\/assets\/[^"]+\.js"><\/script>/
+      )?.[0];
+
+      if (!cssLink || !jsScript || html.indexOf(cssLink) < html.indexOf(jsScript)) {
+        return html;
+      }
+
+      return html.replace(cssLink, "").replace(jsScript, `${cssLink}\n    ${jsScript}`);
+    },
+  },
+});
+
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS && repositoryName && !isUserPage ? `/${repositoryName}/` : "/",
+  plugins: [cssBeforeJs()],
   build: {
     rollupOptions: {
       input: {

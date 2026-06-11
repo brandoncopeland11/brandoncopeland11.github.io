@@ -8,23 +8,39 @@ const themeMql = window.matchMedia("(prefers-color-scheme: dark)");
 const reducedMotionMql = window.matchMedia("(prefers-reduced-motion: reduce)");
 const rootEl = document.documentElement;
 
+const PAGE_REVEAL_MS = 80;
+const PAGE_LEAVE_MS = 450;
+
 const revealPage = () => {
   rootEl.classList.remove("is-loading", "is-leaving");
   rootEl.classList.add("is-ready");
 };
 
-if (reducedMotionMql.matches) {
-  revealPage();
-} else {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(revealPage);
-  });
-}
+const scheduleReveal = () => {
+  if (reducedMotionMql.matches) {
+    revealPage();
+    return;
+  }
 
-window.addEventListener("pageshow", revealPage);
+  const run = () => window.setTimeout(revealPage, PAGE_REVEAL_MS);
+
+  if (document.readyState === "complete") {
+    run();
+  } else {
+    window.addEventListener("load", run, { once: true });
+  }
+};
+
+scheduleReveal();
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    revealPage();
+  }
+});
 
 document.addEventListener("click", (event) => {
-  if (reducedMotionMql.matches || event.defaultPrevented || event.button !== 0) return;
+  if (event.defaultPrevented || event.button !== 0) return;
   if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
   const link = event.target instanceof Element ? event.target.closest("a") : null;
@@ -35,11 +51,13 @@ document.addEventListener("click", (event) => {
   if (url.pathname === window.location.pathname && url.hash) return;
   if (url.href === window.location.href) return;
 
+  if (reducedMotionMql.matches) return;
+
   event.preventDefault();
   rootEl.classList.add("is-leaving");
   window.setTimeout(() => {
     window.location.href = url.href;
-  }, 180);
+  }, PAGE_LEAVE_MS);
 });
 
 const getStoredTheme = () => {
@@ -195,10 +213,7 @@ if (heroSectionEl && !window.matchMedia("(prefers-reduced-motion: reduce)").matc
 
 const heroHeadingEl = document.getElementById("hero-heading");
 
-if (
-  heroHeadingEl &&
-  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-) {
+if (heroHeadingEl) {
   const headings = [
     "Crafting polished, intuitive interfaces with care and precision.",
     "Grounding every design decision in real user research and insight.",
@@ -206,37 +221,78 @@ if (
     "Partnering closely with teams to ship work that truly matters.",
   ];
 
-  const ROTATE_INTERVAL = 8000;
-  const FADE_DURATION = 1200;
-  const dots = Array.from(document.querySelectorAll(".hero-pagination__dot"));
-  let headingIndex = 0;
+  const mobileHeroMql = window.matchMedia("(max-width: 767px)");
 
-  const syncDots = () => {
-    dots.forEach((dot, dotIndex) => {
-      dot.classList.toggle("is-active", dotIndex === headingIndex);
+  const syncHeroHeadingHeight = () => {
+    if (!mobileHeroMql.matches) {
+      heroHeadingEl.style.minHeight = "";
+      return;
+    }
+
+    const currentText = heroHeadingEl.textContent;
+    let maxHeight = 0;
+
+    headings.forEach((heading) => {
+      heroHeadingEl.textContent = heading;
+      maxHeight = Math.max(maxHeight, heroHeadingEl.offsetHeight);
     });
+
+    heroHeadingEl.textContent = currentText;
+    heroHeadingEl.style.minHeight = `${maxHeight}px`;
   };
 
-  const showHeading = (nextIndex) => {
-    headingIndex = (nextIndex + headings.length) % headings.length;
-    syncDots();
-    heroHeadingEl.classList.add("is-swapping");
+  syncHeroHeadingHeight();
+  window.addEventListener("resize", syncHeroHeadingHeight);
 
-    window.setTimeout(() => {
-      heroHeadingEl.textContent = headings[headingIndex];
-      heroHeadingEl.classList.remove("is-swapping");
-    }, FADE_DURATION);
-  };
+  if (mobileHeroMql.addEventListener) {
+    mobileHeroMql.addEventListener("change", syncHeroHeadingHeight);
+  } else {
+    mobileHeroMql.addListener(syncHeroHeadingHeight);
+  }
 
-  window.setInterval(() => showHeading(headingIndex + 1), ROTATE_INTERVAL);
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(syncHeroHeadingHeight);
+  }
+
+  if (!reducedMotionMql.matches) {
+    const ROTATE_INTERVAL = 8000;
+    const FADE_DURATION = 1200;
+    const dots = Array.from(document.querySelectorAll(".hero-pagination__dot"));
+    let headingIndex = 0;
+
+    const syncDots = () => {
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === headingIndex);
+      });
+    };
+
+    const showHeading = (nextIndex) => {
+      headingIndex = (nextIndex + headings.length) % headings.length;
+      syncDots();
+      heroHeadingEl.classList.add("is-swapping");
+
+      window.setTimeout(() => {
+        heroHeadingEl.textContent = headings[headingIndex];
+        heroHeadingEl.classList.remove("is-swapping");
+      }, FADE_DURATION);
+    };
+
+    window.setInterval(() => showHeading(headingIndex + 1), ROTATE_INTERVAL);
+  }
 }
 
 
 if (masonryEl) {
   masonryEl.innerHTML = projects
     .map((project) => {
+      const imageAlt = project.imageAlt || project.title;
       const media = project.image
-        ? `<img class="work-card__image" src="${project.image}" alt="${project.imageAlt}" loading="lazy" decoding="async" />`
+        ? project.imageHover
+          ? `<div class="work-card__images">
+              <img class="work-card__image work-card__image--default" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />
+              <img class="work-card__image work-card__image--hover" src="${project.imageHover}" alt="" loading="lazy" decoding="async" />
+            </div>`
+          : `<img class="work-card__image" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />`
         : `<span class="placeholder-label">${project.title}</span>`;
 
       const badge = project.featured
@@ -325,14 +381,10 @@ function renderExperienceItem(item) {
 }
 
 if (experienceMarqueeEl && experience.length) {
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
   const buildMarquee = () => {
     const items = experience.map(renderExperienceItem).join("");
 
-    if (prefersReducedMotion) {
+    if (reducedMotionMql.matches) {
       experienceMarqueeEl.innerHTML = items;
       experienceMarqueeEl.style.removeProperty("--marquee-end");
       return;
@@ -358,6 +410,12 @@ if (experienceMarqueeEl && experience.length) {
 
   buildMarquee();
   window.addEventListener("resize", buildMarquee);
+
+  if (reducedMotionMql.addEventListener) {
+    reducedMotionMql.addEventListener("change", buildMarquee);
+  } else {
+    reducedMotionMql.addListener(buildMarquee);
+  }
 }
 
 const toolsGridEl = document.querySelector(".tools-grid");
@@ -418,14 +476,17 @@ if (toolsGridEl) {
 const navToggleBtn = document.querySelector("[data-nav-toggle]");
 if (navToggleBtn) {
   const navEl = navToggleBtn.closest(".site-nav");
-  const navListId = navToggleBtn.getAttribute("aria-controls");
-  const navListEl = navListId ? document.getElementById(navListId) : null;
+  const navMenuId = navToggleBtn.getAttribute("aria-controls");
+  const navMenuEl = navMenuId ? document.getElementById(navMenuId) : null;
+  const navListEl = navMenuEl?.querySelector(".site-nav__list") ?? null;
 
-  if (navEl && navListEl) {
+  if (navEl && navMenuEl && navListEl) {
     const iconEl = navToggleBtn.querySelector(".material-symbols-outlined");
 
     const setOpen = (open) => {
       navEl.classList.toggle("is-open", open);
+      document.body.classList.toggle("is-nav-open", open);
+      navMenuEl.setAttribute("aria-hidden", open ? "false" : "true");
       navToggleBtn.setAttribute("aria-expanded", open ? "true" : "false");
       navToggleBtn.setAttribute(
         "aria-label",

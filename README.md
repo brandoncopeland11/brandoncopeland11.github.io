@@ -19,6 +19,37 @@ npm run build
 npm run preview
 ```
 
+## Publish changes to GitHub Pages
+
+The live site is published from the `main` branch to:
+
+```text
+https://brandoncopeland11.github.io/
+```
+
+Recommended process:
+
+1. Make edits locally.
+2. Preview them with `npm run dev`.
+3. When the site is in a good place, run:
+
+```bash
+npm run pages:check
+git status
+```
+
+4. If the build passes and the changed files look right, commit and push:
+
+```bash
+git add .
+git commit -m "Describe the change"
+git push
+```
+
+5. Wait for the GitHub Pages deployment to finish in GitHub Actions, then hard refresh the live site.
+
+If you want help publishing, ask Cursor to "check, commit, and push the portfolio changes." Cursor should run the build first, review the changed files, commit only the intended changes, push to `main`, and verify the live URL.
+
 ## Project structure
 
 | Path | Purpose |

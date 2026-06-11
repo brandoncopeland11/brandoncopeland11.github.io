@@ -1,4 +1,6 @@
-const addToListThumbnail = "/assets/Intro1.png";
+import addToListThumbnail from "../../case-studies/project-two/images/thumbnail-default.png";
+import addToListHover from "../../case-studies/project-two/images/thumbnail-hover.png";
+
 const flippLogo = "/assets/logos/flipp.png";
 const innosoftLogo = "/assets/logos/innosoft.png";
 const trapezeLogo = "/assets/logos/trapeze.svg";
@@ -11,6 +13,7 @@ const lawlabsLogo = "/assets/logos/lawlabs.png";
  * size: "feature" (big, top-left) | "wide-tall" | "tall" | "wide" | "default"
  * featured: shows a "Featured" tag on the tile.
  * type: short label shown under the title (e.g. "Case study", "UI focus").
+ * image / imageHover: thumbnail pair for default and hover states.
  */
 export const projects = [
   {
@@ -30,7 +33,8 @@ export const projects = [
     href: "/case-studies/project-two.html",
     size: "default",
     image: addToListThumbnail,
-    imageAlt: "Flipp add to list UX case study mobile screen collage",
+    imageHover: addToListHover,
+    imageAlt: "Flipp add to list UX — search results and flyer add-to-list flows",
   },
   {
     title: "Project Three",
@@ -47,7 +51,7 @@ export const projects = [
     logoClass: "work-card__logo--trapeze",
     type: "Research project",
     href: "/case-studies/project-four.html",
-    size: "tall",
+    size: "default",
   },
   {
     title: "Project Five",
@@ -55,6 +59,6 @@ export const projects = [
     logo: lawlabsLogo,
     type: "UI focus",
     href: "/case-studies/project-five.html",
-    size: "wide-tall",
+    size: "wide",
   },
 ];
