@@ -1,5 +1,9 @@
 import { projects } from "./data/projects.js";
 import { experience } from "./data/experience.js";
+import { mountSiteLogo } from "./logo.js";
+import { initCaseStudyLightbox } from "./caseStudyLightbox.js";
+
+mountSiteLogo();
 
 const masonryEl = document.getElementById("work-masonry");
 const yearEl = document.getElementById("year");
@@ -189,6 +193,8 @@ if (document.body.classList.contains("case-study-page")) {
   window.addEventListener("resize", updateSubnavState);
   window.addEventListener("pageshow", updateScrollProgress);
   window.addEventListener("pageshow", updateSubnavState);
+
+  initCaseStudyLightbox();
 }
 
 const heroSectionEl = document.querySelector(".section--hero");

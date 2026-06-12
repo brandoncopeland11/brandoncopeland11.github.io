@@ -55,7 +55,7 @@
 
     <header class="site-header" id="top">
       <nav class="site-nav" aria-label="Primary">
-        <a class="site-nav__logo" href="#hero" aria-label="Go to hero section"><span>B</span><span>C</span></a>
+        <a class="site-nav__logo" href="#hero" aria-label="Brandon Copeland — home"></a>
         <div class="site-nav__menu" id="site-nav-menu" aria-hidden="true">
           <ul class="site-nav__list" id="site-nav-list">
             <li><a href="#hero">Home</a></li>
@@ -81,19 +81,6 @@
         </div>
         <div class="site-nav__actions">
           <button
-            class="theme-toggle theme-toggle--header"
-            type="button"
-            data-theme-toggle
-            aria-label="Switch to dark mode"
-          >
-            <span class="theme-toggle__option theme-toggle__option--light" aria-hidden="true">
-              <span class="material-symbols-outlined">light_mode</span>
-            </span>
-            <span class="theme-toggle__option theme-toggle__option--dark" aria-hidden="true">
-              <span class="material-symbols-outlined">dark_mode</span>
-            </span>
-          </button>
-          <button
             class="nav-toggle"
             type="button"
             data-nav-toggle
@@ -106,6 +93,22 @@
         </div>
       </nav>
     </header>
+
+    <aside class="theme-switcher" aria-label="Theme">
+      <button
+        class="theme-toggle theme-toggle--fixed"
+        type="button"
+        data-theme-toggle
+        aria-label="Switch to dark mode"
+      >
+        <span class="theme-toggle__option theme-toggle__option--light" aria-hidden="true">
+          <span class="material-symbols-outlined">light_mode</span>
+        </span>
+        <span class="theme-toggle__option theme-toggle__option--dark" aria-hidden="true">
+          <span class="material-symbols-outlined">dark_mode</span>
+        </span>
+      </button>
+    </aside>
 
     <main id="main">
       <!-- Hero -->
