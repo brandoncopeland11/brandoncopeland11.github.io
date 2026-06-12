@@ -45,6 +45,8 @@
           storedTheme = null;
         }
         document.documentElement.dataset.theme = storedTheme || (prefersDark ? "dark" : "light");
+        // Default overlap layout. Classic backup: dataset.heroLayout = "classic"
+        document.documentElement.dataset.heroLayout = "overlap";
       })();
     </script>
     <link rel="stylesheet" href="/src/styles/main.css" />
@@ -111,6 +113,7 @@
     </aside>
 
     <main id="main">
+      <div class="hero-work-cluster">
       <!-- Hero -->
       <section id="hero" class="section section--hero" aria-labelledby="hero-heading">
         <div class="hero-stars" aria-hidden="true">
@@ -198,15 +201,21 @@
           </svg>
         </div>
         <div class="container hero">
-          <p class="hero-caption">Hi <span class="hero-caption__wave" role="img" aria-label="waving hand">👋</span> I'm Brandon — Product designer with 10 years of experience.</p>
-          <h1 id="hero-heading" class="hero-one-liner">
-            Crafting polished, intuitive interfaces with care and precision.
-          </h1>
-          <div class="hero-pagination" aria-hidden="true">
-            <span class="hero-pagination__dot is-active"></span>
-            <span class="hero-pagination__dot"></span>
-            <span class="hero-pagination__dot"></span>
-            <span class="hero-pagination__dot"></span>
+          <div class="hero-content hero-content--classic">
+            <p class="hero-caption">Hi <span class="hero-caption__wave" role="img" aria-label="waving hand">👋</span> I'm Brandon — Product designer with 10 years of experience.</p>
+            <h1 id="hero-heading" class="hero-one-liner">
+              <span class="hero-copy hero-copy--classic">Crafting polished, intuitive interfaces with care and precision.</span>
+              <span class="hero-copy hero-copy--overlap">
+                <span class="hero-emoji hero-emoji--wave" role="img" aria-label="waving hand">👋</span>
+                I'm Brandon, a product designer passionate about crafting intuitive experiences with care and precision.
+              </span>
+            </h1>
+            <div class="hero-pagination" aria-hidden="true">
+              <span class="hero-pagination__dot is-active"></span>
+              <span class="hero-pagination__dot"></span>
+              <span class="hero-pagination__dot"></span>
+              <span class="hero-pagination__dot"></span>
+            </div>
           </div>
         </div>
       </section>
@@ -312,6 +321,7 @@
           </div>
         </div>
       </section>
+      </div>
 
       <!-- About -->
       <section id="about" class="section section--about" aria-labelledby="about-heading">

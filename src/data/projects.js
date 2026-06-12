@@ -12,7 +12,7 @@ const lawlabsLogo = "/assets/logos/lawlabs.png";
  * Order here is the canonical project order (and the cycle order).
  * size: "feature" (big, top-left) | "wide-tall" | "tall" | "wide" | "default"
  * featured: shows a "Featured" tag on the tile.
- * type: short label shown under the title (e.g. "Case study", "UI focus").
+ * year, method, device, type: shown under the title, separated by ·
  * image / imageHover: thumbnail pair for default and hover states.
  */
 export const projects = [
@@ -20,6 +20,9 @@ export const projects = [
     title: "Project One",
     company: "Flipp",
     logo: flippLogo,
+    year: "2024",
+    method: "Product design",
+    device: "Mobile",
     type: "Case study",
     href: "/case-studies/project-one.html",
     size: "feature",
@@ -29,6 +32,9 @@ export const projects = [
     title: "Add to list UX",
     company: "Flipp",
     logo: flippLogo,
+    year: "2025",
+    method: "UX research",
+    device: "Mobile",
     type: "Case study",
     href: "/case-studies/project-two.html",
     size: "default",
@@ -40,7 +46,10 @@ export const projects = [
     title: "Project Three",
     company: "InnoSoft Canada",
     logo: innosoftLogo,
-    type: "UI focus",
+    year: "2024",
+    method: "Product design",
+    device: "Desktop",
+    type: "UI",
     href: "/case-studies/project-three.html",
     size: "default",
   },
@@ -49,7 +58,10 @@ export const projects = [
     company: "Trapeze",
     logo: trapezeLogo,
     logoClass: "work-card__logo--trapeze",
-    type: "Research project",
+    year: "2023",
+    method: "UX research",
+    device: "Desktop",
+    type: "Case study",
     href: "/case-studies/project-four.html",
     size: "default",
   },
@@ -57,7 +69,10 @@ export const projects = [
     title: "Project Five",
     company: "LawLabs",
     logo: lawlabsLogo,
-    type: "UI focus",
+    year: "2024",
+    method: "Product design",
+    device: "Mobile",
+    type: "UI",
     href: "/case-studies/project-five.html",
     size: "wide",
   },

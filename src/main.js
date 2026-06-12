@@ -218,8 +218,9 @@ if (heroSectionEl && !window.matchMedia("(prefers-reduced-motion: reduce)").matc
 }
 
 const heroHeadingEl = document.getElementById("hero-heading");
+const heroClassicCopyEl = document.querySelector(".hero-copy--classic");
 
-if (heroHeadingEl) {
+if (heroHeadingEl && heroClassicCopyEl) {
   const headings = [
     "Crafting polished, intuitive interfaces with care and precision.",
     "Grounding every design decision in real user research and insight.",
@@ -230,20 +231,20 @@ if (heroHeadingEl) {
   const mobileHeroMql = window.matchMedia("(max-width: 767px)");
 
   const syncHeroHeadingHeight = () => {
-    if (!mobileHeroMql.matches) {
+    if (!mobileHeroMql.matches || rootEl.dataset.heroLayout === "overlap") {
       heroHeadingEl.style.minHeight = "";
       return;
     }
 
-    const currentText = heroHeadingEl.textContent;
+    const currentText = heroClassicCopyEl.textContent;
     let maxHeight = 0;
 
     headings.forEach((heading) => {
-      heroHeadingEl.textContent = heading;
+      heroClassicCopyEl.textContent = heading;
       maxHeight = Math.max(maxHeight, heroHeadingEl.offsetHeight);
     });
 
-    heroHeadingEl.textContent = currentText;
+    heroClassicCopyEl.textContent = currentText;
     heroHeadingEl.style.minHeight = `${maxHeight}px`;
   };
 
@@ -260,11 +261,16 @@ if (heroHeadingEl) {
     document.fonts.ready.then(syncHeroHeadingHeight);
   }
 
-  if (!reducedMotionMql.matches) {
+  let headingIntervalId = null;
+
+  const startHeadingRotation = () => {
+    if (reducedMotionMql.matches || rootEl.dataset.heroLayout === "overlap") return;
+
     const ROTATE_INTERVAL = 8000;
     const FADE_DURATION = 1200;
     const dots = Array.from(document.querySelectorAll(".hero-pagination__dot"));
-    let headingIndex = 0;
+    let headingIndex = headings.indexOf(heroClassicCopyEl.textContent.trim());
+    if (headingIndex === -1) headingIndex = 0;
 
     const syncDots = () => {
       dots.forEach((dot, dotIndex) => {
@@ -278,17 +284,40 @@ if (heroHeadingEl) {
       heroHeadingEl.classList.add("is-swapping");
 
       window.setTimeout(() => {
-        heroHeadingEl.textContent = headings[headingIndex];
+        heroClassicCopyEl.textContent = headings[headingIndex];
         heroHeadingEl.classList.remove("is-swapping");
       }, FADE_DURATION);
     };
 
-    window.setInterval(() => showHeading(headingIndex + 1), ROTATE_INTERVAL);
+    syncDots();
+    headingIntervalId = window.setInterval(
+      () => showHeading(headingIndex + 1),
+      ROTATE_INTERVAL
+    );
+  };
+
+  // Classic layout backup: set dataset.heroLayout = "classic" to enable rotation.
+  if (rootEl.dataset.heroLayout !== "overlap") {
+    startHeadingRotation();
   }
 }
 
 
 if (masonryEl) {
+  const renderWorkCardMeta = (project) => {
+    const tags = [project.year, project.method, project.device, project.type].filter(
+      Boolean
+    );
+
+    if (!tags.length) {
+      return "";
+    }
+
+    return `<p class="work-card__meta">${tags
+      .map((tag) => `<span>${tag}</span>`)
+      .join('<span class="work-card__meta-sep" aria-hidden="true">·</span>')}</p>`;
+  };
+
   masonryEl.innerHTML = projects
     .map((project) => {
       const imageAlt = project.imageAlt || project.title;
@@ -321,7 +350,7 @@ if (masonryEl) {
           ${logoMarkup}
           <div class="work-card__copy">
             <h3 class="work-card__title">${project.title}</h3>
-            ${project.type ? `<p class="work-card__type">${project.type}</p>` : ""}
+            ${renderWorkCardMeta(project)}
           </div>
         </div>
       </a>
@@ -387,8 +416,64 @@ function renderExperienceItem(item) {
 }
 
 if (experienceMarqueeEl && experience.length) {
+  const experienceViewportEl = experienceMarqueeEl.closest(".experience-strip__viewport");
+  const experienceMobileMql = window.matchMedia("(max-width: 767px)");
+  let experienceResumeTimer = null;
+  let experienceInteractionBound = false;
+
+  const pauseExperienceInteraction = () => {
+    if (!experienceMobileMql.matches || reducedMotionMql.matches) return;
+
+    window.clearTimeout(experienceResumeTimer);
+    experienceViewportEl?.classList.add("is-interactive");
+    experienceMarqueeEl.classList.add("is-paused");
+  };
+
+  const scheduleExperienceResume = () => {
+    if (!experienceMobileMql.matches || reducedMotionMql.matches) return;
+
+    window.clearTimeout(experienceResumeTimer);
+    experienceResumeTimer = window.setTimeout(() => {
+      if (experienceViewportEl) {
+        experienceViewportEl.scrollLeft = 0;
+        experienceViewportEl.classList.remove("is-interactive");
+      }
+      experienceMarqueeEl.classList.remove("is-paused");
+    }, 1800);
+  };
+
+  const bindExperienceInteraction = () => {
+    if (!experienceViewportEl || experienceInteractionBound) return;
+
+    experienceInteractionBound = true;
+    experienceViewportEl.addEventListener("pointerdown", pauseExperienceInteraction, {
+      passive: true,
+    });
+    experienceViewportEl.addEventListener("pointerup", scheduleExperienceResume, {
+      passive: true,
+    });
+    experienceViewportEl.addEventListener("pointercancel", scheduleExperienceResume, {
+      passive: true,
+    });
+    experienceViewportEl.addEventListener(
+      "scroll",
+      () => {
+        if (experienceMarqueeEl.classList.contains("is-paused")) {
+          scheduleExperienceResume();
+        }
+      },
+      { passive: true }
+    );
+  };
+
   const buildMarquee = () => {
     const items = experience.map(renderExperienceItem).join("");
+    experienceMarqueeEl.classList.remove("experience-strip__track--auto", "is-paused");
+    experienceViewportEl?.classList.remove("is-interactive");
+
+    if (experienceViewportEl) {
+      experienceViewportEl.scrollLeft = 0;
+    }
 
     if (reducedMotionMql.matches) {
       experienceMarqueeEl.innerHTML = items;
@@ -409,13 +494,21 @@ if (experienceMarqueeEl && experience.length) {
       }
 
       experienceMarqueeEl.style.setProperty("--marquee-end", `-${distance}px`);
+      experienceMarqueeEl.classList.add("experience-strip__track--auto");
     };
 
     requestAnimationFrame(measureMarquee);
   };
 
+  bindExperienceInteraction();
   buildMarquee();
   window.addEventListener("resize", buildMarquee);
+
+  if (experienceMobileMql.addEventListener) {
+    experienceMobileMql.addEventListener("change", buildMarquee);
+  } else {
+    experienceMobileMql.addListener(buildMarquee);
+  }
 
   if (reducedMotionMql.addEventListener) {
     reducedMotionMql.addEventListener("change", buildMarquee);
@@ -432,7 +525,8 @@ if (toolsGridEl) {
   const reducedMotionMql = window.matchMedia("(prefers-reduced-motion: reduce)");
 
   const buildToolsCarousel = () => {
-    const shouldCarousel = mobileMql.matches && !reducedMotionMql.matches;
+    const isOverlapLayout = rootEl.dataset.heroLayout === "overlap";
+    const shouldCarousel = mobileMql.matches && !reducedMotionMql.matches && !isOverlapLayout;
 
     if (!shouldCarousel) {
       toolsGridEl.classList.remove("tools-grid--carousel");
@@ -477,6 +571,153 @@ if (toolsGridEl) {
     reducedMotionMql.addListener(buildToolsCarousel);
   }
 }
+
+// Sliding pill indicator for desktop nav
+const initSiteNavIndicator = () => {
+  const navList = document.getElementById("site-nav-list");
+  if (!navList || navList.closest(".site-nav__track")) return;
+
+  const track = document.createElement("div");
+  track.className = "site-nav__track";
+  navList.parentNode?.insertBefore(track, navList);
+  track.appendChild(navList);
+
+  const indicator = document.createElement("span");
+  indicator.className = "site-nav__indicator";
+  indicator.setAttribute("aria-hidden", "true");
+  track.prepend(indicator);
+
+  const links = Array.from(navList.querySelectorAll("a"));
+  const desktopNavMql = window.matchMedia("(min-width: 768px)");
+  const sectionIds = ["hero", "work", "about", "contact"];
+  const isCaseStudyPage = document.body.classList.contains("case-study-page");
+  let activeSectionId = "";
+  let lockedSectionId = null;
+  let lockReleaseTimer = null;
+  let scrollRaf = null;
+
+  const linkMatchesSection = (link, sectionId) => {
+    const href = link.getAttribute("href") || "";
+    return href === `#${sectionId}` || href.endsWith(`#${sectionId}`);
+  };
+
+  const getLinkForSection = (sectionId) =>
+    links.find((link) => linkMatchesSection(link, sectionId));
+
+  const measureIndicator = (activeLink) => {
+    const trackRect = track.getBoundingClientRect();
+    const linkRect = activeLink.getBoundingClientRect();
+
+    indicator.style.left = `${linkRect.left - trackRect.left}px`;
+    indicator.style.width = `${linkRect.width}px`;
+    indicator.style.height = `${linkRect.height}px`;
+    indicator.style.opacity = "1";
+  };
+
+  const moveIndicator = (activeLink) => {
+    if (!desktopNavMql.matches || !activeLink) {
+      indicator.style.opacity = "0";
+      return;
+    }
+
+    measureIndicator(activeLink);
+  };
+
+  const setActiveSection = (sectionId, { force = false } = {}) => {
+    if (!force && sectionId === activeSectionId) return;
+
+    activeSectionId = sectionId;
+
+    links.forEach((link) => {
+      const isActive = linkMatchesSection(link, sectionId);
+      link.classList.toggle("is-active", isActive);
+      if (isActive) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+
+    const activeLink = getLinkForSection(sectionId);
+    if (activeLink) moveIndicator(activeLink);
+  };
+
+  const lockSection = (sectionId) => {
+    lockedSectionId = sectionId;
+    window.clearTimeout(lockReleaseTimer);
+    lockReleaseTimer = window.setTimeout(() => {
+      lockedSectionId = null;
+    }, 1000);
+  };
+
+  const resolveSectionFromScroll = () => {
+    if (isCaseStudyPage) return "work";
+
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    if (!sections.length) return "hero";
+
+    const activationLine = window.innerHeight * 0.38;
+    const activeSection =
+      sections.slice().reverse().find((section) => {
+        return section.getBoundingClientRect().top <= activationLine;
+      }) ?? sections[0];
+
+    return activeSection.id;
+  };
+
+  const updateActiveFromScroll = () => {
+    if (!desktopNavMql.matches) return;
+    if (lockedSectionId) return;
+
+    setActiveSection(resolveSectionFromScroll());
+  };
+
+  const scheduleScrollUpdate = () => {
+    if (scrollRaf !== null) return;
+
+    scrollRaf = window.requestAnimationFrame(() => {
+      scrollRaf = null;
+      updateActiveFromScroll();
+    });
+  };
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      const href = link.getAttribute("href") || "";
+      const hash = href.includes("#") ? href.slice(href.indexOf("#")) : "";
+      const sectionId = hash.replace("#", "");
+      if (!sectionId) return;
+
+      lockSection(sectionId);
+      setActiveSection(sectionId, { force: true });
+    });
+  });
+
+  updateActiveFromScroll();
+  window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
+  window.addEventListener("resize", () => {
+    const activeLink = getLinkForSection(lockedSectionId || activeSectionId);
+    if (activeLink) measureIndicator(activeLink);
+    updateActiveFromScroll();
+  });
+  window.addEventListener("pageshow", updateActiveFromScroll);
+
+  if ("onscrollend" in window) {
+    window.addEventListener("scrollend", updateActiveFromScroll, { passive: true });
+  }
+
+  if (desktopNavMql.addEventListener) {
+    desktopNavMql.addEventListener("change", updateActiveFromScroll);
+  } else {
+    desktopNavMql.addListener(updateActiveFromScroll);
+  }
+
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(updateActiveFromScroll);
+  }
+};
+
+initSiteNavIndicator();
 
 // Responsive nav: hamburger menu for small screens
 const navToggleBtn = document.querySelector("[data-nav-toggle]");
