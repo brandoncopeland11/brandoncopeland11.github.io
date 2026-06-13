@@ -47,6 +47,11 @@
         document.documentElement.dataset.theme = storedTheme || (prefersDark ? "dark" : "light");
         // Default overlap layout. Classic backup: dataset.heroLayout = "classic"
         document.documentElement.dataset.heroLayout = "overlap";
+
+        const isHomePage = /^\/(?:index\.html)?$/.test(window.location.pathname);
+        if (isHomePage) {
+          document.documentElement.classList.add("is-hero-intro-pending");
+        }
       })();
     </script>
     <link rel="stylesheet" href="/src/styles/main.css" />

@@ -37,6 +37,110 @@ const scheduleReveal = () => {
 
 scheduleReveal();
 
+const HERO_INTRO_REVEAL_DELAY_MS = 140;
+
+const isHomePage = () => /^\/(?:index\.html)?$/.test(window.location.pathname);
+
+const initHeroTitleIntro = () => {
+  const overlapCopyEl = document.querySelector(".hero-copy--overlap");
+  const waveEl = document.querySelector(".hero-emoji--wave");
+
+  if (!isHomePage() || !overlapCopyEl || rootEl.dataset.heroLayout !== "overlap") {
+    return;
+  }
+
+  if (!rootEl.classList.contains("is-hero-intro-pending")) {
+    return;
+  }
+
+  let introTimeoutId = null;
+  let introFallbackId = null;
+
+  const clearIntroTimers = () => {
+    if (introTimeoutId !== null) {
+      window.clearTimeout(introTimeoutId);
+      introTimeoutId = null;
+    }
+    if (introFallbackId !== null) {
+      window.clearTimeout(introFallbackId);
+      introFallbackId = null;
+    }
+  };
+
+  const playWave = () => {
+    if (!waveEl || reducedMotionMql.matches) return;
+
+    waveEl.classList.remove("is-waving");
+    void waveEl.offsetWidth;
+    waveEl.classList.add("is-waving");
+  };
+
+  const finishIntro = () => {
+    if (rootEl.dataset.heroIntroComplete === "true") return;
+
+    clearIntroTimers();
+    rootEl.dataset.heroIntroComplete = "true";
+    rootEl.classList.remove("is-hero-intro-pending", "is-hero-intro-revealed");
+    playWave();
+  };
+
+  const revealHeroTitle = () => {
+    if (reducedMotionMql.matches) {
+      finishIntro();
+      return;
+    }
+
+    rootEl.classList.add("is-hero-intro-revealed");
+
+    const onIntroEnd = (event) => {
+      if (event.target !== overlapCopyEl || event.propertyName !== "opacity") return;
+
+      overlapCopyEl.removeEventListener("transitionend", onIntroEnd);
+      finishIntro();
+    };
+
+    overlapCopyEl.addEventListener("transitionend", onIntroEnd);
+    introFallbackId = window.setTimeout(() => {
+      if (rootEl.dataset.heroIntroComplete !== "true") {
+        finishIntro();
+      }
+    }, 1100);
+  };
+
+  const runIntro = () => {
+    clearIntroTimers();
+    delete rootEl.dataset.heroIntroComplete;
+    rootEl.classList.remove("is-hero-intro-revealed");
+    rootEl.classList.add("is-hero-intro-pending");
+    waveEl?.classList.remove("is-waving");
+
+    void overlapCopyEl.offsetWidth;
+
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        introTimeoutId = window.setTimeout(revealHeroTitle, HERO_INTRO_REVEAL_DELAY_MS);
+      });
+    });
+  };
+
+  const startIntro = () => runIntro();
+
+  if (rootEl.classList.contains("is-ready")) {
+    startIntro();
+  } else {
+    const readyObserver = new MutationObserver(() => {
+      if (!rootEl.classList.contains("is-ready")) return;
+
+      readyObserver.disconnect();
+      startIntro();
+    });
+
+    readyObserver.observe(rootEl, { attributes: true, attributeFilter: ["class"] });
+  }
+};
+
+initHeroTitleIntro();
+
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) {
     revealPage();
