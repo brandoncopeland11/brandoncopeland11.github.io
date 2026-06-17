@@ -25,6 +25,7 @@ export const projects = [
     device: "Mobile",
     type: "Case study",
     href: "/case-studies/project-one.html",
+    headerColor: "#1f2933",
     size: "feature",
     featured: true,
   },
@@ -37,10 +38,11 @@ export const projects = [
     device: "Mobile",
     type: "Case study",
     href: "/case-studies/project-two.html",
+    headerImage: "/case-studies/project-two/images/Intro1.png",
     size: "default",
     image: addToListThumbnail,
     imageHover: addToListHover,
-    imageAlt: "Flipp add to list UX — search results and flyer add-to-list flows",
+    imageAlt: "Flipp add to list UX: search results and flyer add-to-list flows",
   },
   {
     title: "Project Three",
@@ -51,6 +53,7 @@ export const projects = [
     device: "Desktop",
     type: "UI",
     href: "/case-studies/project-three.html",
+    headerColor: "#2b2233",
     size: "default",
   },
   {
@@ -63,6 +66,7 @@ export const projects = [
     device: "Desktop",
     type: "Case study",
     href: "/case-studies/project-four.html",
+    headerColor: "#1f2b26",
     size: "default",
   },
   {
@@ -74,6 +78,7 @@ export const projects = [
     device: "Mobile",
     type: "UI",
     href: "/case-studies/project-five.html",
+    headerColor: "#2b2730",
     size: "wide",
   },
 ];
