@@ -2,6 +2,7 @@ import { projects } from "./data/projects.js";
 import { experience } from "./data/experience.js";
 import { mountSiteLogo } from "./logo.js";
 import { initCaseStudyLightbox } from "./caseStudyLightbox.js";
+import { initScrollReveal } from "./scrollReveal.js";
 
 mountSiteLogo();
 
@@ -464,22 +465,75 @@ if (masonryEl) {
     .join("");
 }
 
-const nextProjectEl = document.querySelector(".next-project");
+const getNextProjectLogoClass = (project) =>
+  project.logoClass
+    ? ` ${project.logoClass.replace("work-card__logo", "next-project__logo")}`
+    : "";
 
-if (nextProjectEl && projects.length) {
+const renderNextProjectLogo = (project) => {
+  if (!project.logo) return "";
+
+  return `<img class="next-project__logo${getNextProjectLogoClass(project)}" src="${project.logo}" alt="" width="32" height="32" loading="lazy" decoding="async" />`;
+};
+
+const renderNextProjectPreview = (project) => {
+  const logoMarkup = renderNextProjectLogo(project);
+  const companyMarkup = project.company
+    ? `<span class="next-project__company">${project.company}</span>`
+    : "";
+
+  return `
+    <span class="next-project__hero-bg" aria-hidden="true"></span>
+    <span class="next-project__scrim" aria-hidden="true"></span>
+    <span class="next-project__editorial">
+      <span class="next-project__content">
+        <span class="next-project__label">Next project</span>
+        <strong class="next-project__title">${project.title}</strong>
+        <span class="next-project__meta">${logoMarkup}${companyMarkup}</span>
+      </span>
+      <span class="next-project__arrow" aria-hidden="true">→</span>
+    </span>
+  `;
+};
+
+const applyNextProjectHero = (el, project) => {
+  if (project.headerImage) {
+    el.style.setProperty("--next-project-hero-image", `url("${project.headerImage}")`);
+  } else {
+    el.style.removeProperty("--next-project-hero-image");
+  }
+
+  if (project.headerColor) {
+    el.style.setProperty("--next-project-hero-color", project.headerColor);
+  } else {
+    el.style.removeProperty("--next-project-hero-color");
+  }
+};
+
+const initNextProjectLinks = () => {
+  const nextProjectEls = document.querySelectorAll(".next-project");
+  if (!nextProjectEls.length || !projects.length) return;
+
   const basename = (path) => (path || "").split("?")[0].split("#")[0].split("/").pop();
   const currentFile = basename(window.location.pathname);
   const currentIndex = projects.findIndex(
     (project) => basename(project.href) === currentFile
   );
 
-  if (currentIndex !== -1) {
-    const nextProject = projects[(currentIndex + 1) % projects.length];
+  if (currentIndex === -1) return;
+
+  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const ariaLabel = `Next project: ${nextProject.title}${nextProject.company ? `, ${nextProject.company}` : ""}`;
+
+  nextProjectEls.forEach((nextProjectEl) => {
     nextProjectEl.href = nextProject.href;
-    const labelEl = nextProjectEl.querySelector("strong");
-    if (labelEl) labelEl.textContent = `${nextProject.title} →`;
-  }
-}
+    nextProjectEl.setAttribute("aria-label", ariaLabel);
+    applyNextProjectHero(nextProjectEl, nextProject);
+    nextProjectEl.innerHTML = renderNextProjectPreview(nextProject);
+  });
+};
+
+initNextProjectLinks();
 
 const experienceMarqueeEl = document.getElementById("experience-marquee");
 
@@ -881,3 +935,5 @@ if (navToggleBtn) {
     }
   }
 }
+
+initScrollReveal(reducedMotionMql);

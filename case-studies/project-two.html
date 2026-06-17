@@ -596,29 +596,23 @@
           </section>
 
           <figure class="case-study-visual case-study-visual--wide">
-            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
+            <img
+              class="case-study-image"
+              src="/case-studies/project-two/images/Outcome.png"
+              alt="Final add-to-list experience across search results, category pages, flyers, and product details, showing add, added, and quantity states."
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              Final add-to-list experience across search results, category pages,
+              flyers, and product details.
+            </figcaption>
           </figure>
 
-          <div class="case-study-image-grid" aria-label="Outcome visuals">
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
-          </div>
-
           <section
-            class="case-study-section case-study-section--split case-study-section--split-reverse"
+            class="case-study-section case-study-section--explorations"
             aria-labelledby="explorations-heading"
           >
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
             <div class="case-study-copy">
               <h2 id="explorations-heading">UX explorations</h2>
               <p>
@@ -626,6 +620,36 @@
                 list-level feedback, and confirmation patterns that help users
                 understand when items have been added successfully.
               </p>
+            </div>
+
+            <div
+              class="case-study-image-grid case-study-image-grid--explorations"
+              aria-label="UX exploration visuals"
+            >
+              <figure class="case-study-visual case-study-visual--inline">
+                <img
+                  class="case-study-image"
+                  src="/case-studies/project-two/images/Explore1.png"
+                  alt="In-flyer quick tips tooltip prompting users to tap and add an item to their list."
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  In-flyer quick tips tooltip for adding items to your list.
+                </figcaption>
+              </figure>
+              <figure class="case-study-visual case-study-visual--inline">
+                <img
+                  class="case-study-image"
+                  src="/case-studies/project-two/images/Explore2.png"
+                  alt="Deal card explorations showing add, added, and quantity selector states."
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  Add, added, and quantity states on deal cards.
+                </figcaption>
+              </figure>
             </div>
           </section>
 
@@ -638,28 +662,26 @@
             </div>
             <ul class="case-study-list">
               <li>
-                Initially, we considered a full revamp of the swipe and flyer
-                viewing experience. However, exploring various options showed
-                that a redesign was not essential. Instead, I leveraged native
-                components and common practices to solve the problem.
+                <strong>Benchmark earlier to simplify ideation:</strong>
+                looking at common add-to-list patterns from other apps sooner would
+                have narrowed the exploration space faster. Many of the final
+                directions (explicit add states, quantity controls, and list feedback)
+                already exist elsewhere, and starting from those conventions could
+                have reduced the complexity of early ideation.
               </li>
               <li>
-                I was confident skipping usability testing before the experiment
-                due to the use of common design practices and components, which
-                positively impacted development time and user interaction.
+                <strong>Participant feedback shaped the second round:</strong>
+                users praised exposed add controls and the ability to save multiple
+                items from one screen, but some missed animations on a first pass
+                and flagged accidental adds as a concern. Refinements like the
+                quantity selector, clearer “Add to list” language, and separating
+                add from “Shop Now” addressed those gaps before the work shipped
+                as an experiment.
               </li>
             </ul>
           </section>
 
-          <figure class="case-study-visual case-study-visual--wide">
-            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
-          </figure>
-
-          <a class="next-project" href="/case-studies/project-three.html">
-            <span>Next project</span>
-            <strong>Project Three →</strong>
-          </a>
+          <a class="next-project next-project--editorial" href="/case-studies/project-three.html"></a>
         </div>
       </article>
     </main>
