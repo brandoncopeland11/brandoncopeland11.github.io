@@ -5,39 +5,39 @@ const trapezeLogo = "/assets/logos/trapeze.svg";
 const brandAndMortarLogo = "/assets/logos/brand-and-mortar.png";
 
 /**
- * Work history — logos published from /assets/logos/
+ * Work history: logos published from /assets/logos/
  */
 export const experience = [
   {
     company: "Flipp",
     role: "Senior Product Designer",
-    years: "2023 — Present",
+    years: "2023 - Present",
     logo: flippLogo,
     highlighted: true,
   },
   {
     company: "LawLabs",
     role: "UX Design Lead",
-    years: "2022 — 2023",
+    years: "2022 - 2023",
     logo: lawlabsLogo,
   },
   {
     company: "InnoSoft Canada",
     role: "UX Design Lead",
-    years: "2019 — 2022",
+    years: "2019 - 2022",
     logo: innosoftLogo,
   },
   {
     company: "Trapeze",
     role: "Web Developer & UX/UI Designer",
-    years: "2016 — 2018",
+    years: "2016 - 2018",
     logo: trapezeLogo,
     logoClass: "experience-item__logo--trapeze",
   },
   {
     company: "Brand & Mortar",
     role: "Web Developer & UX/UI Designer",
-    years: "2014 — 2016",
+    years: "2014 - 2016",
     logo: brandAndMortarLogo,
   },
 ];

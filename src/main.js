@@ -488,7 +488,7 @@ function formatExperienceYears(item) {
   if (!item.start) return "";
 
   const end = item.current ? "Present" : item.end;
-  return end ? `${item.start} — ${end}` : item.start;
+  return end ? `${item.start} - ${end}` : item.start;
 }
 
 function renderExperienceItem(item) {

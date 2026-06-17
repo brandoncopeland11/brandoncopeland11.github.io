@@ -40,7 +40,7 @@ export const projects = [
     size: "default",
     image: addToListThumbnail,
     imageHover: addToListHover,
-    imageAlt: "Flipp add to list UX — search results and flyer add-to-list flows",
+    imageAlt: "Flipp add to list UX: search results and flyer add-to-list flows",
   },
   {
     title: "Project Three",
