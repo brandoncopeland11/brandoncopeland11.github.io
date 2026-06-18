@@ -1,4 +1,4 @@
 export const profile = {
   name: "Brandon Copeland",
-  photo: "/assets/profile.jpg",
+  photo: "/assets/profilepic.jpeg",
 };
