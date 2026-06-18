@@ -225,74 +225,6 @@
         </div>
       </section>
 
-      <!-- Tools -->
-      <section id="tools" class="section section--tools" aria-label="Tools">
-        <div class="container">
-          <ul class="tools-grid" aria-label="Tools Brandon uses">
-            <li class="tool-card">
-              <img
-                class="tool-card__logo"
-                src="https://cdn.simpleicons.org/figma"
-                alt=""
-                width="20"
-                height="20"
-                loading="lazy"
-                decoding="async"
-              />
-              <span>Figma</span>
-            </li>
-            <li class="tool-card">
-              <img
-                class="tool-card__logo"
-                src="https://cdn.simpleicons.org/claude"
-                alt=""
-                width="20"
-                height="20"
-                loading="lazy"
-                decoding="async"
-              />
-              <span>Claude</span>
-            </li>
-            <li class="tool-card">
-              <img
-                class="tool-card__logo tool-card__logo--cursor"
-                src="https://cdn.simpleicons.org/cursor"
-                alt=""
-                width="20"
-                height="20"
-                loading="lazy"
-                decoding="async"
-              />
-              <span>Cursor</span>
-            </li>
-            <li class="tool-card">
-              <img
-                class="tool-card__logo"
-                src="https://cdn.simpleicons.org/atlassian"
-                alt=""
-                width="20"
-                height="20"
-                loading="lazy"
-                decoding="async"
-              />
-              <span>Atlassian</span>
-            </li>
-            <li class="tool-card">
-              <img
-                class="tool-card__logo"
-                src="https://images.seeklogo.com/logo-png/39/1/usertesting-logo-png_seeklogo-394626.png"
-                alt=""
-                width="20"
-                height="20"
-                loading="lazy"
-                decoding="async"
-              />
-              <span>UserTesting.com</span>
-            </li>
-          </ul>
-        </div>
-      </section>
-
       <!-- Work -->
       <section id="work" class="section section--work" aria-labelledby="work-heading">
         <div class="container">
@@ -329,48 +261,152 @@
       </div>
 
       <!-- About -->
-      <section id="about" class="section section--about" aria-labelledby="about-heading">
+      <section id="about" class="section section--about" aria-label="About">
         <div class="container">
           <div class="about-layout">
-          <div class="about-layout__media">
-            <img
-              src="https://media.licdn.com/dms/image/v2/D5603AQFabhkbqXXJ0Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718224071530?e=1781740800&v=beta&t=vEpukMosFPTuP8HS3HTOphhOGooXQGjrK0FdwJTIVr4"
-              alt="Portrait of Brandon Copeland"
-              width="400"
-              height="500"
-              class="about-photo"
-            />
-          </div>
-          <div class="about-layout__content">
-            <header class="section-header">
-              <h2 id="about-heading">About</h2>
-            </header>
-            <p>
-              I'm Brandon, a product designer with a background in marketing and
-              visual design. My interest in UX took shape while I was studying for
-              my Advertising and Marketing diploma, and it has grown into a career
-              focused on thoughtful, user-centred digital products.
-            </p>
-            <p>
-              I'm currently a Senior Product Designer at Flipp, based in Dutton,
-              Ontario. I work closely with cross-functional teams to research
-              problems, iterate on ideas, and ship high-fidelity solutions that
-              address real user needs. I'm equally comfortable thinking visually
-              and technically, from prototyping and design systems to
-              collaborating with developers on implementation details.
-            </p>
-            <p>
-              Whether I'm mentoring designers, leading projects end to end, or
-              partnering with stakeholders on clear communication, I care about
-              building engaging experiences that are grounded in research and
-              craft.
-            </p>
-          </div>
+            <div class="about-layout__media">
+              <img
+                src="https://media.licdn.com/dms/image/v2/D5603AQFabhkbqXXJ0Q/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1718224071530?e=1781740800&v=beta&t=vEpukMosFPTuP8HS3HTOphhOGooXQGjrK0FdwJTIVr4"
+                alt="Portrait of Brandon Copeland"
+                width="400"
+                height="500"
+                class="about-photo"
+              />
+            </div>
+            <div class="about-layout__content">
+              <header class="section-header">
+                <h2 id="about-heading">A bit about me</h2>
+              </header>
+              <div class="about-prose">
+              <p>
+                Hey there, I'm Brandon. Thanks for stopping by! I'm a product designer with
+                10 years of experience and a background in marketing and visual design. My
+                path into UX started while studying for my Advertising and Marketing diploma.
+                Today, I lead product design end to end at Flipp, helping teams turn user
+                research into thoughtful, shipped experiences.
+              </p>
+              <p>
+                Along the way, I've designed mobile and SaaS products, built design systems,
+                mentored designers, and scaled design teams across multiple products. My
+                strengths span UX research, prototyping, visual design, and design systems,
+                with a focus on solving real user problems in a thoughtful, user-centred
+                way. If anything here resonates, I'd love to hear from you.
+              </p>
+              <div class="about-experience">
+                <h3 class="about-tools__heading">Experience</h3>
+                <ul class="experience-cards" id="experience-cards" aria-label="Work experience"></ul>
+              </div>
+              <div class="about-tools">
+                <h3 class="about-tools__heading">Tools</h3>
+                <ul class="about-tools__list" aria-label="Tools Brandon uses">
+                  <li class="about-tools__chip">
+                    <img
+                      class="about-tools__chip-logo"
+                      src="https://cdn.simpleicons.org/figma"
+                      alt=""
+                      width="16"
+                      height="16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>Figma</span>
+                  </li>
+                  <li class="about-tools__chip">
+                    <img
+                      class="about-tools__chip-logo"
+                      src="https://cdn.simpleicons.org/claude"
+                      alt=""
+                      width="16"
+                      height="16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>Claude</span>
+                  </li>
+                  <li class="about-tools__chip">
+                    <img
+                      class="about-tools__chip-logo about-tools__chip-logo--cursor"
+                      src="https://cdn.simpleicons.org/cursor"
+                      alt=""
+                      width="16"
+                      height="16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>Cursor</span>
+                  </li>
+                  <li class="about-tools__chip">
+                    <img
+                      class="about-tools__chip-logo"
+                      src="https://cdn.simpleicons.org/jira"
+                      alt=""
+                      width="16"
+                      height="16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>Jira</span>
+                  </li>
+                  <li class="about-tools__chip">
+                    <img
+                      class="about-tools__chip-logo"
+                      src="https://cdn.simpleicons.org/google"
+                      alt=""
+                      width="16"
+                      height="16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>Google Suite</span>
+                  </li>
+                  <li class="about-tools__chip">
+                    <img
+                      class="about-tools__chip-logo"
+                      src="/assets/logos/usertesting.png"
+                      alt=""
+                      width="16"
+                      height="16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>UserTesting.com</span>
+                  </li>
+                  <li class="about-tools__chip">
+                    <img
+                      class="about-tools__chip-logo"
+                      src="/assets/logos/slack.svg"
+                      alt=""
+                      width="16"
+                      height="16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>Slack</span>
+                  </li>
+                  <li class="about-tools__chip">
+                    <img
+                      class="about-tools__chip-logo about-tools__chip-logo--notion"
+                      src="/assets/logos/notion.svg"
+                      alt=""
+                      width="16"
+                      height="16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span>Notion</span>
+                  </li>
+                </ul>
+              </div>
+              </div>
+            </div>
           </div>
 
-          <div class="experience-strip" aria-label="Work experience">
-            <div class="experience-strip__viewport">
-              <ul class="experience-strip__track" id="experience-marquee"></ul>
+          <!-- Marquee backup (unused): set ENABLE_EXPERIENCE_MARQUEE in main.js -->
+          <div class="experience-marquee-backup" hidden aria-hidden="true">
+            <div class="experience-strip" aria-label="Work experience">
+              <div class="experience-strip__viewport">
+                <ul class="experience-strip__track" id="experience-marquee"></ul>
+              </div>
             </div>
           </div>
         </div>

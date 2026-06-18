@@ -13,7 +13,6 @@ export const experience = [
     role: "Senior Product Designer",
     years: "2023 - Present",
     logo: flippLogo,
-    highlighted: true,
   },
   {
     company: "LawLabs",
@@ -39,5 +38,6 @@ export const experience = [
     role: "Web Developer & UX/UI Designer",
     years: "2014 - 2016",
     logo: brandAndMortarLogo,
+    logoClass: "experience-item__logo--brand-and-mortar",
   },
 ];

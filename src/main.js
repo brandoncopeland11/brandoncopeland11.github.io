@@ -535,7 +535,11 @@ const initNextProjectLinks = () => {
 
 initNextProjectLinks();
 
+// Marquee backup: set to true and unhide .experience-marquee-backup in index.html to restore.
+const ENABLE_EXPERIENCE_MARQUEE = false;
+
 const experienceMarqueeEl = document.getElementById("experience-marquee");
+const experienceCardsEl = document.getElementById("experience-cards");
 
 function formatExperienceYears(item) {
   if (item.years) return item.years;
@@ -545,9 +549,14 @@ function formatExperienceYears(item) {
   return end ? `${item.start} - ${end}` : item.start;
 }
 
-function renderExperienceItem(item) {
+function mapExperienceLogoClass(item, block) {
+  if (!item.logoClass) return "";
+  return ` ${item.logoClass.replace("experience-item__logo", `${block}__logo`)}`;
+}
+
+function renderExperienceMarqueeItem(item) {
   const highlightClass = item.highlighted ? " experience-item--highlighted" : "";
-  const logoClass = item.logoClass ? ` ${item.logoClass}` : "";
+  const logoClass = mapExperienceLogoClass(item, "experience-item");
   const years = formatExperienceYears(item);
   const yearsMarkup = years
     ? `<span class="experience-item__years">${years}</span>`
@@ -573,7 +582,39 @@ function renderExperienceItem(item) {
   `;
 }
 
-if (experienceMarqueeEl && experience.length) {
+function renderExperienceCardItem(item) {
+  const highlightClass = item.highlighted ? " experience-card--highlighted" : "";
+  const logoClass = mapExperienceLogoClass(item, "experience-card");
+  const years = formatExperienceYears(item);
+
+  return `
+    <li class="experience-card${highlightClass}">
+      <img
+        class="experience-card__logo${logoClass}"
+        src="${item.logo}"
+        alt=""
+        width="24"
+        height="24"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="experience-card__body">
+        <span class="experience-card__company">${item.company}</span>
+        <span class="experience-card__role">${item.role}</span>
+        <span class="experience-card__years">${years}</span>
+      </div>
+    </li>
+  `;
+}
+
+function renderExperienceCards() {
+  if (!experienceCardsEl || !experience.length) return;
+  experienceCardsEl.innerHTML = experience.map(renderExperienceCardItem).join("");
+}
+
+renderExperienceCards();
+
+if (ENABLE_EXPERIENCE_MARQUEE && experienceMarqueeEl && experience.length) {
   const experienceViewportEl = experienceMarqueeEl.closest(".experience-strip__viewport");
   const experienceMobileMql = window.matchMedia("(max-width: 767px)");
   let experienceResumeTimer = null;
@@ -625,7 +666,7 @@ if (experienceMarqueeEl && experience.length) {
   };
 
   const buildMarquee = () => {
-    const items = experience.map(renderExperienceItem).join("");
+    const items = experience.map(renderExperienceMarqueeItem).join("");
     experienceMarqueeEl.classList.remove("experience-strip__track--auto", "is-paused");
     experienceViewportEl?.classList.remove("is-interactive");
 
@@ -672,61 +713,6 @@ if (experienceMarqueeEl && experience.length) {
     reducedMotionMql.addEventListener("change", buildMarquee);
   } else {
     reducedMotionMql.addListener(buildMarquee);
-  }
-}
-
-const toolsGridEl = document.querySelector(".tools-grid");
-
-if (toolsGridEl) {
-  const initialToolsMarkup = toolsGridEl.innerHTML;
-  const mobileMql = window.matchMedia("(max-width: 767px)");
-  const reducedMotionMql = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  const buildToolsCarousel = () => {
-    const isOverlapLayout = rootEl.dataset.heroLayout === "overlap";
-    const shouldCarousel = mobileMql.matches && !reducedMotionMql.matches && !isOverlapLayout;
-
-    if (!shouldCarousel) {
-      toolsGridEl.classList.remove("tools-grid--carousel");
-      toolsGridEl.innerHTML = initialToolsMarkup;
-      toolsGridEl.style.removeProperty("--tools-scroll-end");
-      return;
-    }
-
-    toolsGridEl.classList.add("tools-grid--carousel");
-    toolsGridEl.innerHTML = initialToolsMarkup + initialToolsMarkup;
-
-    const loopStartIndex = Math.floor(toolsGridEl.children.length / 2);
-    const measureCarousel = () => {
-      const loopStart = toolsGridEl.children[loopStartIndex];
-      if (!loopStart) return;
-
-      const distance = loopStart.offsetLeft;
-      if (distance === 0) {
-        requestAnimationFrame(measureCarousel);
-        return;
-      }
-
-      toolsGridEl.style.setProperty("--tools-scroll-end", `-${distance}px`);
-    };
-
-    requestAnimationFrame(measureCarousel);
-
-    // Re-measure after remote logos finish loading to keep loop seamless.
-    toolsGridEl.querySelectorAll("img").forEach((img) => {
-      if (!img.complete) img.addEventListener("load", measureCarousel, { once: true });
-    });
-  };
-
-  buildToolsCarousel();
-  window.addEventListener("resize", buildToolsCarousel);
-
-  if (mobileMql.addEventListener) {
-    mobileMql.addEventListener("change", buildToolsCarousel);
-    reducedMotionMql.addEventListener("change", buildToolsCarousel);
-  } else {
-    mobileMql.addListener(buildToolsCarousel);
-    reducedMotionMql.addListener(buildToolsCarousel);
   }
 }
 
