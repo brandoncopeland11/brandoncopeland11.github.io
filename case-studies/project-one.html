@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project One | Brandon Copeland</title>
+    <title>In-App Collection Ads | Brandon Copeland</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&display=swap" />
     <style>
@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="/src/styles/main.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
-  <body class="case-study-page case-study-page--image-header">
+  <body class="case-study-page case-study-page--image-header case-study-page--project-one">
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary">
         <a class="site-nav__logo" href="/#hero" aria-label="Brandon Copeland, home"></a>
@@ -114,12 +114,21 @@
               <span aria-hidden="true">→</span>
               <a href="/#work">Work</a>
               <span aria-hidden="true">→</span>
-              <span>Project One</span>
+              <span>In-App Collection Ads</span>
             </nav>
-            <h1>Project One | Featured case study title</h1>
+            <h1>In-app collection ads</h1>
             <div class="case-study-company">
               <span>Completed while at</span>
-              <strong>Company</strong>
+              <img
+                class="case-study-company__logo"
+                src="/assets/logos/flipp.png"
+                alt=""
+                width="24"
+                height="24"
+                loading="lazy"
+                decoding="async"
+              />
+              <strong>Flipp</strong>
             </div>
           </div>
         </header>
@@ -129,40 +138,51 @@
             <div class="case-study-copy">
               <h2 id="overview-heading">Overview</h2>
               <p>
-                A short introduction to the product, audience, and problem space.
-                Explain what was happening, why it mattered, and what the team
-                needed to improve.
+                In-App Collection Ads transformed Flipp's ad experience by
+                replacing legacy, static Google Ad Manager (GAM) banners with a
+                dynamic, video/display unit paired with an interactive 1 to 3
+                item shoppable carousel.
               </p>
               <p>
-                Use this section to frame the challenge in plain language before
-                moving into your process. Keep the focus on user needs, business
-                context, and the design decisions that shaped the work.
+                As the lead product designer for this initiative, I led the
+                end-to-end design strategy across two high-traffic app surfaces:
+                Search and Browse. My focus was on driving higher ad engagement
+                and CPM value for brand partners while establishing strict UX
+                guardrails to protect core flyer browsing, user retention, and
+                overall ecosystem health.
               </p>
             </div>
 
             <dl class="case-study-meta">
               <div>
                 <dt>My contribution</dt>
-                <dd>Product strategy</dd>
-                <dd>User research</dd>
-                <dd>Product design</dd>
+                <dd>Product Strategy</dd>
+                <dd>UX/UI Design</dd>
+                <dd>User Research</dd>
               </div>
               <div>
                 <dt>The team</dt>
-                <dd>Product designer</dd>
-                <dd>Product partners</dd>
-                <dd>Engineering partners</dd>
+                <dd>Product Designer (yours truly)</dd>
+                <dd>UX Researcher</dd>
+                <dd>Director of Product</dd>
+                <dd>Product Manager</dd>
+                <dd>Engineering Manager</dd>
+                <dd>Software Engineer ×5</dd>
+                <dd>Product Marketing</dd>
+                <dd>Product Analytics</dd>
+                <dd>Media Science</dd>
+                <dd>QA</dd>
               </div>
               <div>
                 <dt>Year</dt>
-                <dd>2024</dd>
+                <dd>Q1 2025 to Present (2026)</dd>
               </div>
             </dl>
           </section>
 
           <figure class="case-study-visual">
             <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
+            <figcaption>Collection Ads hero — legacy GAM banner vs. video + shoppable carousel.</figcaption>
           </figure>
 
           <section class="case-study-company-intro" aria-labelledby="context-heading">
@@ -180,36 +200,30 @@
             <div class="case-study-company-intro__copy">
               <h2 id="context-heading">What is Flipp?</h2>
               <p>
-                Introduce the company, product, or market this work sits within so
-                a reader unfamiliar with it can follow along.
+                Flipp is a leading deal-discovery platform that helps millions of
+                shoppers plan weekly grocery and retail purchases through digital
+                flyers, search, and personalized deal feeds from local retailers.
               </p>
             </div>
           </section>
 
-          <figure class="case-study-visual case-study-visual--wide">
-            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
-          </figure>
-
-          <section
-            class="case-study-section case-study-section--split"
-            aria-labelledby="problem-heading"
-          >
+          <section class="case-study-section" aria-labelledby="problem-heading">
             <div class="case-study-copy">
               <h2 id="problem-heading">Problem</h2>
               <p>
-                Describe the core problem in plain language. What was breaking
-                down for users, and where did the existing experience fall short?
+                Flipp needed to move beyond legacy static Google Ad Manager (GAM)
+                banners. They were reliable for revenue, but engagement was weak—a
+                baseline CTR around 0.29%—and they couldn't showcase actionable,
+                item-level deals directly inside the feed.
               </p>
               <p>
-                Add supporting detail about the friction, the cost of the problem,
-                and why it was worth solving now.
+                The core design challenge was introducing high-impact, shoppable
+                Collection Ads into Search and Browse without degrading flyer
+                browsing, session depth, or retention. On Browse especially, new
+                ad units would compete for feed real estate alongside premium
+                digital flyer tiles—the product experience users come to Flipp for.
               </p>
             </div>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
           </section>
 
           <section
@@ -217,33 +231,32 @@
             aria-labelledby="goal-heading"
           >
             <div class="case-study-copy">
-              <h2 id="goal-heading">Goal</h2>
+              <h2 id="goal-heading">Goals</h2>
             </div>
             <ul class="case-study-list">
               <li>
-                <strong>First goal:</strong> describe the primary outcome you
-                set out to achieve with this work.
+                <strong>Business:</strong> Increase ad engagement and CPM value
+                for brand partners through a native video and shoppable carousel
+                format.
               </li>
               <li>
-                <strong>Second goal:</strong> capture a secondary objective that
-                shaped the direction of the design.
+                <strong>User:</strong> Protect core flyer browsing and retention;
+                ads should feel integrated into the feed, not disruptive to it.
               </li>
               <li>
-                <strong>Third goal:</strong> note any guiding principle or
-                constraint the team aligned on.
+                <strong>Design:</strong> Ship a cohesive Collection Ads experience
+                across Search (high-intent) and Browse (discovery-first) with
+                surface-specific UX patterns.
+              </li>
+              <li>
+                <strong>Guardrails:</strong> Define ad system rules—slot
+                placement, density, video behavior, and carousel interactions—
+                before scaling into high-traffic feed positions.
               </li>
             </ul>
           </section>
 
-          <div class="case-study-image-grid case-study-image-grid--goal" aria-label="Goal visuals">
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
+          <div class="case-study-image-grid" aria-label="Solution visuals">
             <figure class="case-study-visual case-study-visual--inline">
               <div class="case-study-visual__placeholder" aria-hidden="true"></div>
               <figcaption>Add a caption.</figcaption>
@@ -254,118 +267,166 @@
             </figure>
           </div>
 
-          <section class="case-study-section case-study-section--process" aria-labelledby="process-heading">
+          <section class="case-study-section" aria-labelledby="solution-heading">
             <div class="case-study-copy">
-              <h2 id="process-heading">Process</h2>
+              <h2 id="solution-heading">The solution</h2>
               <p>
-                The process moved through define, research, ideate, test,
-                refine, and ship. Describe how user testing informed the work
-                and what you set out to validate.
+                Collection Ads replace static banners with a dynamic video or
+                display unit paired with an interactive 1–3 item shoppable
+                carousel—a modern, CPM-billed format designed to feel native on
+                each surface while giving brand partners higher-impact placement.
+              </p>
+              <p>The format launched across two primary surfaces:</p>
+              <ul class="case-study-list">
+                <li>
+                  Search: Positioned at slots 3 and 7 within Search results.
+                  Targeted by exact, competitive, and related keywords, this
+                  surface served high-intent shoppers and proved stable early on.
+                </li>
+                <li>
+                  Browse: Placed within high-value feed slots (slots 4–9),
+                  competing directly for real estate alongside Flipp's primary
+                  content—premium digital flyer tiles.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <figure class="case-study-visual case-study-visual--wide">
+            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
+            <figcaption>Search and Browse feed placements — Collection Ads in context alongside flyer content.</figcaption>
+          </figure>
+
+          <section class="case-study-section" aria-labelledby="research-heading">
+            <div class="case-study-copy">
+              <h2 id="research-heading">User research</h2>
+              <p>
+                Because ads would ship into feed slots competing with core flyer
+                content, we couldn't scale on intuition alone. Before launching
+                across Search and Browse, Design and Research ran 7 unmoderated
+                rounds via UserTesting.com with 84 participants—casual, power,
+                and browser personas—to validate engagement without harming
+                retention.
               </p>
               <p>
-                Add how research and testing provided insights for further
-                refinement and development.
+                We tested video controls, item-card interactions, carousel card
+                density, and alternative IAB formats (250×250 and 300×250).
               </p>
             </div>
           </section>
 
-          <figure class="case-study-visual case-study-visual--inline">
-            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
-          </figure>
+          <section class="case-study-research-plan" aria-label="Unmoderated testing plan">
+            <div class="case-study-research-plan__cards">
+              <article class="case-study-research-plan__card case-study-research-plan__card--search">
+                <header class="case-study-research-plan__card-header">
+                  <span class="case-study-research-plan__card-index" aria-hidden="true">1</span>
+                  <div>
+                    <p class="case-study-research-plan__card-surface">Search</p>
+                    <h4 class="case-study-research-plan__card-title">Initial discovery</h4>
+                  </div>
+                </header>
+                <p class="case-study-research-plan__card-copy">
+                  Evaluated preferences for video controls, item card interactions,
+                  and the integrated experience.
+                </p>
+              </article>
 
-          <section class="case-study-testing-grid" aria-label="Unmoderated testing plan">
-            <article class="case-study-test-block case-study-test-block--tone-1">
-              <header class="case-study-test-block__header">
-                <span class="case-study-test-block__index" aria-hidden="true">01</span>
-                <div>
-                  <p class="case-study-test-block__eyebrow">Unmoderated test</p>
-                  <h3 class="case-study-test-block__title">Initial Discovery</h3>
-                </div>
-              </header>
-              <div class="case-study-test-block__body">
-                <dl class="case-study-test-block__meta">
+              <article class="case-study-research-plan__card case-study-research-plan__card--search">
+                <header class="case-study-research-plan__card-header">
+                  <span class="case-study-research-plan__card-index" aria-hidden="true">2</span>
                   <div>
-                    <dt># of participants</dt>
-                    <dd>Add number</dd>
+                    <p class="case-study-research-plan__card-surface">Search</p>
+                    <h4 class="case-study-research-plan__card-title">Iteration review</h4>
                   </div>
-                  <div>
-                    <dt>Device</dt>
-                    <dd>Add device</dd>
-                  </div>
-                  <div class="case-study-test-block__meta-wide">
-                    <dt>User type</dt>
-                    <dd>Add user segments</dd>
-                  </div>
-                </dl>
-                <div class="case-study-test-block__objectives">
-                  <p class="case-study-test-block__label">Objective</p>
-                  <ul class="case-study-test-block__list">
-                    <li>
-                      Define what you wanted to learn in the first round of testing.
-                    </li>
-                    <li>
-                      Capture how users responded to early concepts or flows.
-                    </li>
-                    <li>
-                      Gather qualitative feedback to support design iteration.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </article>
+                </header>
+                <p class="case-study-research-plan__card-copy">
+                  Tested reactions to design iterations and expectations for the
+                  integrated video and item experience.
+                </p>
+              </article>
 
-            <article class="case-study-test-block case-study-test-block--tone-2">
-              <header class="case-study-test-block__header">
-                <span class="case-study-test-block__index" aria-hidden="true">02</span>
-                <div>
-                  <p class="case-study-test-block__eyebrow">Unmoderated test</p>
-                  <h3 class="case-study-test-block__title">Learning from Iterations</h3>
-                </div>
-              </header>
-              <div class="case-study-test-block__body">
-                <dl class="case-study-test-block__meta">
+              <article class="case-study-research-plan__card case-study-research-plan__card--search">
+                <header class="case-study-research-plan__card-header">
+                  <span class="case-study-research-plan__card-index" aria-hidden="true">3</span>
                   <div>
-                    <dt># of participants</dt>
-                    <dd>Add number</dd>
+                    <p class="case-study-research-plan__card-surface">Search</p>
+                    <h4 class="case-study-research-plan__card-title">Scenario review</h4>
                   </div>
+                </header>
+                <p class="case-study-research-plan__card-copy">
+                  Tested layout iterations—SSD items at top and sponsored video in
+                  slot five—to refine the video and item experience.
+                </p>
+              </article>
+
+              <article class="case-study-research-plan__card case-study-research-plan__card--search">
+                <header class="case-study-research-plan__card-header">
+                  <span class="case-study-research-plan__card-index" aria-hidden="true">4</span>
                   <div>
-                    <dt>Device</dt>
-                    <dd>Add device</dd>
+                    <p class="case-study-research-plan__card-surface">Search</p>
+                    <h4 class="case-study-research-plan__card-title">IAB 250×250 alternate format</h4>
                   </div>
-                  <div class="case-study-test-block__meta-wide">
-                    <dt>User type</dt>
-                    <dd>Add user segments</dd>
+                </header>
+                <p class="case-study-research-plan__card-copy">
+                  Evaluated reaction and interaction preferences for the new IAB
+                  carousel ad format.
+                </p>
+              </article>
+
+              <article class="case-study-research-plan__card case-study-research-plan__card--browse">
+                <header class="case-study-research-plan__card-header">
+                  <span class="case-study-research-plan__card-index" aria-hidden="true">1</span>
+                  <div>
+                    <p class="case-study-research-plan__card-surface">Browse</p>
+                    <h4 class="case-study-research-plan__card-title">Initial discovery</h4>
                   </div>
-                </dl>
-                <div class="case-study-test-block__objectives">
-                  <p class="case-study-test-block__label">Objective</p>
-                  <ul class="case-study-test-block__list">
-                    <li>
-                      Validate updates from the first round with a second test.
-                    </li>
-                    <li>
-                      Learn how users respond to refined interactions and language.
-                    </li>
-                    <li>
-                      Gather qualitative feedback to support further iteration.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </article>
+                </header>
+                <p class="case-study-research-plan__card-copy">
+                  Evaluated placement, frequency, and visual design of Sponsored
+                  Display variants in Browse.
+                </p>
+              </article>
+
+              <article class="case-study-research-plan__card case-study-research-plan__card--browse">
+                <header class="case-study-research-plan__card-header">
+                  <span class="case-study-research-plan__card-index" aria-hidden="true">2</span>
+                  <div>
+                    <p class="case-study-research-plan__card-surface">Browse</p>
+                    <h4 class="case-study-research-plan__card-title">Visual impact</h4>
+                  </div>
+                </header>
+                <p class="case-study-research-plan__card-copy">
+                  Measured how quickly users process item card details and whether
+                  the reduced footprint felt less disruptive.
+                </p>
+              </article>
+
+              <article class="case-study-research-plan__card case-study-research-plan__card--browse">
+                <header class="case-study-research-plan__card-header">
+                  <span class="case-study-research-plan__card-index" aria-hidden="true">3</span>
+                  <div>
+                    <p class="case-study-research-plan__card-surface">Browse</p>
+                    <h4 class="case-study-research-plan__card-title">300×250 format</h4>
+                  </div>
+                </header>
+                <p class="case-study-research-plan__card-copy">
+                  Evaluated reaction and interaction preferences for the new IAB
+                  carousel ad format.
+                </p>
+              </article>
+            </div>
           </section>
 
           <section
             class="case-study-feedback-board"
-            aria-labelledby="feedback-heading"
+            aria-label="User feedback"
           >
             <header class="case-study-feedback-board__header">
-              <h2 id="feedback-heading">User feedback</h2>
+              <h2>User feedback</h2>
               <div class="case-study-feedback-board__intro">
                 <p>
-                  Highlights from unmoderated sessions. Add a summary of participant
-                  responses across both rounds of testing.
+                  Highlights from unmoderated sessions across Search and Browse
+                  testing rounds.
                 </p>
                 <ul class="case-study-feedback-board__legend" aria-label="Sticky note color key">
                   <li class="case-study-feedback-board__legend-item case-study-feedback-board__legend-item--comment">
@@ -393,79 +454,186 @@
                 class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--1"
                 role="listitem"
               >
-                <p>“Add a positive feedback quote.”</p>
+                <p>“I don't mind sponsored results when there are savings.”</p>
               </blockquote>
               <blockquote
                 class="case-study-sticky-note case-study-sticky-note--comment case-study-sticky-note--2"
                 role="listitem"
               >
-                <p>“Add a participant comment.”</p>
+                <p>“The red prices stick out as the deals.”</p>
               </blockquote>
               <blockquote
                 class="case-study-sticky-note case-study-sticky-note--highlight case-study-sticky-note--3"
                 role="listitem"
               >
-                <p>“Add a key highlight quote.”</p>
+                <p>“Huge image, heavy branding—not much else.”</p>
               </blockquote>
               <blockquote
                 class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--4"
                 role="listitem"
               >
-                <p>“Add a positive feedback quote.”</p>
+                <p>“I tapped the carousel because items looked on sale.”</p>
               </blockquote>
               <blockquote
                 class="case-study-sticky-note case-study-sticky-note--negative case-study-sticky-note--5"
                 role="listitem"
               >
-                <p>“Add a negative feedback quote.”</p>
+                <p>“The ad takes up too much of the page.”</p>
               </blockquote>
               <blockquote
                 class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--6"
                 role="listitem"
               >
-                <p>“Add a positive feedback quote.”</p>
+                <p>“Less intrusive than ads on other sites.”</p>
               </blockquote>
               <blockquote
-                class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--7"
+                class="case-study-sticky-note case-study-sticky-note--comment case-study-sticky-note--7"
                 role="listitem"
               >
-                <p>“Add a positive feedback quote.”</p>
+                <p>“I'm here to find stuff, not watch videos.”</p>
               </blockquote>
               <blockquote
-                class="case-study-sticky-note case-study-sticky-note--comment case-study-sticky-note--8"
+                class="case-study-sticky-note case-study-sticky-note--negative case-study-sticky-note--8"
                 role="listitem"
               >
-                <p>“Add a participant comment.”</p>
+                <p>“Moving images signal ads—I ignore them.”</p>
+              </blockquote>
+              <blockquote
+                class="case-study-sticky-note case-study-sticky-note--comment case-study-sticky-note--9"
+                role="listitem"
+              >
+                <p>“Right in the middle where I'd expect it.”</p>
+              </blockquote>
+              <blockquote
+                class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--10"
+                role="listitem"
+              >
+                <p>“Muted by default—I'd turn it off anyway.”</p>
               </blockquote>
             </div>
           </section>
 
           <section
-            class="case-study-section case-study-section--split case-study-section--split-list"
+            class="case-study-section case-study-section--outcome"
             aria-labelledby="outcome-heading"
           >
             <div class="case-study-copy">
               <h2 id="outcome-heading">Outcome</h2>
+              <ul class="case-study-outcome-grid">
+                <li class="case-study-outcome-card">
+                  <span class="case-study-outcome-card__emoji" aria-hidden="true">📈</span>
+                  <div class="case-study-outcome-card__body">
+                    <h3 class="case-study-outcome-card__title">A native ad product replaced legacy banners</h3>
+                    <p>
+                      Collection Ads moved Flipp from static GAM banners to a
+                      CPM-billed, in-feed format with video or display plus a
+                      shoppable 1–3 item carousel—giving brand partners item-level
+                      storytelling the legacy unit couldn't support.
+                    </p>
+                  </div>
+                </li>
+                <li class="case-study-outcome-card">
+                  <span class="case-study-outcome-card__emoji" aria-hidden="true">🔍</span>
+                  <div class="case-study-outcome-card__body">
+                    <h3 class="case-study-outcome-card__title">Search launched and scaled first</h3>
+                    <p>
+                      Search placements at slots 3 and 7 shipped ahead of Browse
+                      and proved stable with high-intent shoppers—creating a
+                      validated foundation before expanding into the more
+                      sensitive Browse feed.
+                    </p>
+                  </div>
+                </li>
+                <li class="case-study-outcome-card">
+                  <span class="case-study-outcome-card__emoji" aria-hidden="true">🛡️</span>
+                  <div class="case-study-outcome-card__body">
+                    <h3 class="case-study-outcome-card__title">Research-backed guardrails shipped</h3>
+                    <p>
+                      Seven rounds of testing across 84 participants codified core
+                      rules: muted video by default, carousel density limits,
+                      surface-specific slot placement, and tighter Browse
+                      footprints to reduce feed disruption.
+                    </p>
+                  </div>
+                </li>
+                <li class="case-study-outcome-card">
+                  <span class="case-study-outcome-card__emoji" aria-hidden="true">🛒</span>
+                  <div class="case-study-outcome-card__body">
+                    <h3 class="case-study-outcome-card__title">Shoppable carousel drove engagement</h3>
+                    <p>
+                      Users interacted with the carousel when deals were visually
+                      clear—red pricing and sale cues made the unit feel relevant
+                      rather than purely promotional, aligning ad value with
+                      Flipp's deal-discovery mission.
+                    </p>
+                  </div>
+                </li>
+                <li class="case-study-outcome-card case-study-outcome-card--wide">
+                  <span class="case-study-outcome-card__emoji" aria-hidden="true">🧭</span>
+                  <div class="case-study-outcome-card__body">
+                    <h3 class="case-study-outcome-card__title">Browse expanded with retention guardrails intact</h3>
+                    <p>
+                      Browse rolled out to high-value feed slots (4–9) with
+                      stricter visual and placement standards informed by Visual
+                      Impact and format testing—balancing monetization in direct
+                      competition with premium flyer tiles while keeping the feed
+                      usable for core shopping behavior.
+                    </p>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <ul class="case-study-list">
-              <li>
-                <strong>Result one:</strong> summarize a concrete outcome, with
-                a metric or qualitative impact where possible.
-              </li>
-              <li>
-                <strong>Result two:</strong> describe another way the work moved
-                the product, team, or users forward.
-              </li>
-              <li>
-                <strong>Result three:</strong> capture validation, adoption, or
-                feedback that confirmed the direction.
-              </li>
-            </ul>
+          </section>
+
+          <section
+            class="case-study-section case-study-section--design"
+            aria-labelledby="design-heading"
+          >
+            <h2 id="design-heading" class="case-study-section--design__heading">Design</h2>
+
+            <div class="case-study-design__intro">
+              <p>
+                Research findings directly shaped the shipped UI—slot placement,
+                video behavior, carousel density, and surface-specific layouts
+                for Search and Browse. Each variant was designed to feel native
+                in-feed while making deals scannable at a glance.
+              </p>
+              <p>
+                On Search, the unit paired video or display with a shoppable
+                carousel beneath, optimized for high-intent keyword context at
+                slots 3 and 7. Browse used a tighter footprint for slots 4–9,
+                with item cards tuned for faster scanning so the ad didn't
+                compete visually with premium flyer tiles.
+              </p>
+            </div>
+
+            <div class="case-study-design__detail">
+              <ul class="case-study-list">
+                <li>
+                  <strong>Video:</strong> Autoplay muted by default, with explicit
+                  controls—addressing the top retention concern from testing.
+                </li>
+                <li>
+                  <strong>Carousel:</strong> 1–3 item slots with sale-forward
+                  pricing (red price, deal cues) to match how users already scan
+                  Flipp feeds.
+                </li>
+                <li>
+                  <strong>Guardrails:</strong> Sponsored labeling, density caps,
+                  and surface-specific slot rules codified into the ad system
+                  before Browse scaled.
+                </li>
+              </ul>
+              <figure class="case-study-visual case-study-visual--inline">
+                <div class="case-study-visual__placeholder" aria-hidden="true"></div>
+                <figcaption>Final Collection Ads UI — Search and Browse variants.</figcaption>
+              </figure>
+            </div>
           </section>
 
           <figure class="case-study-visual case-study-visual--wide">
             <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
+            <figcaption>Collection Ads live in Search and Browse — final in-feed placements.</figcaption>
           </figure>
 
           <div class="case-study-image-grid" aria-label="Outcome visuals">

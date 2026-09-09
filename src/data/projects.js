@@ -17,7 +17,7 @@ const lawlabsLogo = "/assets/logos/lawlabs.png";
  */
 export const projects = [
   {
-    title: "Project One",
+    title: "In-App Collection Ads",
     company: "Flipp",
     logo: flippLogo,
     year: "2024",
