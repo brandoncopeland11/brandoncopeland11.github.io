@@ -2023,7 +2023,7 @@ a.work-card:active {
   filter: brightness(0) invert(1);
 }
 
-/* Experience — small cards */
+/* Experience: small cards */
 .experience-cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2102,7 +2102,7 @@ a.work-card:active {
   color: var(--color-text-tertiary);
 }
 
-/* Experience strip: centered, scrolling marquee (backup — unused by default) */
+/* Experience strip: centered, scrolling marquee (backup, unused by default) */
 .experience-strip {
   width: 100%;
   display: flex;
@@ -2708,7 +2708,7 @@ a.work-card:active {
   background-color: #1f2933;
 }
 
-/* Project one — scoped styles (In-App Collection Ads) */
+/* Project one: scoped styles (In-App Collection Ads) */
 .case-study-page--project-one {
   --project-one-body-size: clamp(1.125rem, 2vw, 1.375rem);
   --project-one-body-line-height: 1.55;
@@ -2862,8 +2862,62 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-research-plan_
   }
 }
 
-.case-study-page--project-one .case-study-section--outcome + .case-study-section--design {
-  margin-top: 2rem;
+.case-study-page--project-one .case-study-section--outcome .case-study-production-card {
+  margin-top: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.case-study-page--project-one .case-study-production-card {
+  --production-accent: #5bb8c9;
+  border: 1px solid color-mix(in srgb, var(--production-accent) 24%, var(--color-border-subtle));
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--production-accent) 7%, var(--color-surface) 92%, var(--color-bg-faint));
+  overflow: hidden;
+}
+
+html[data-theme="dark"] .case-study-page--project-one .case-study-production-card {
+  --production-accent: #7fd0de;
+  background: color-mix(in srgb, var(--production-accent) 9%, var(--color-surface) 88%, #ffffff08);
+}
+
+.case-study-page--project-one .case-study-production-card__header {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--production-accent) 18%, var(--color-border-subtle));
+  background: color-mix(in srgb, var(--production-accent) 10%, var(--color-surface));
+}
+
+.case-study-page--project-one .case-study-production-card__heading {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.25rem, 2.25vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.case-study-page--project-one .case-study-production-card__context {
+  max-width: none;
+  margin: 0.375rem 0 0;
+  color: var(--color-muted);
+  font-size: var(--project-one-body-size);
+  line-height: var(--project-one-body-line-height);
+}
+
+.case-study-page--project-one .case-study-production-card__body {
+  padding: 1rem;
+}
+
+.case-study-page--project-one .case-study-outcome-grid--production {
+  gap: clamp(1rem, 2.5vw, 1.25rem);
+  margin-top: 0;
+}
+
+.case-study-page--project-one .case-study-outcome-grid--production .case-study-outcome-card {
+  padding: 1rem;
+  column-gap: 0.75rem;
+}
+
+.case-study-page--project-one .case-study-production-card strong {
+  color: var(--color-text);
+  font-weight: 600;
 }
 
 .case-study-page--project-one
@@ -2932,6 +2986,84 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-research-plan_
   .case-study-page--project-one .case-study-section--design {
     gap: 2rem;
   }
+}
+
+.case-study-page--project-one
+  .case-study-section--explorations
+  .case-study-copy
+  p
+  + p {
+  margin-top: 0.75rem;
+}
+
+.case-study-page--project-one .case-study-explorations-carousel {
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+.case-study-page--project-one .case-study-explorations-carousel__viewport {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.case-study-page--project-one
+  .case-study-explorations-carousel__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.case-study-page--project-one .case-study-explorations-carousel__track {
+  display: flex;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+  width: max-content;
+  padding-bottom: 0.25rem;
+}
+
+.case-study-page--project-one .case-study-explorations-carousel__slide {
+  flex: 0 0 clamp(16rem, 78vw, 42rem);
+  margin: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.case-study-page--project-one
+  .case-study-explorations-carousel__slide
+  .case-study-visual__placeholder {
+  min-height: clamp(14rem, 28vw, 22rem);
+}
+
+.case-study-page--project-one .case-study-explorations-carousel__controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.case-study-page--project-one .case-study-explorations-carousel__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--color-border-default);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+.case-study-page--project-one
+  .case-study-explorations-carousel__button:hover:not(:disabled) {
+  border-color: var(--color-card-hover-border);
+}
+
+.case-study-page--project-one
+  .case-study-explorations-carousel__button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }
 
 .case-study-page--project-one .case-study-sticky-note--9 {

@@ -231,6 +231,52 @@ const setNavScrollState = () => {
 setNavScrollState();
 window.addEventListener("scroll", setNavScrollState, { passive: true });
 
+const initExplorationsCarousel = () => {
+  const carousel = document.querySelector("[data-explorations-carousel]");
+  if (!carousel) return;
+
+  const viewport = carousel.querySelector(
+    ".case-study-explorations-carousel__viewport"
+  );
+  const slides = Array.from(
+    carousel.querySelectorAll(".case-study-explorations-carousel__slide")
+  );
+  const prevBtn = carousel.querySelector("[data-carousel-prev]");
+  const nextBtn = carousel.querySelector("[data-carousel-next]");
+
+  if (!viewport || !slides.length) return;
+
+  const scrollBehavior = reducedMotionMql.matches ? "auto" : "smooth";
+
+  const getCurrentIndex = () => {
+    const { scrollLeft } = viewport;
+    return slides.reduce(
+      (closest, slide, index) => {
+        const dist = Math.abs(slide.offsetLeft - scrollLeft);
+        return dist < closest.dist ? { index, dist } : closest;
+      },
+      { index: 0, dist: Infinity }
+    ).index;
+  };
+
+  const scrollToIndex = (index) => {
+    const slide = slides[Math.max(0, Math.min(slides.length - 1, index))];
+    viewport.scrollTo({ left: slide.offsetLeft, behavior: scrollBehavior });
+  };
+
+  const updateButtons = () => {
+    const index = getCurrentIndex();
+    prevBtn?.toggleAttribute("disabled", index <= 0);
+    nextBtn?.toggleAttribute("disabled", index >= slides.length - 1);
+  };
+
+  prevBtn?.addEventListener("click", () => scrollToIndex(getCurrentIndex() - 1));
+  nextBtn?.addEventListener("click", () => scrollToIndex(getCurrentIndex() + 1));
+  viewport.addEventListener("scroll", updateButtons, { passive: true });
+  window.addEventListener("resize", updateButtons);
+  updateButtons();
+};
+
 if (document.body.classList.contains("case-study-page")) {
   const progressEl = document.createElement("div");
   progressEl.className = "case-study-scroll-progress";
@@ -300,6 +346,7 @@ if (document.body.classList.contains("case-study-page")) {
   window.addEventListener("pageshow", updateSubnavState);
 
   initCaseStudyLightbox();
+  initExplorationsCarousel();
 }
 
 const heroSectionEl = document.querySelector(".section--hero");
