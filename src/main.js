@@ -477,7 +477,7 @@ if (masonryEl) {
         ? project.imageHover
           ? `<div class="work-card__images">
               <img class="work-card__image work-card__image--default" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />
-              <img class="work-card__image work-card__image--hover" src="${project.imageHover}" alt="" loading="lazy" decoding="async" />
+              <img class="work-card__image work-card__image--hover" src="${project.imageHover}" alt="" loading="eager" decoding="async" />
             </div>`
           : `<img class="work-card__image" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />`
         : `<span class="placeholder-label">${project.title}</span>`;

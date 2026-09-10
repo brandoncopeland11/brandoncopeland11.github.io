@@ -81,6 +81,9 @@
   --hero-accent-5: #f6c6aa;
 
   --ease: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-crossfade-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-crossfade-in: cubic-bezier(0, 0, 0.2, 1);
+  --crossfade-duration: 0.65s;
   --skew-link: 3deg;
   --skew-card-sm: 0.72deg;
   --opacity-hover: 0.72;
@@ -1675,6 +1678,7 @@ a.work-card:active {
   background: var(--color-bg-faint);
   border-bottom: 1px solid var(--color-border-subtle);
   overflow: hidden;
+  transition: none;
 }
 
 .work-card__badge {
@@ -1721,6 +1725,7 @@ a.work-card:active {
 .work-card__images {
   position: absolute;
   inset: 0;
+  isolation: isolate;
 }
 
 .work-card__image--default,
@@ -1731,20 +1736,28 @@ a.work-card:active {
   height: 100%;
   min-height: 0;
   object-fit: cover;
-  transition: opacity 0.4s var(--ease);
+  backface-visibility: hidden;
+  transition: opacity var(--crossfade-duration) var(--ease-crossfade-out);
 }
 
 .work-card__image--hover {
   opacity: 0;
+  transition-timing-function: var(--ease-crossfade-in);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .work-card:hover .work-card__image--default {
     opacity: 0;
+    transition-duration: 0.45s;
+    transition-timing-function: var(--ease-crossfade-out);
+    transition-delay: 0s;
   }
 
   .work-card:hover .work-card__image--hover {
     opacity: 1;
+    transition-duration: var(--crossfade-duration);
+    transition-timing-function: var(--ease-crossfade-in);
+    transition-delay: 0.08s;
   }
 }
 
@@ -2705,7 +2718,7 @@ a.work-card:active {
 }
 
 .case-study-header--project-one {
-  background-color: #1f2933;
+  background-image: url("/case-studies/project-one/thumbnail-default.png");
 }
 
 /* Project one: scoped styles (In-App Collection Ads) */

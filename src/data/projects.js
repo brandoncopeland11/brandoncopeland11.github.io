@@ -1,3 +1,5 @@
+import collectionAdsThumbnail from "../../case-studies/project-one/thumbnail-default.png";
+import collectionAdsHover from "../../case-studies/project-one/thumbnail-hover.png";
 import addToListThumbnail from "../../case-studies/project-two/images/thumbnail-default.png";
 import addToListHover from "../../case-studies/project-two/images/thumbnail-hover.png";
 
@@ -25,9 +27,13 @@ export const projects = [
     device: "Mobile",
     type: "Case study",
     href: "/case-studies/project-one.html",
-    headerColor: "#1f2933",
+    headerImage: "/case-studies/project-one/thumbnail-default.png",
     size: "feature",
     featured: true,
+    image: collectionAdsThumbnail,
+    imageHover: collectionAdsHover,
+    imageAlt:
+      "Flipp Collection Ads: Search and Browse in-feed ad units with shoppable carousel",
   },
   {
     title: "Add to list UX",
