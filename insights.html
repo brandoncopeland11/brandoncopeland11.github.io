@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Private Analytics | Brandon Copeland</title>
+    <style>
+      html {
+        background: #fff;
+      }
+
+      html[data-theme="dark"] {
+        background: #0a0712;
+        color-scheme: dark;
+      }
+
+      body {
+        margin: 0;
+        background: #fff;
+        color: #000;
+      }
+
+      html[data-theme="dark"] body {
+        background: #0a0712;
+        color: #f7f2ff;
+      }
+    </style>
+    <script>
+      (() => {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        let storedTheme = null;
+        try {
+          storedTheme = localStorage.getItem("theme");
+        } catch {
+          storedTheme = null;
+        }
+        document.documentElement.dataset.theme = storedTheme || (prefersDark ? "dark" : "light");
+      })();
+    </script>
+    <script type="module" src="/src/insights.js"></script>
+  </head>
+  <body class="insights-page" data-analytics-opt-out="true">
+    <main id="insights-app"></main>
+  </body>
+</html>
