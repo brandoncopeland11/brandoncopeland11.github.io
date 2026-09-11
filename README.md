@@ -55,6 +55,8 @@ VITE_TRACK_LOCAL_ANALYTICS=false
 8. Restart the dev server or rebuild the site.
 9. Visit `/insights.html` and sign in.
 
+For this portfolio, the current Supabase project URL and publishable key are also checked into `src/supabaseClient.js` as a GitHub Pages-safe fallback. The local `.env` values override those defaults if you rotate keys later.
+
 ### Security model
 
 - The dashboard page is not linked anywhere in the site navigation.
