@@ -52,6 +52,10 @@ create index if not exists analytics_page_views_path_idx
 create index if not exists analytics_page_views_session_id_idx
   on public.analytics_page_views (session_id);
 
+grant usage on schema public to anon, authenticated;
+grant select, insert, update on public.analytics_sessions to anon, authenticated;
+grant select, insert, update on public.analytics_page_views to anon, authenticated;
+
 alter table public.analytics_sessions enable row level security;
 alter table public.analytics_page_views enable row level security;
 
@@ -59,14 +63,14 @@ drop policy if exists "public_insert_sessions" on public.analytics_sessions;
 create policy "public_insert_sessions"
   on public.analytics_sessions
   for insert
-  to anon, authenticated
+  to public
   with check (true);
 
 drop policy if exists "public_update_sessions" on public.analytics_sessions;
 create policy "public_update_sessions"
   on public.analytics_sessions
   for update
-  to anon, authenticated
+  to public
   using (true)
   with check (true);
 
@@ -81,14 +85,14 @@ drop policy if exists "public_insert_page_views" on public.analytics_page_views;
 create policy "public_insert_page_views"
   on public.analytics_page_views
   for insert
-  to anon, authenticated
+  to public
   with check (true);
 
 drop policy if exists "public_update_page_views" on public.analytics_page_views;
 create policy "public_update_page_views"
   on public.analytics_page_views
   for update
-  to anon, authenticated
+  to public
   using (true)
   with check (true);
 
