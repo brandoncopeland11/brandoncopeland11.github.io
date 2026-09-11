@@ -59,6 +59,66 @@ const getVisitorId = () => {
 const getCurrentPath = () =>
   `${window.location.pathname}${window.location.search}${window.location.hash}`;
 
+const getNormalizedText = (value) => String(value || "").replace(/\s+/g, " ").trim();
+
+const getSafeUrl = (value) => {
+  try {
+    return new URL(value, window.location.href);
+  } catch {
+    return null;
+  }
+};
+
+const classifyCtaLink = (link) => {
+  if (!(link instanceof HTMLAnchorElement)) return null;
+
+  const href = link.getAttribute("href") || "";
+  const url = getSafeUrl(href);
+  const hostname = url?.hostname.replace(/^www\./, "") || "";
+  const textLabel = getNormalizedText(link.getAttribute("aria-label") || link.textContent);
+
+  const buildClick = (label, category) => ({
+    key: `${category}:${label}:${url?.pathname || href || "unknown"}`,
+    label,
+    category,
+    targetUrl: url?.href || href || null,
+  });
+
+  if (href.startsWith("mailto:")) {
+    return buildClick("Contact email", "contact");
+  }
+
+  if (link.hasAttribute("download") || /\/resume\.pdf$/i.test(url?.pathname || href)) {
+    return buildClick("Resume download", "contact");
+  }
+
+  if (hostname.includes("linkedin.com")) {
+    return buildClick("LinkedIn profile", "social");
+  }
+
+  if (hostname.includes("github.com")) {
+    return buildClick("GitHub profile", "social");
+  }
+
+  if (hostname.includes("dribbble.com")) {
+    return buildClick("Dribbble profile", "social");
+  }
+
+  if (link.classList.contains("work-card")) {
+    return buildClick(textLabel || "Project card", "project");
+  }
+
+  if (link.classList.contains("next-project")) {
+    return buildClick("Next project", "project");
+  }
+
+  if (url?.origin === window.location.origin && url.hash) {
+    return buildClick(textLabel || `Jump to ${url.hash.replace(/^#/, "")}`, "navigation");
+  }
+
+  return null;
+};
+
 const getSessionState = (visitorId) => {
   const now = new Date();
   const storedSession = parseJson(readStorage(window.localStorage, SESSION_STORAGE_KEY));
@@ -188,6 +248,7 @@ export const initSiteAnalytics = () => {
   let isFlushing = false;
   let pendingFlush = false;
   const areaTimesMs = {};
+  const ctaClicks = new Map();
 
   const isEngaged = () => document.visibilityState === "visible" && document.hasFocus();
 
@@ -244,6 +305,7 @@ export const initSiteAnalytics = () => {
     duration_seconds: Math.max(0, Math.round(engagedMs / 1000)),
     max_scroll_pct: Number(maxScrollPct.toFixed(2)),
     area_times: roundSecondsMap(areaTimesMs),
+    cta_clicks: Array.from(ctaClicks.values()),
   });
 
   const flush = async () => {
@@ -287,6 +349,33 @@ export const initSiteAnalytics = () => {
     syncMeasurements();
   };
 
+  const recordCtaClick = (click) => {
+    if (!click) return;
+
+    const nowIso = new Date().toISOString();
+    const existing = ctaClicks.get(click.key);
+
+    ctaClicks.set(click.key, {
+      label: click.label,
+      category: click.category,
+      target_url: click.targetUrl,
+      count: (existing?.count || 0) + 1,
+      first_clicked_at: existing?.first_clicked_at || nowIso,
+      last_clicked_at: nowIso,
+    });
+  };
+
+  const handleDocumentClick = (event) => {
+    if (event.defaultPrevented || event.button !== 0) return;
+    if (!(event.target instanceof Element)) return;
+
+    const link = event.target.closest("a");
+    if (!link) return;
+
+    recordCtaClick(classifyCtaLink(link));
+    flush();
+  };
+
   syncMeasurements();
   scheduleFlush();
   flush();
@@ -295,6 +384,7 @@ export const initSiteAnalytics = () => {
   window.addEventListener("resize", handleActivity);
   window.addEventListener("focus", handleActivity);
   window.addEventListener("blur", handleActivity);
+  document.addEventListener("click", handleDocumentClick);
   document.addEventListener("visibilitychange", () => {
     handleActivity();
     if (document.visibilityState === "hidden") {

@@ -61,6 +61,61 @@ const formatPathLabel = (path, title) => {
   return basename.replace(".html", "").replaceAll("-", " ");
 };
 
+const getFriendlyHost = (value) => value.replace(/^www\./, "");
+
+const getSourceDetails = (session) => {
+  const fallback = {
+    group: "Direct",
+    label: "Direct",
+    detail: "No referrer",
+  };
+
+  try {
+    const landingUrl = new URL(session.landing_path || "/", "https://portfolio.local");
+    const utmSource = landingUrl.searchParams.get("utm_source");
+    const utmMedium = landingUrl.searchParams.get("utm_medium");
+    const utmCampaign = landingUrl.searchParams.get("utm_campaign");
+
+    if (utmSource || utmMedium || utmCampaign) {
+      const label = [utmSource, utmMedium].filter(Boolean).join(" / ") || utmCampaign || "Campaign";
+      return {
+        group: "Campaign",
+        label,
+        detail: utmCampaign ? `Campaign: ${utmCampaign}` : "Tagged link",
+      };
+    }
+  } catch {
+    // Fall through to referrer-based source detection.
+  }
+
+  if (!session.referrer) return fallback;
+
+  try {
+    const referrerUrl = new URL(session.referrer);
+    const hostname = getFriendlyHost(referrerUrl.hostname);
+    const isSocial = ["linkedin.com", "dribbble.com", "x.com", "twitter.com"].some((domain) =>
+      hostname.includes(domain)
+    );
+    const isSearch = ["google.", "bing.com", "duckduckgo.com"].some((domain) =>
+      hostname.includes(domain)
+    );
+
+    return {
+      group: isSocial ? "Social" : isSearch ? "Search" : "Referral",
+      label: hostname,
+      detail: session.referrer,
+    };
+  } catch {
+    return {
+      group: "Referral",
+      label: session.referrer,
+      detail: session.referrer,
+    };
+  }
+};
+
+const normalizeClicks = (value) => (Array.isArray(value) ? value : []);
+
 const getCutoffDate = () => {
   if (state.range === "all") return null;
   const days = Number.parseInt(state.range, 10);
@@ -185,6 +240,97 @@ const buildAreaStats = (pageViews) => {
   return Array.from(areaMap.values()).sort((a, b) => b.seconds - a.seconds);
 };
 
+const buildSourceStats = (sessions, pageViews) => {
+  const sessionDurations = getSessionDurationMap(pageViews);
+  const visitorSessionCounts = getVisitorSessionCountMap(state.sessions);
+  const grouped = new Map();
+
+  sessions.forEach((session) => {
+    const source = getSourceDetails(session);
+    const key = `${source.group}::${source.label}`;
+    const current = grouped.get(key) || {
+      group: source.group,
+      label: source.label,
+      detail: source.detail,
+      sessions: 0,
+      visitors: new Set(),
+      returningVisitors: 0,
+      durationSeconds: 0,
+    };
+
+    current.sessions += 1;
+    current.visitors.add(session.visitor_id);
+    current.durationSeconds += sessionDurations.get(session.id) || 0;
+    if ((visitorSessionCounts.get(session.visitor_id) || 0) > 1) {
+      current.returningVisitors += 1;
+    }
+
+    grouped.set(key, current);
+  });
+
+  return Array.from(grouped.values())
+    .map((source) => ({
+      ...source,
+      visitors: source.visitors.size,
+      avgSessionDuration: source.durationSeconds / Math.max(source.sessions, 1),
+    }))
+    .sort((a, b) => b.sessions - a.sessions);
+};
+
+const buildScrollStats = (pageViews) => {
+  const grouped = groupBy(pageViews, (view) => view.path);
+
+  return Array.from(grouped.entries())
+    .map(([path, views]) => {
+      const title = views[0]?.page_title || "";
+      const strongReads = views.filter((view) => Number(view.max_scroll_pct) >= 75).length;
+      const nearCompleteReads = views.filter((view) => Number(view.max_scroll_pct) >= 90).length;
+      const avgScroll =
+        views.reduce((sum, view) => sum + (Number(view.max_scroll_pct) || 0), 0) /
+        Math.max(views.length, 1);
+
+      return {
+        path,
+        label: formatPathLabel(path, title),
+        avgScroll,
+        strongReadRate: (strongReads / Math.max(views.length, 1)) * 100,
+        completionRate: (nearCompleteReads / Math.max(views.length, 1)) * 100,
+      };
+    })
+    .sort((a, b) => b.avgScroll - a.avgScroll);
+};
+
+const buildClickStats = (pageViews) => {
+  const clickMap = new Map();
+
+  pageViews.forEach((view) => {
+    normalizeClicks(view.cta_clicks).forEach((click) => {
+      const key = `${click.category || "other"}::${click.label || "Unknown"}::${click.target_url || ""}`;
+      const current = clickMap.get(key) || {
+        category: click.category || "other",
+        label: click.label || "Unknown",
+        targetUrl: click.target_url || "",
+        count: 0,
+        visitors: new Set(),
+        pages: new Set(),
+      };
+
+      current.count += Number(click.count) || 0;
+      current.visitors.add(view.visitor_id);
+      current.pages.add(formatPathLabel(view.path, view.page_title));
+      clickMap.set(key, current);
+    });
+  });
+
+  return Array.from(clickMap.values())
+    .map((click) => ({
+      ...click,
+      visitors: click.visitors.size,
+      pages: Array.from(click.pages),
+    }))
+    .sort((a, b) => b.count - a.count);
+};
+
 const buildRecentSessions = (sessions, pageViews) => {
   const viewsBySession = groupBy(pageViews, (view) => view.session_id);
   const visitorSessionCounts = getVisitorSessionCountMap(state.sessions);
@@ -200,15 +346,23 @@ const buildRecentSessions = (sessions, pageViews) => {
       const uniquePageTrail = pageTrail.filter((label, index) => {
         return index === 0 || label !== pageTrail[index - 1];
       });
+      const source = getSourceDetails(session);
+      const clickedLabels = views.flatMap((view) =>
+        normalizeClicks(view.cta_clicks).map((click) => click.label).filter(Boolean)
+      );
+      const uniqueClickedLabels = Array.from(new Set(clickedLabels));
 
       return {
         id: session.id,
         startedAt: session.started_at,
         referrer: session.referrer,
+        sourceLabel: source.label,
+        sourceGroup: source.group,
         visitorId: session.visitor_id,
         returning: (visitorSessionCounts.get(session.visitor_id) || 0) > 1,
         durationSeconds: sessionDurations.get(session.id) || 0,
         pages: uniquePageTrail,
+        keyActions: uniqueClickedLabels,
       };
     })
     .sort((a, b) => new Date(b.startedAt) - new Date(a.startedAt));
@@ -225,6 +379,13 @@ const getMetrics = () => {
   }).length;
   const totalDuration = Array.from(sessionDurations.values()).reduce((sum, value) => sum + value, 0);
   const avgSessionDuration = totalDuration / Math.max(sessionDurations.size, 1);
+  const sourceStats = buildSourceStats(filteredSessions, filteredPageViews);
+  const scrollStats = buildScrollStats(filteredPageViews);
+  const clickStats = buildClickStats(filteredPageViews);
+  const avgScrollDepth =
+    filteredPageViews.reduce((sum, view) => sum + (Number(view.max_scroll_pct) || 0), 0) /
+    Math.max(filteredPageViews.length, 1);
+  const totalKeyActions = clickStats.reduce((sum, click) => sum + click.count, 0);
 
   return {
     filteredSessions,
@@ -235,10 +396,15 @@ const getMetrics = () => {
       pageViews: filteredPageViews.length,
       returningVisitors,
       avgSessionDuration,
+      avgScrollDepth,
+      totalKeyActions,
     },
     dailySeries: createDailyVisitorSeries(filteredPageViews),
     pageStats: buildPageStats(filteredPageViews),
+    sourceStats,
+    scrollStats,
     areaStats: buildAreaStats(filteredPageViews),
+    clickStats,
     recentSessions: buildRecentSessions(filteredSessions, filteredPageViews).slice(0, 12),
   };
 };
@@ -347,6 +513,120 @@ const renderAreaTable = (areaStats) => {
   `;
 };
 
+const renderSourceTable = (sourceStats) => {
+  if (!sourceStats.length) {
+    return '<p class="insights-empty">Traffic source details will appear after visits start coming in.</p>';
+  }
+
+  return `
+    <div class="insights-table-wrap">
+      <table class="insights-table">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Sessions</th>
+            <th>Visitors</th>
+            <th>Avg time</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${sourceStats
+            .slice(0, 12)
+            .map((source) => {
+              return `
+                <tr>
+                  <td>
+                    <strong>${escapeHtml(source.label)}</strong>
+                    <span class="insights-table__subtle">${escapeHtml(source.group)}</span>
+                  </td>
+                  <td>${source.sessions}</td>
+                  <td>${source.visitors}</td>
+                  <td>${escapeHtml(formatDuration(source.avgSessionDuration))}</td>
+                </tr>
+              `;
+            })
+            .join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+};
+
+const renderScrollTable = (scrollStats) => {
+  if (!scrollStats.length) {
+    return '<p class="insights-empty">Scroll depth will appear after a few page views.</p>';
+  }
+
+  return `
+    <div class="insights-table-wrap">
+      <table class="insights-table">
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Avg depth</th>
+            <th>75%+ reads</th>
+            <th>90%+ reads</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${scrollStats
+            .slice(0, 12)
+            .map((page) => {
+              return `
+                <tr>
+                  <td>${escapeHtml(page.label)}</td>
+                  <td>${Math.round(page.avgScroll)}%</td>
+                  <td>${Math.round(page.strongReadRate)}%</td>
+                  <td>${Math.round(page.completionRate)}%</td>
+                </tr>
+              `;
+            })
+            .join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+};
+
+const renderClickTable = (clickStats) => {
+  if (!clickStats.length) {
+    return '<p class="insights-empty">Key action clicks will appear after visitors interact with your links.</p>';
+  }
+
+  return `
+    <div class="insights-table-wrap">
+      <table class="insights-table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Clicks</th>
+            <th>Visitors</th>
+            <th>Pages</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${clickStats
+            .slice(0, 12)
+            .map((click) => {
+              return `
+                <tr>
+                  <td>
+                    <strong>${escapeHtml(click.label)}</strong>
+                    <span class="insights-table__subtle">${escapeHtml(click.category)}</span>
+                  </td>
+                  <td>${click.count}</td>
+                  <td>${click.visitors}</td>
+                  <td>${escapeHtml(click.pages.join(", "))}</td>
+                </tr>
+              `;
+            })
+            .join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+};
+
 const renderRecentSessions = (recentSessions) => {
   if (!recentSessions.length) {
     return '<p class="insights-empty">Returning visitors and page trails will show up here.</p>';
@@ -368,7 +648,9 @@ const renderRecentSessions = (recentSessions) => {
               </div>
               <p class="insights-session-card__trail">${escapeHtml(session.pages.join(" -> ") || "Single page visit")}</p>
               <p class="insights-session-card__meta">
+                Source: ${escapeHtml(session.sourceLabel)} (${escapeHtml(session.sourceGroup)})<br />
                 Referrer: ${escapeHtml(referrer)}<br />
+                Key actions: ${escapeHtml(session.keyActions.join(", ") || "None")}<br />
                 Visitor ID: <code>${escapeHtml(session.visitorId)}</code>
               </p>
             </article>
@@ -489,6 +771,14 @@ const renderShell = () => {
             <span class="insights-kpi__label">Avg session time</span>
             <strong class="insights-kpi__value">${escapeHtml(formatDuration(metrics.summary.avgSessionDuration))}</strong>
           </article>
+          <article class="insights-kpi">
+            <span class="insights-kpi__label">Avg scroll depth</span>
+            <strong class="insights-kpi__value">${Math.round(metrics.summary.avgScrollDepth)}%</strong>
+          </article>
+          <article class="insights-kpi">
+            <span class="insights-kpi__label">Key actions</span>
+            <strong class="insights-kpi__value">${metrics.summary.totalKeyActions}</strong>
+          </article>
         </section>
 
         <div class="insights-grid">
@@ -510,16 +800,40 @@ const renderShell = () => {
 
           <section class="insights-card">
             <div class="insights-card__header">
+              <h2>Traffic sources</h2>
+              <p>See whether visits came direct, from social, from search, or from tagged links.</p>
+            </div>
+            ${renderSourceTable(metrics.sourceStats)}
+          </section>
+
+          <section class="insights-card">
+            <div class="insights-card__header">
+              <h2>Scroll depth</h2>
+              <p>Use this to spot which pages are being read deeply versus skimmed.</p>
+            </div>
+            ${renderScrollTable(metrics.scrollStats)}
+          </section>
+
+          <section class="insights-card">
+            <div class="insights-card__header">
               <h2>Top attention areas</h2>
               <p>Approximate section-level engagement across your site.</p>
             </div>
             ${renderAreaTable(metrics.areaStats)}
           </section>
 
+          <section class="insights-card">
+            <div class="insights-card__header">
+              <h2>Key actions</h2>
+              <p>Track clicks on your resume, contact methods, and project entry points.</p>
+            </div>
+            ${renderClickTable(metrics.clickStats)}
+          </section>
+
           <section class="insights-card insights-card--wide">
             <div class="insights-card__header">
               <h2>Recent sessions</h2>
-              <p>Use this to spot page flow, referrers, and return visits.</p>
+              <p>Use this to spot page flow, traffic source, return visits, and clicked actions.</p>
             </div>
             ${renderRecentSessions(metrics.recentSessions)}
           </section>

@@ -37,6 +37,9 @@ create table if not exists public.analytics_page_views (
   created_at timestamptz not null default timezone('utc', now())
 );
 
+alter table if exists public.analytics_page_views
+  add column if not exists cta_clicks jsonb not null default '[]'::jsonb;
+
 create index if not exists analytics_sessions_started_at_idx
   on public.analytics_sessions (started_at desc);
 
