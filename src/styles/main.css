@@ -2990,6 +2990,10 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   min-height: clamp(18rem, 34vw, 32rem);
 }
 
+.case-study-page--project-one .case-study-image-grid + .case-study-image-grid {
+  margin-top: clamp(1rem, 2.5vw, 1.25rem);
+}
+
 @media (max-width: 767px) {
   .case-study-page--project-one .case-study-design__intro,
   .case-study-page--project-one .case-study-design__detail {
