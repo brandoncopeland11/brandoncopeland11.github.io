@@ -5,8 +5,6 @@ import addToListHover from "../../case-studies/project-two/images/thumbnail-hove
 
 const flippLogo = "/assets/logos/flipp.png";
 const innosoftLogo = "/assets/logos/innosoft.png";
-const trapezeLogo = "/assets/logos/trapeze.svg";
-const lawlabsLogo = "/assets/logos/lawlabs.png";
 
 /**
  * Case studies shown in the masonry/bento grid and used to drive the
@@ -14,7 +12,7 @@ const lawlabsLogo = "/assets/logos/lawlabs.png";
  * Order here is the canonical project order (and the cycle order).
  * size: "feature" (big, top-left) | "wide-tall" | "tall" | "wide" | "default"
  * featured: shows a "Featured" tag on the tile.
- * year, method, device, type: shown under the title, separated by ·
+ * method, device, type: shown under the title, separated by ·
  * image / imageHover: thumbnail pair for default and hover states.
  */
 export const projects = [
@@ -40,7 +38,7 @@ export const projects = [
     company: "Flipp",
     logo: flippLogo,
     year: "2025",
-    method: "UX research",
+    method: "Product design",
     device: "Mobile",
     type: "Case study",
     href: "/case-studies/project-two.html",
@@ -51,38 +49,33 @@ export const projects = [
     imageAlt: "Flipp add to list UX: search results and flyer add-to-list flows",
   },
   {
-    title: "Project Three",
-    company: "InnoSoft Canada",
+    title: "Efficient score submission",
+    company: "Fusion",
     logo: innosoftLogo,
-    year: "2024",
+    year: "",
     method: "Product design",
-    device: "Desktop",
-    type: "UI",
+    device: "Tablet",
+    type: "Case study",
     href: "/case-studies/project-three.html",
     headerColor: "#2b2233",
     size: "default",
   },
   {
-    title: "Project Four",
-    company: "Trapeze",
-    logo: trapezeLogo,
-    logoClass: "work-card__logo--trapeze",
-    year: "2023",
-    method: "UX research",
-    device: "Desktop",
+    title: "Flyer swiping (9% growth adoption)",
+    company: "Flipp",
+    logo: flippLogo,
+    year: "",
+    method: "Product design",
+    device: "Strategy",
     type: "Case study",
     href: "/case-studies/project-four.html",
     headerColor: "#1f2b26",
     size: "default",
   },
   {
-    title: "Project Five",
-    company: "LawLabs",
-    logo: lawlabsLogo,
-    year: "2024",
-    method: "Product design",
-    device: "Mobile",
-    type: "UI",
+    title: "Coming soon",
+    placeholderLabel: "Coming soon",
+    isNavigable: false,
     href: "/case-studies/project-five.html",
     headerColor: "#2b2730",
     size: "wide",

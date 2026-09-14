@@ -459,9 +459,7 @@ if (heroHeadingEl && heroClassicCopyEl) {
 
 if (masonryEl) {
   const renderWorkCardMeta = (project) => {
-    const tags = [project.year, project.method, project.device, project.type].filter(
-      Boolean
-    );
+    const tags = [project.method, project.device, project.type].filter(Boolean);
 
     if (!tags.length) {
       return "";
@@ -475,6 +473,16 @@ if (masonryEl) {
   masonryEl.innerHTML = projects
     .map((project) => {
       const imageAlt = project.imageAlt || project.title;
+      const placeholderLabel = Object.prototype.hasOwnProperty.call(
+        project,
+        "placeholderLabel"
+      )
+        ? project.placeholderLabel
+        : project.title;
+      const isClickable = Boolean(project.href && project.isNavigable !== false);
+      const cardTag = isClickable ? "a" : "div";
+      const cardClass = `work-card${isClickable ? "" : " work-card--disabled"}`;
+      const cardHrefAttr = isClickable ? ` href="${project.href}"` : "";
       const media = project.image
         ? project.imageHover
           ? `<div class="work-card__images">
@@ -482,7 +490,9 @@ if (masonryEl) {
               <img class="work-card__image work-card__image--hover" src="${project.imageHover}" alt="" loading="eager" decoding="async" />
             </div>`
           : `<img class="work-card__image" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />`
-        : `<span class="placeholder-label">${project.title}</span>`;
+        : placeholderLabel
+          ? `<span class="placeholder-label">${placeholderLabel}</span>`
+          : "";
 
       const badge = project.featured
         ? `<span class="work-card__badge">Featured</span>`
@@ -495,7 +505,7 @@ if (masonryEl) {
 
       return `
     <li class="work-masonry__item work-masonry__item--${project.size}">
-      <a class="work-card" href="${project.href}">
+      <${cardTag} class="${cardClass}"${cardHrefAttr}>
         <div class="work-card__media">
           ${media}
           ${badge}
@@ -507,7 +517,7 @@ if (masonryEl) {
             ${renderWorkCardMeta(project)}
           </div>
         </div>
-      </a>
+      </${cardTag}>
     </li>
   `;
     })
@@ -561,17 +571,21 @@ const applyNextProjectHero = (el, project) => {
 
 const initNextProjectLinks = () => {
   const nextProjectEls = document.querySelectorAll(".next-project");
-  if (!nextProjectEls.length || !projects.length) return;
+  const navigableProjects = projects.filter(
+    (project) => project.href && project.isNavigable !== false
+  );
+  if (!nextProjectEls.length || !navigableProjects.length) return;
 
   const basename = (path) => (path || "").split("?")[0].split("#")[0].split("/").pop();
   const currentFile = basename(window.location.pathname);
-  const currentIndex = projects.findIndex(
+  const currentIndex = navigableProjects.findIndex(
     (project) => basename(project.href) === currentFile
   );
 
   if (currentIndex === -1) return;
 
-  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const nextProject =
+    navigableProjects[(currentIndex + 1) % navigableProjects.length];
   const ariaLabel = `Next project: ${nextProject.title}${nextProject.company ? `, ${nextProject.company}` : ""}`;
 
   nextProjectEls.forEach((nextProjectEl) => {
