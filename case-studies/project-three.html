@@ -47,7 +47,7 @@
     <link rel="stylesheet" href="/src/styles/main.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
-  <body class="case-study-page case-study-page--image-header">
+  <body class="case-study-page case-study-page--image-header case-study-page--template-compact">
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary">
         <a class="site-nav__logo" href="/#hero" aria-label="Brandon Copeland, home"></a>
@@ -160,9 +160,9 @@
             </dl>
           </section>
 
-          <figure class="case-study-visual">
+          <figure class="case-study-visual case-study-visual--wide">
             <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
+            <figcaption>Add a hero-supporting image.</figcaption>
           </figure>
 
           <section class="case-study-company-intro" aria-labelledby="context-heading">
@@ -186,15 +186,7 @@
             </div>
           </section>
 
-          <figure class="case-study-visual case-study-visual--wide">
-            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
-          </figure>
-
-          <section
-            class="case-study-section case-study-section--split"
-            aria-labelledby="problem-heading"
-          >
+          <section class="case-study-section" aria-labelledby="problem-heading">
             <div class="case-study-copy">
               <h2 id="problem-heading">Problem</h2>
               <p>
@@ -206,18 +198,14 @@
                 and why it was worth solving now.
               </p>
             </div>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
           </section>
 
           <section
             class="case-study-section case-study-section--split case-study-section--split-list"
-            aria-labelledby="goal-heading"
+            aria-labelledby="goals-heading"
           >
             <div class="case-study-copy">
-              <h2 id="goal-heading">Goal</h2>
+              <h2 id="goals-heading">Goals</h2>
             </div>
             <ul class="case-study-list">
               <li>
@@ -238,19 +226,11 @@
           <div class="case-study-image-grid case-study-image-grid--goal" aria-label="Goal visuals">
             <figure class="case-study-visual case-study-visual--inline">
               <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
+              <figcaption>Add visual one.</figcaption>
             </figure>
             <figure class="case-study-visual case-study-visual--inline">
               <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
+              <figcaption>Add visual two.</figcaption>
             </figure>
           </div>
 
@@ -274,171 +254,68 @@
             <figcaption>Add a caption.</figcaption>
           </figure>
 
-          <section class="case-study-testing-grid" aria-label="Unmoderated testing plan">
-            <article class="case-study-test-block case-study-test-block--tone-1">
-              <header class="case-study-test-block__header">
-                <span class="case-study-test-block__index" aria-hidden="true">01</span>
-                <div>
-                  <p class="case-study-test-block__eyebrow">Unmoderated test</p>
-                  <h3 class="case-study-test-block__title">Initial Discovery</h3>
-                </div>
-              </header>
-              <div class="case-study-test-block__body">
-                <dl class="case-study-test-block__meta">
-                  <div>
-                    <dt># of participants</dt>
-                    <dd>Add number</dd>
-                  </div>
-                  <div>
-                    <dt>Device</dt>
-                    <dd>Add device</dd>
-                  </div>
-                  <div class="case-study-test-block__meta-wide">
-                    <dt>User type</dt>
-                    <dd>Add user segments</dd>
-                  </div>
-                </dl>
-                <div class="case-study-test-block__objectives">
-                  <p class="case-study-test-block__label">Objective</p>
-                  <ul class="case-study-test-block__list">
-                    <li>
-                      Define what you wanted to learn in the first round of testing.
-                    </li>
-                    <li>
-                      Capture how users responded to early concepts or flows.
-                    </li>
-                    <li>
-                      Gather qualitative feedback to support design iteration.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-
-            <article class="case-study-test-block case-study-test-block--tone-2">
-              <header class="case-study-test-block__header">
-                <span class="case-study-test-block__index" aria-hidden="true">02</span>
-                <div>
-                  <p class="case-study-test-block__eyebrow">Unmoderated test</p>
-                  <h3 class="case-study-test-block__title">Learning from Iterations</h3>
-                </div>
-              </header>
-              <div class="case-study-test-block__body">
-                <dl class="case-study-test-block__meta">
-                  <div>
-                    <dt># of participants</dt>
-                    <dd>Add number</dd>
-                  </div>
-                  <div>
-                    <dt>Device</dt>
-                    <dd>Add device</dd>
-                  </div>
-                  <div class="case-study-test-block__meta-wide">
-                    <dt>User type</dt>
-                    <dd>Add user segments</dd>
-                  </div>
-                </dl>
-                <div class="case-study-test-block__objectives">
-                  <p class="case-study-test-block__label">Objective</p>
-                  <ul class="case-study-test-block__list">
-                    <li>
-                      Validate updates from the first round with a second test.
-                    </li>
-                    <li>
-                      Learn how users respond to refined interactions and language.
-                    </li>
-                    <li>
-                      Gather qualitative feedback to support further iteration.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </article>
-          </section>
-
           <section
-            class="case-study-feedback-board"
-            aria-labelledby="feedback-heading"
+            class="case-study-section case-study-section--design"
+            aria-labelledby="design-heading"
           >
-            <header class="case-study-feedback-board__header">
-              <h2 id="feedback-heading">User feedback</h2>
-              <div class="case-study-feedback-board__intro">
-                <p>
-                  Highlights from unmoderated sessions. Add a summary of participant
-                  responses across both rounds of testing.
-                </p>
-                <ul class="case-study-feedback-board__legend" aria-label="Sticky note color key">
-                  <li class="case-study-feedback-board__legend-item case-study-feedback-board__legend-item--comment">
-                    <span class="case-study-feedback-board__legend-swatch" aria-hidden="true"></span>
-                    Comment
-                  </li>
-                  <li class="case-study-feedback-board__legend-item case-study-feedback-board__legend-item--positive">
-                    <span class="case-study-feedback-board__legend-swatch" aria-hidden="true"></span>
-                    Positive
-                  </li>
-                  <li class="case-study-feedback-board__legend-item case-study-feedback-board__legend-item--negative">
-                    <span class="case-study-feedback-board__legend-swatch" aria-hidden="true"></span>
-                    Negative
-                  </li>
-                  <li class="case-study-feedback-board__legend-item case-study-feedback-board__legend-item--highlight">
-                    <span class="case-study-feedback-board__legend-swatch" aria-hidden="true"></span>
-                    Key highlight
-                  </li>
-                </ul>
-              </div>
-            </header>
+            <h2 id="design-heading" class="case-study-section--design__heading">Design</h2>
 
-            <div class="case-study-feedback-board__whiteboard" role="list">
-              <blockquote
-                class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--1"
-                role="listitem"
-              >
-                <p>“Add a positive feedback quote.”</p>
-              </blockquote>
-              <blockquote
-                class="case-study-sticky-note case-study-sticky-note--comment case-study-sticky-note--2"
-                role="listitem"
-              >
-                <p>“Add a participant comment.”</p>
-              </blockquote>
-              <blockquote
-                class="case-study-sticky-note case-study-sticky-note--highlight case-study-sticky-note--3"
-                role="listitem"
-              >
-                <p>“Add a key highlight quote.”</p>
-              </blockquote>
-              <blockquote
-                class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--4"
-                role="listitem"
-              >
-                <p>“Add a positive feedback quote.”</p>
-              </blockquote>
-              <blockquote
-                class="case-study-sticky-note case-study-sticky-note--negative case-study-sticky-note--5"
-                role="listitem"
-              >
-                <p>“Add a negative feedback quote.”</p>
-              </blockquote>
-              <blockquote
-                class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--6"
-                role="listitem"
-              >
-                <p>“Add a positive feedback quote.”</p>
-              </blockquote>
-              <blockquote
-                class="case-study-sticky-note case-study-sticky-note--positive case-study-sticky-note--7"
-                role="listitem"
-              >
-                <p>“Add a positive feedback quote.”</p>
-              </blockquote>
-              <blockquote
-                class="case-study-sticky-note case-study-sticky-note--comment case-study-sticky-note--8"
-                role="listitem"
-              >
-                <p>“Add a participant comment.”</p>
-              </blockquote>
+            <div class="case-study-design__intro">
+              <p>
+                Use this section to explain how the final experience came together.
+                Focus on the design choices that made the solution easier to
+                understand, navigate, or act on.
+              </p>
+              <p>
+                Call out the parts of the UI that mattered most, including layout,
+                hierarchy, interaction behavior, and any patterns tailored to the
+                context of the product.
+              </p>
+            </div>
+
+            <div class="case-study-design__detail">
+              <ul class="case-study-list">
+                <li>
+                  <strong>Structure:</strong> explain how the layout organized the
+                  most important information for users.
+                </li>
+                <li>
+                  <strong>Interaction:</strong> highlight the moments that made the
+                  flow clearer, faster, or more intuitive.
+                </li>
+                <li>
+                  <strong>Polish:</strong> note the details that improved clarity,
+                  consistency, or trust in the experience.
+                </li>
+              </ul>
+              <figure class="case-study-visual case-study-visual--inline">
+                <div class="case-study-visual__placeholder" aria-hidden="true"></div>
+                <figcaption>Add a primary design visual.</figcaption>
+              </figure>
             </div>
           </section>
+
+          <div class="case-study-image-grid" aria-label="Design visuals">
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
+              <figcaption>Add supporting design visual one.</figcaption>
+            </figure>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
+              <figcaption>Add supporting design visual two.</figcaption>
+            </figure>
+          </div>
+
+          <div class="case-study-image-grid" aria-label="Design visuals continued">
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
+              <figcaption>Add supporting design visual three.</figcaption>
+            </figure>
+            <figure class="case-study-visual case-study-visual--inline">
+              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
+              <figcaption>Add supporting design visual four.</figcaption>
+            </figure>
+          </div>
 
           <section
             class="case-study-section case-study-section--split case-study-section--split-list"
@@ -459,58 +336,6 @@
               <li>
                 <strong>Result three:</strong> capture validation, adoption, or
                 feedback that confirmed the direction.
-              </li>
-            </ul>
-          </section>
-
-          <figure class="case-study-visual case-study-visual--wide">
-            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
-          </figure>
-
-          <div class="case-study-image-grid" aria-label="Outcome visuals">
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
-          </div>
-
-          <section
-            class="case-study-section case-study-section--split case-study-section--split-reverse"
-            aria-labelledby="explorations-heading"
-          >
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add a caption.</figcaption>
-            </figure>
-            <div class="case-study-copy">
-              <h2 id="explorations-heading">Explorations</h2>
-              <p>
-                Show the options you considered and the thinking behind the
-                direction you chose. Highlight key decisions and tradeoffs.
-              </p>
-            </div>
-          </section>
-
-          <section
-            class="case-study-section case-study-section--split case-study-section--split-list"
-            aria-labelledby="reflections-heading"
-          >
-            <div class="case-study-copy">
-              <h2 id="reflections-heading">Reflections</h2>
-            </div>
-            <ul class="case-study-list">
-              <li>
-                Capture what you learned and what you would approach differently
-                next time.
-              </li>
-              <li>
-                Note any longer-term impact, follow-on work, or decisions that
-                shaped how the team works today.
               </li>
             </ul>
           </section>
