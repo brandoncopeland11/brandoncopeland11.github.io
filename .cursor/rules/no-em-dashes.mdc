@@ -1,0 +1,36 @@
+---
+description: Avoid em dashes in site copy; use commas, colons, or rephrasing instead
+alwaysApply: true
+---
+
+# No em dashes in copy
+
+Do not use em dashes (`—`) anywhere in user-facing site content, including case studies, captions, quotes, meta copy, and comments that describe visible text.
+
+Do not replace em dashes with hyphens (`-`). Rewrite the sentence with clearer punctuation instead.
+
+## Preferred replacements
+
+| Use case | Instead of | Prefer |
+|----------|------------|--------|
+| Parenthetical aside | `weak—a baseline CTR—and` | `weak, with a baseline CTR around 0.29%, and` |
+| Appositive | `carousel—a modern format` | `carousel, a modern format` |
+| List or definition | `content—premium tiles` | `content: premium tiles` |
+| Caption label | `hero—legacy banner` | `hero: legacy banner` |
+| Quote / speech | `ads—I ignore them` | `ads, so I ignore them` |
+| Clarifying detail | `UI—slot placement` | `UI, including slot placement` |
+
+## Examples
+
+```
+❌ engagement was weak—a baseline CTR around 0.29%—and they couldn't
+✅ engagement was weak, with a baseline CTR around 0.29%, and they couldn't
+
+❌ 84 participants—casual, power, and browser personas—to validate
+✅ 84 participants (casual, power, and browser personas) to validate
+
+❌ Collection Ads hero - legacy GAM banner
+✅ Collection Ads hero: legacy GAM banner
+```
+
+En dashes in numeric ranges (e.g. `1–3`, `4–9`, `2023–2025`) are fine when they denote a span.

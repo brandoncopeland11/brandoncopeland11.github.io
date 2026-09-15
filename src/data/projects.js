@@ -2,6 +2,7 @@ import collectionAdsThumbnail from "../../case-studies/project-one/thumbnail-def
 import collectionAdsHover from "../../case-studies/project-one/thumbnail-hover.png";
 import addToListThumbnail from "../../case-studies/project-two/images/thumbnail-default.png";
 import addToListHover from "../../case-studies/project-two/images/thumbnail-hover.png";
+import flyerSwipingThumbnail from "../../case-studies/project-four/thumbnail-default.webp";
 
 const flippLogo = "/assets/logos/flipp.png";
 const innosoftLogo = "/assets/logos/innosoft.png";
@@ -69,6 +70,9 @@ export const projects = [
     device: "Strategy",
     type: "Case study",
     href: "/case-studies/project-four.html",
+    headerImage: "/case-studies/project-four/thumbnail-default.webp",
+    image: flyerSwipingThumbnail,
+    imageAlt: "Flipp flyer swiping case study cover image.",
     headerColor: "#1f2b26",
     size: "default",
   },

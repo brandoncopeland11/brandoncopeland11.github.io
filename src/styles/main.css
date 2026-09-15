@@ -1048,6 +1048,51 @@ main {
   transition: opacity 1.2s ease-in-out;
 }
 
+.hero-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 1.35rem 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+}
+
+.hero-status__company {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.35rem 0.6rem 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid var(--color-border-subtle);
+}
+
+html[data-theme="dark"] .hero-status__company {
+  background: var(--color-surface-raised);
+  border-color: var(--color-border-default);
+  box-shadow: 0 0.75rem 1.5rem var(--color-shadow-soft);
+}
+
+.hero-status__logo {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 0.35rem;
+  flex-shrink: 0;
+}
+
+.hero-status__separator {
+  color: inherit;
+}
+
+.hero-status__availability {
+  color: inherit;
+}
+
 .hero-one-liner.is-swapping {
   opacity: 0;
 }
@@ -1184,6 +1229,11 @@ html[data-hero-layout="overlap"] .hero-one-liner {
   font-size: clamp(2.625rem, 5.75vw, 4.75rem);
   line-height: 1.04;
   transition: none;
+}
+
+html[data-hero-layout="overlap"] .hero-status {
+  margin-top: 1.5rem;
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
 }
 
 html[data-hero-layout="overlap"] .hero-one-liner.is-swapping {
@@ -3129,6 +3179,7 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
 
 .case-study-header--project-four {
   background-color: #1f2b26;
+  background-image: url("/case-studies/project-four/thumbnail-default.webp");
 }
 
 .case-study-header--project-five {

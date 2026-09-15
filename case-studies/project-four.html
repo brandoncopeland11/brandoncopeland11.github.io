@@ -119,6 +119,15 @@
             <h1>Flyer swiping (9% growth adoption)</h1>
             <div class="case-study-company">
               <span>Completed while at</span>
+              <img
+                class="case-study-company__logo"
+                src="/assets/logos/flipp.png"
+                alt=""
+                width="24"
+                height="24"
+                loading="lazy"
+                decoding="async"
+              />
               <strong>Flipp</strong>
             </div>
           </div>
@@ -129,33 +138,36 @@
             <div class="case-study-copy">
               <h2 id="overview-heading">Overview</h2>
               <p>
-                A short introduction to the product, audience, and problem space.
-                Explain what was happening, why it mattered, and what the team
-                needed to improve.
+                This project aims to improve the in-flyer "Next Flyer"
+                experience, enhancing navigation and driving up to $1MM in
+                revenue through optimized cross-browse recommendations.
               </p>
               <p>
-                Use this section to frame the challenge in plain language before
-                moving into your process. Keep the focus on user needs, business
-                context, and the design decisions that shaped the work.
+                The focus was on helping shoppers better understand that more
+                flyers were available to swipe through, while making the
+                recommendation experience clearer and more predictable across
+                devices.
               </p>
             </div>
 
             <dl class="case-study-meta">
               <div>
                 <dt>My contribution</dt>
-                <dd>Product strategy</dd>
-                <dd>User research</dd>
                 <dd>Product design</dd>
+                <dd>Product strategy</dd>
               </div>
               <div>
                 <dt>The team</dt>
-                <dd>Product designer</dd>
-                <dd>Product partners</dd>
-                <dd>Engineering partners</dd>
+                <dd>Product designer (me)</dd>
+                <dd>Product manager</dd>
+                <dd>Engineering manager</dd>
+                <dd>2 iOS engineers</dd>
+                <dd>2 Android engineers</dd>
+                <dd>2 backend engineers</dd>
               </div>
               <div>
-                <dt>Year</dt>
-                <dd>2023</dd>
+                <dt>Timeline</dt>
+                <dd>September to December 2024</dd>
               </div>
             </dl>
           </section>
@@ -180,8 +192,9 @@
             <div class="case-study-company-intro__copy">
               <h2 id="context-heading">What is Flipp?</h2>
               <p>
-                Introduce the company, product, or market this work sits within so
-                a reader unfamiliar with it can follow along.
+                Flipp is a shopping platform that lets users discover deals,
+                coupons, and flyers from local retailers to save money on
+                products.
               </p>
             </div>
           </section>
@@ -190,12 +203,14 @@
             <div class="case-study-copy">
               <h2 id="problem-heading">Problem</h2>
               <p>
-                Describe the core problem in plain language. What was breaking
-                down for users, and where did the existing experience fall short?
+                Flipp's flyer recommendation experience, where shoppers spend
+                71% of their session time and generate 13-14% of ad clicks, had
+                not been updated in 5 years.
               </p>
               <p>
-                Add supporting detail about the friction, the cost of the problem,
-                and why it was worth solving now.
+                Inconsistent and unintuitive transitions between flyers led to
+                failed navigation and missed engagement opportunities, limiting
+                usability and ad performance.
               </p>
             </div>
           </section>
@@ -209,16 +224,17 @@
             </div>
             <ul class="case-study-list">
               <li>
-                <strong>First goal:</strong> describe the primary outcome you
-                set out to achieve with this work.
+                <strong>Improve awareness:</strong> enhance the in-flyer "Next
+                Flyer" swiping experience by improving user awareness and
+                understanding of the swiping functionality.
               </li>
               <li>
-                <strong>Second goal:</strong> capture a secondary objective that
-                shaped the direction of the design.
+                <strong>Reach parity:</strong> enable parity across devices
+                (iOS and Android).
               </li>
               <li>
-                <strong>Third goal:</strong> note any guiding principle or
-                constraint the team aligned on.
+                <strong>Increase relevance:</strong> improve flyer
+                predictability and relevancy per user.
               </li>
             </ul>
           </section>
@@ -238,13 +254,20 @@
             <div class="case-study-copy">
               <h2 id="process-heading">Process</h2>
               <p>
-                The process moved through define, research, ideate, test,
-                refine, and ship. Describe how user testing informed the work
-                and what you set out to validate.
+                The work moved through define, ideate, refine, test, and ship.
+                Initially, we considered a full revamp of the swipe and flyer
+                viewing experience. Exploring various options showed that a
+                redesign was not essential, so I leveraged native components and
+                common practices to solve the problem.
               </p>
               <p>
-                Add how research and testing provided insights for further
-                refinement and development.
+                To evaluate the impact of the new designs, we ran a 3-month
+                experiment with a small test group in the app. This gave us
+                confidence in making changes to a risky area. I was confident
+                skipping usability testing before the experiment because the
+                solution relied on common design practices and shared
+                components, which positively impacted development time and user
+                interaction.
               </p>
             </div>
           </section>
@@ -262,30 +285,40 @@
 
             <div class="case-study-design__intro">
               <p>
-                Use this section to explain how the final experience came together.
-                Focus on the design choices that made the solution easier to
-                understand, navigate, or act on.
+                To increase user swiping awareness, we introduced a next flyer
+                "peak" to indicate that more flyers were available to swipe to.
+                This was paired with a swipe indication pill to further
+                communicate the next flyer functionality.
               </p>
               <p>
-                Call out the parts of the UI that mattered most, including layout,
-                hierarchy, interaction behavior, and any patterns tailored to the
-                context of the product.
+                A common component, the pagination controller, was also
+                implemented to improve visibility of other flyers in the
+                cross-browse carousel. Although the iOS and Android components
+                were slightly different due to platform constraints, the
+                functionality stayed the same and did not impact user
+                interaction or education.
               </p>
             </div>
 
             <div class="case-study-design__detail">
               <ul class="case-study-list">
                 <li>
-                  <strong>Structure:</strong> explain how the layout organized the
-                  most important information for users.
+                  <strong>Structure:</strong> the swipe indication pill and next
+                  flyer peak made the presence of adjacent flyers more visible
+                  at the moment users needed the cue.
                 </li>
                 <li>
-                  <strong>Interaction:</strong> highlight the moments that made the
-                  flow clearer, faster, or more intuitive.
+                  <strong>Interaction:</strong> the flyer peak education showed
+                  on every even-numbered session (2, 4, 6), began 1 second
+                  after a user landed on a flyer, ran for 1200ms, did not
+                  repeat within the same session, and stopped after the sixth
+                  session. It only triggered when users opened a flyer directly.
                 </li>
                 <li>
-                  <strong>Polish:</strong> note the details that improved clarity,
-                  consistency, or trust in the experience.
+                  <strong>Polish:</strong> the swipe indication pill appeared on
+                  every session without stopping, helping reinforce the
+                  interaction pattern over time while keeping behavior
+                  consistent across platforms.
                 </li>
               </ul>
               <figure class="case-study-visual case-study-visual--inline">
@@ -323,19 +356,26 @@
           >
             <div class="case-study-copy">
               <h2 id="outcome-heading">Outcome</h2>
+              <p>
+                The experiment validated that targeted UX changes were enough
+                to improve cross-browse adoption without a full redesign.
+              </p>
             </div>
             <ul class="case-study-list">
               <li>
-                <strong>Result one:</strong> summarize a concrete outcome, with
-                a metric or qualitative impact where possible.
+                <strong>Adoption grew:</strong> the test showed that the new UX
+                changes led to a significant increase in cross-browse adoption
+                (+8.92%).
               </li>
               <li>
-                <strong>Result two:</strong> describe another way the work moved
-                the product, team, or users forward.
+                <strong>Ad engagement improved:</strong> premium cross-browse ad
+                clicks per user increased by 43.83%, and overall premium ad
+                clicks per user increased by 13.14%.
               </li>
               <li>
-                <strong>Result three:</strong> capture validation, adoption, or
-                feedback that confirmed the direction.
+                <strong>Rolled out broadly:</strong> the experience rolled out
+                to 100% of users, with cross-browse adoption continuing to
+                grow.
               </li>
             </ul>
           </section>
