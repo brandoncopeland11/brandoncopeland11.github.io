@@ -594,7 +594,13 @@ const initNextProjectLinks = () => {
   );
   if (!nextProjectEls.length || !navigableProjects.length) return;
 
-  const basename = (path) => (path || "").split("?")[0].split("#")[0].split("/").pop();
+  const basename = (path) =>
+    (path || "")
+      .split("?")[0]
+      .split("#")[0]
+      .replace(/\/+$/, "")
+      .split("/")
+      .pop();
   const currentFile = basename(window.location.pathname);
   const currentIndex = navigableProjects.findIndex(
     (project) => basename(project.href) === currentFile

@@ -33,10 +33,10 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         insights: resolve(__dirname, "insights.html"),
-        "case-study-1": resolve(__dirname, "case-studies/project-one.html"),
-        "case-study-2": resolve(__dirname, "case-studies/project-two.html"),
+        "collection-ads": resolve(__dirname, "case-studies/collection-ads/index.html"),
+        "add-to-list-ux": resolve(__dirname, "case-studies/add-to-list-ux/index.html"),
         "case-study-3": resolve(__dirname, "case-studies/project-three.html"),
-        "case-study-4": resolve(__dirname, "case-studies/project-four.html"),
+        "flyer-swiping": resolve(__dirname, "case-studies/flyer-swiping/index.html"),
         "case-study-5": resolve(__dirname, "case-studies/project-five.html"),
       },
     },
