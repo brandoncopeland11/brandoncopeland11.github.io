@@ -1758,6 +1758,10 @@ a.work-card:active {
   object-fit: cover;
 }
 
+.work-card__image--top {
+  object-position: top;
+}
+
 .work-card__media .placeholder-label {
   position: absolute;
   inset: 0;
@@ -1834,6 +1838,8 @@ a.work-card:active {
 @media (max-width: 767px) {
   .work-masonry {
     grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: auto;
     grid-auto-flow: row;
   }
 
@@ -1852,20 +1858,53 @@ a.work-card:active {
 
   .work-card__media {
     flex: 0 0 auto;
+    height: clamp(17rem, 55vw, 22rem);
+    aspect-ratio: auto;
+  }
+
+  .work-masonry__item--feature .work-card__title {
+    font-size: 1.0625rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .work-masonry {
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+  }
+
+  .work-masonry__item--feature,
+  .work-masonry__item--tall,
+  .work-masonry__item--wide,
+  .work-masonry__item--wide-tall {
+    grid-row: auto;
+  }
+
+  .work-masonry__item--feature,
+  .work-masonry__item--wide-tall {
+    grid-column: span 2;
+  }
+
+  .work-masonry__item {
+    min-height: auto;
+  }
+
+  .work-card {
+    flex: initial;
+    min-height: auto;
+  }
+
+  .work-card__media {
+    flex: 0 0 auto;
     aspect-ratio: 5 / 4;
   }
 
   .work-masonry__item--feature .work-card__media {
-    aspect-ratio: 3 / 2;
+    aspect-ratio: 16 / 9;
   }
 
-  .work-masonry__item--wide .work-card__media,
   .work-masonry__item--wide-tall .work-card__media {
     aspect-ratio: 2 / 1;
-  }
-
-  .work-masonry__item--tall .work-card__media {
-    aspect-ratio: 4 / 5;
   }
 
   .work-masonry__item--feature .work-card__title {
@@ -1875,6 +1914,7 @@ a.work-card:active {
 
 .work-card__body {
   flex: 0 0 auto;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -1897,6 +1937,7 @@ a.work-card:active {
 
 .work-card__copy {
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .work-card__title {
@@ -1904,6 +1945,22 @@ a.work-card:active {
   font-size: 1.0625rem;
   font-weight: 500;
   line-height: 1.25;
+}
+
+.work-card__external-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #fff;
+  font-size: 1.75rem;
+  line-height: 1;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 28;
+}
+
+html[data-theme="light"] .work-card__external-icon {
+  color: var(--color-text);
 }
 
 .work-card__meta {

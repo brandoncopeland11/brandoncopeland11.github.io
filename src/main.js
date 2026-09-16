@@ -482,14 +482,22 @@ if (masonryEl) {
       const isClickable = Boolean(project.href && project.isNavigable !== false);
       const cardTag = isClickable ? "a" : "div";
       const cardClass = `work-card${isClickable ? "" : " work-card--disabled"}`;
-      const cardHrefAttr = isClickable ? ` href="${project.href}"` : "";
+      const cardTargetAttr = project.openInNewTab
+        ? ' target="_blank" rel="noopener noreferrer"'
+        : "";
+      const cardHrefAttr = isClickable
+        ? ` href="${project.href}"${cardTargetAttr}`
+        : "";
+      const imagePositionClass = project.imagePosition
+        ? ` work-card__image--${project.imagePosition}`
+        : "";
       const media = project.image
         ? project.imageHover
           ? `<div class="work-card__images">
-              <img class="work-card__image work-card__image--default" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />
-              <img class="work-card__image work-card__image--hover" src="${project.imageHover}" alt="" loading="eager" decoding="async" />
+              <img class="work-card__image work-card__image--default${imagePositionClass}" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />
+              <img class="work-card__image work-card__image--hover${imagePositionClass}" src="${project.imageHover}" alt="" loading="eager" decoding="async" />
             </div>`
-          : `<img class="work-card__image" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />`
+          : `<img class="work-card__image${imagePositionClass}" src="${project.image}" alt="${imageAlt}" loading="lazy" decoding="async" />`
         : placeholderLabel
           ? `<span class="placeholder-label">${placeholderLabel}</span>`
           : "";
@@ -502,10 +510,16 @@ if (masonryEl) {
       const logoMarkup = project.logo
         ? `<img class="work-card__logo${logoClass}" src="${project.logo}" alt="" width="28" height="28" loading="lazy" decoding="async" />`
         : "";
+      const externalIcon = project.openInNewTab
+        ? `<span class="material-symbols-rounded work-card__external-icon" aria-hidden="true">arrow_outward</span>`
+        : "";
+      const cardAriaAttr = project.openInNewTab
+        ? ` aria-label="${project.title} (opens in a new tab)"`
+        : "";
 
       return `
     <li class="work-masonry__item work-masonry__item--${project.size}">
-      <${cardTag} class="${cardClass}"${cardHrefAttr}>
+      <${cardTag} class="${cardClass}"${cardHrefAttr}${cardAriaAttr}>
         <div class="work-card__media">
           ${media}
           ${badge}
@@ -516,6 +530,7 @@ if (masonryEl) {
             <h3 class="work-card__title">${project.title}</h3>
             ${renderWorkCardMeta(project)}
           </div>
+          ${externalIcon}
         </div>
       </${cardTag}>
     </li>
@@ -572,7 +587,10 @@ const applyNextProjectHero = (el, project) => {
 const initNextProjectLinks = () => {
   const nextProjectEls = document.querySelectorAll(".next-project");
   const navigableProjects = projects.filter(
-    (project) => project.href && project.isNavigable !== false
+    (project) =>
+      project.href &&
+      project.isNavigable !== false &&
+      project.includeInNextProject !== false
   );
   if (!nextProjectEls.length || !navigableProjects.length) return;
 

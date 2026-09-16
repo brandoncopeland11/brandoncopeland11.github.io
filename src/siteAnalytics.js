@@ -92,6 +92,10 @@ const classifyCtaLink = (link) => {
     return buildClick("Resume download", "contact");
   }
 
+  if (link.classList.contains("work-card")) {
+    return buildClick(textLabel || "Project card", "project");
+  }
+
   if (hostname.includes("linkedin.com")) {
     return buildClick("LinkedIn profile", "social");
   }
@@ -102,10 +106,6 @@ const classifyCtaLink = (link) => {
 
   if (hostname.includes("dribbble.com")) {
     return buildClick("Dribbble profile", "social");
-  }
-
-  if (link.classList.contains("work-card")) {
-    return buildClick(textLabel || "Project card", "project");
   }
 
   if (link.classList.contains("next-project")) {

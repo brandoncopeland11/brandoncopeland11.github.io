@@ -2,7 +2,9 @@ import collectionAdsThumbnail from "../../case-studies/project-one/thumbnail-def
 import collectionAdsHover from "../../case-studies/project-one/thumbnail-hover.png";
 import addToListThumbnail from "../../case-studies/project-two/images/thumbnail-default.png";
 import addToListHover from "../../case-studies/project-two/images/thumbnail-hover.png";
+import scoreSubmissionThumbnail from "../../case-studies/project-three/thumbnail-default.webp";
 import flyerSwipingThumbnail from "../../case-studies/project-four/thumbnail-default.webp";
+import fusionPlayThumbnail from "../../case-studies/project-five/thumbnail-default.webp";
 
 const flippLogo = "/assets/logos/flipp.png";
 const innosoftLogo = "/assets/logos/innosoft.png";
@@ -15,6 +17,9 @@ const innosoftLogo = "/assets/logos/innosoft.png";
  * featured: shows a "Featured" tag on the tile.
  * method, device, type: shown under the title, separated by ·
  * image / imageHover: thumbnail pair for default and hover states.
+ * imagePosition: object-position for the thumbnail (e.g. "top").
+ * openInNewTab: work card opens in a new tab.
+ * includeInNextProject: false omits the item from case study "next project" links.
  */
 export const projects = [
   {
@@ -57,9 +62,13 @@ export const projects = [
     method: "Product design",
     device: "Tablet",
     type: "Case study",
-    href: "/case-studies/project-three.html",
+    href: "https://dribbble.com/shots/22528454-Efficient-score-submission",
+    openInNewTab: true,
+    includeInNextProject: false,
     headerColor: "#2b2233",
     size: "default",
+    image: scoreSubmissionThumbnail,
+    imageAlt: "Fusion efficient score submission: tablet scoring interface",
   },
   {
     title: "Flyer swiping (9% growth adoption)",
@@ -77,11 +86,20 @@ export const projects = [
     size: "default",
   },
   {
-    title: "Coming soon",
-    placeholderLabel: "Coming soon",
-    isNavigable: false,
-    href: "/case-studies/project-five.html",
+    title: "Fusion play product overview",
+    company: "Fusion",
+    logo: innosoftLogo,
+    year: "",
+    method: "Product design",
+    device: "0-1 Research",
+    type: "Case study",
+    href: "https://dribbble.com/shots/21099716-Case-Study-Fusion-Play-Product-Overview",
+    openInNewTab: true,
+    includeInNextProject: false,
     headerColor: "#2b2730",
     size: "wide",
+    image: fusionPlayThumbnail,
+    imageAlt: "Fusion Play product overview cover image",
+    imagePosition: "top",
   },
 ];
