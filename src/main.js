@@ -289,7 +289,7 @@ if (document.body.classList.contains("case-study-page")) {
   const caseStudyHeaderEl = document.querySelector(".case-study-header");
   const sectionHeadings = Array.from(
     document.querySelectorAll(".case-study-content h2[id]")
-  );
+  ).filter((heading) => !heading.closest(".case-study-disclaimer"));
   const subnavLinks = sectionHeadings.map((heading) => {
     const link = document.createElement("a");
     link.href = `#${heading.id}`;
