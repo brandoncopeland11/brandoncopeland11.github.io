@@ -48,7 +48,7 @@
     <link rel="stylesheet" href="/src/styles/main.css" />
     <script type="module" src="/src/main.js"></script>
   </head>
-  <body class="case-study-page case-study-page--image-header case-study-page--template-compact">
+  <body class="case-study-page case-study-page--image-header case-study-page--template-compact case-study-page--project-four">
     <header class="site-header">
       <nav class="site-nav" aria-label="Primary">
         <a class="site-nav__logo" href="/#hero" aria-label="Brandon Copeland, home"></a>
@@ -149,6 +149,11 @@
                 recommendation experience clearer and more predictable across
                 devices.
               </p>
+              <p>
+                The final solution introduced swipe education, a next flyer
+                peek, and a pagination controller to make cross-browse
+                navigation easier to discover and more consistent.
+              </p>
             </div>
 
             <dl class="case-study-meta">
@@ -174,8 +179,16 @@
           </section>
 
           <figure class="case-study-visual case-study-visual--wide">
-            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a hero-supporting image.</figcaption>
+            <video
+              class="case-study-video"
+              src="/case-studies/project-four/Image%202.mov"
+              autoplay
+              loop
+              muted
+              playsinline
+              aria-label="Flyer swiping hero-supporting animation."
+            ></video>
+            <figcaption>Flyer swiping user education animation.</figcaption>
           </figure>
 
           <section class="case-study-company-intro" aria-labelledby="context-heading">
@@ -209,47 +222,62 @@
                 not been updated in 5 years.
               </p>
               <p>
-                Inconsistent and unintuitive transitions between flyers led to
-                failed navigation and missed engagement opportunities, limiting
-                usability and ad performance.
+                Before this work, transitions between flyers felt inconsistent
+                and gave users little signal that more flyers were available,
+                leading to failed navigation and missed engagement
+                opportunities that limited usability and ad performance.
               </p>
             </div>
           </section>
 
           <section
-            class="case-study-section case-study-section--split case-study-section--split-list"
+            class="case-study-section"
             aria-labelledby="goals-heading"
           >
             <div class="case-study-copy">
               <h2 id="goals-heading">Goals</h2>
             </div>
-            <ul class="case-study-list">
-              <li>
-                <strong>Improve awareness:</strong> enhance the in-flyer "Next
-                Flyer" swiping experience by improving user awareness and
-                understanding of the swiping functionality.
-              </li>
-              <li>
-                <strong>Reach parity:</strong> enable parity across devices
-                (iOS and Android).
-              </li>
-              <li>
-                <strong>Increase relevance:</strong> improve flyer
-                predictability and relevancy per user.
-              </li>
-            </ul>
+            <div class="case-study-goal-cards" aria-label="Goal cards">
+              <article class="case-study-goal-card case-study-goal-card--awareness">
+                <header class="case-study-goal-card__header">
+                  <span class="case-study-goal-card__index" aria-hidden="true">1</span>
+                  <div>
+                    <p class="case-study-goal-card__eyebrow">Goal</p>
+                    <h3 class="case-study-goal-card__title">Improve awareness</h3>
+                  </div>
+                </header>
+                <p class="case-study-goal-card__copy">
+                  Enhance the in-flyer "Next Flyer" swiping experience by
+                  improving user awareness and understanding of the swiping
+                  functionality.
+                </p>
+              </article>
+              <article class="case-study-goal-card case-study-goal-card--parity">
+                <header class="case-study-goal-card__header">
+                  <span class="case-study-goal-card__index" aria-hidden="true">2</span>
+                  <div>
+                    <p class="case-study-goal-card__eyebrow">Goal</p>
+                    <h3 class="case-study-goal-card__title">Reach parity</h3>
+                  </div>
+                </header>
+                <p class="case-study-goal-card__copy">
+                  Enable parity across devices (iOS and Android).
+                </p>
+              </article>
+              <article class="case-study-goal-card case-study-goal-card--relevance">
+                <header class="case-study-goal-card__header">
+                  <span class="case-study-goal-card__index" aria-hidden="true">3</span>
+                  <div>
+                    <p class="case-study-goal-card__eyebrow">Goal</p>
+                    <h3 class="case-study-goal-card__title">Increase relevance</h3>
+                  </div>
+                </header>
+                <p class="case-study-goal-card__copy">
+                  Improve flyer predictability and relevancy per user.
+                </p>
+              </article>
+            </div>
           </section>
-
-          <div class="case-study-image-grid case-study-image-grid--goal" aria-label="Goal visuals">
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add visual one.</figcaption>
-            </figure>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add visual two.</figcaption>
-            </figure>
-          </div>
 
           <section class="case-study-section case-study-section--process" aria-labelledby="process-heading">
             <div class="case-study-copy">
@@ -274,8 +302,14 @@
           </section>
 
           <figure class="case-study-visual case-study-visual--inline">
-            <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-            <figcaption>Add a caption.</figcaption>
+            <img
+              class="case-study-image"
+              src="/case-studies/project-four/Process.png"
+              alt="Flyer swiping process overview."
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>Flyer swiping process overview.</figcaption>
           </figure>
 
           <section
@@ -287,7 +321,7 @@
             <div class="case-study-design__intro">
               <p>
                 To increase user swiping awareness, we introduced a next flyer
-                "peak" to indicate that more flyers were available to swipe to.
+                "peek" to indicate that more flyers were available to swipe to.
                 This was paired with a swipe indication pill to further
                 communicate the next flyer functionality.
               </p>
@@ -302,83 +336,181 @@
             </div>
 
             <div class="case-study-design__detail">
-              <ul class="case-study-list">
-                <li>
-                  <strong>Structure:</strong> the swipe indication pill and next
-                  flyer peak made the presence of adjacent flyers more visible
-                  at the moment users needed the cue.
-                </li>
-                <li>
-                  <strong>Interaction:</strong> the flyer peak education showed
-                  on every even-numbered session (2, 4, 6), began 1 second
-                  after a user landed on a flyer, ran for 1200ms, did not
-                  repeat within the same session, and stopped after the sixth
-                  session. It only triggered when users opened a flyer directly.
-                </li>
-                <li>
-                  <strong>Polish:</strong> the swipe indication pill appeared on
-                  every session without stopping, helping reinforce the
-                  interaction pattern over time while keeping behavior
-                  consistent across platforms.
-                </li>
-              </ul>
-              <figure class="case-study-visual case-study-visual--inline">
-                <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-                <figcaption>Add a primary design visual.</figcaption>
+              <div class="case-study-design__cards" aria-label="Design detail cards">
+                <article class="case-study-design-card">
+                  <h3>Structure</h3>
+                  <p>
+                    The swipe indication pill and next flyer peek made the
+                    presence of adjacent flyers more visible at the moment
+                    users needed the cue.
+                  </p>
+                </article>
+                <article class="case-study-design-card">
+                  <h3>Interaction</h3>
+                  <p>
+                    The flyer peek education showed on every even-numbered
+                    session (2, 4, 6), began 1 second after a user landed on a
+                    flyer, ran for 1200ms, did not repeat within the same
+                    session, and stopped after the sixth session.
+                  </p>
+                </article>
+                <article class="case-study-design-card">
+                  <h3>Polish</h3>
+                  <p>
+                    The swipe indication pill appeared on every session without
+                    stopping, reinforcing the interaction pattern over time
+                    while keeping behavior consistent across platforms.
+                  </p>
+                </article>
+              </div>
+            </div>
+
+            <div class="case-study-design__visuals" aria-label="Design visuals">
+              <figure class="case-study-visual case-study-visual--wide">
+                <img
+                  class="case-study-image"
+                  src="/case-studies/project-four/Design%201.png"
+                  alt="Flyer swiping design visual one."
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Flyer swiping animation design and logic</figcaption>
+              </figure>
+              <figure class="case-study-visual case-study-visual--wide">
+                <img
+                  class="case-study-image"
+                  src="/case-studies/project-four/Design%202.png"
+                  alt="Flyer swiping design visual two."
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>Flyer pagination UI component and logic</figcaption>
+              </figure>
+              <figure class="case-study-visual case-study-visual--wide">
+                <video
+                  class="case-study-video"
+                  src="/case-studies/project-four/Design%203.mov"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  aria-label="Flyer swiping design animation."
+                ></video>
+                <figcaption>Flyer swiping design animation.</figcaption>
               </figure>
             </div>
           </section>
 
-          <div class="case-study-image-grid" aria-label="Design visuals">
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add supporting design visual one.</figcaption>
-            </figure>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add supporting design visual two.</figcaption>
-            </figure>
-          </div>
-
-          <div class="case-study-image-grid" aria-label="Design visuals continued">
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add supporting design visual three.</figcaption>
-            </figure>
-            <figure class="case-study-visual case-study-visual--inline">
-              <div class="case-study-visual__placeholder" aria-hidden="true"></div>
-              <figcaption>Add supporting design visual four.</figcaption>
-            </figure>
-          </div>
-
           <section
-            class="case-study-section case-study-section--split case-study-section--split-list"
+            class="case-study-section case-study-section--outcome"
             aria-labelledby="outcome-heading"
           >
             <div class="case-study-copy">
               <h2 id="outcome-heading">Outcome</h2>
               <p>
-                The experiment validated that targeted UX changes were enough
-                to improve cross-browse adoption without a full redesign.
+                After a 3-month experiment with a small test cohort, the team
+                validated that targeted UX changes were enough to improve
+                cross-browse adoption without a full redesign before rolling
+                the experience out to all users.
+              </p>
+              <ul class="case-study-outcome-grid">
+                <li class="case-study-outcome-card">
+                  <span class="case-study-outcome-card__emoji" aria-hidden="true">📈</span>
+                  <div class="case-study-outcome-card__body">
+                    <h3 class="case-study-outcome-card__title">Adoption grew</h3>
+                    <p>
+                      The test showed that the new UX changes led to a
+                      significant increase in cross-browse adoption (+8.92%).
+                    </p>
+                  </div>
+                </li>
+                <li class="case-study-outcome-card">
+                  <span class="case-study-outcome-card__emoji" aria-hidden="true">🛒</span>
+                  <div class="case-study-outcome-card__body">
+                    <h3 class="case-study-outcome-card__title">Ad engagement improved</h3>
+                    <p>
+                      Premium cross-browse ad clicks per user increased by
+                      43.83%, and overall premium ad clicks per user increased
+                      by 13.14%.
+                    </p>
+                  </div>
+                </li>
+                <li class="case-study-outcome-card">
+                  <span class="case-study-outcome-card__emoji" aria-hidden="true">🚀</span>
+                  <div class="case-study-outcome-card__body">
+                    <h3 class="case-study-outcome-card__title">Rolled out broadly</h3>
+                    <p>
+                      The experience rolled out to 100% of users, with
+                      cross-browse adoption continuing to grow.
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section
+            class="case-study-section case-study-section--explorations"
+            aria-labelledby="explorations-heading"
+          >
+            <div class="case-study-copy">
+              <h2 id="explorations-heading">Explorations</h2>
+              <p>
+                Explorations tested different ways to communicate swipe
+                affordance, preview adjacent flyers, and balance user
+                education. The final direction focused on cues that clarified
+                the gesture without overwhelming the flyer content.
               </p>
             </div>
-            <ul class="case-study-list">
-              <li>
-                <strong>Adoption grew:</strong> the test showed that the new UX
-                changes led to a significant increase in cross-browse adoption
-                (+8.92%).
-              </li>
-              <li>
-                <strong>Ad engagement improved:</strong> premium cross-browse ad
-                clicks per user increased by 43.83%, and overall premium ad
-                clicks per user increased by 13.14%.
-              </li>
-              <li>
-                <strong>Rolled out broadly:</strong> the experience rolled out
-                to 100% of users, with cross-browse adoption continuing to
-                grow.
-              </li>
-            </ul>
+
+            <div class="case-study-explorations-carousel" data-explorations-carousel>
+              <div
+                class="case-study-explorations-carousel__viewport"
+                tabindex="0"
+                aria-label="Design exploration visuals"
+              >
+                <div class="case-study-explorations-carousel__track">
+                  <figure class="case-study-visual case-study-explorations-carousel__slide">
+                    <img
+                      class="case-study-image"
+                      src="/case-studies/project-four/Explore%201.png"
+                      alt="Flyer swiping exploration showing alternative education and swipe cues."
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>Swipe education and affordance explorations.</figcaption>
+                  </figure>
+                  <figure class="case-study-visual case-study-explorations-carousel__slide">
+                    <img
+                      class="case-study-image"
+                      src="/case-studies/project-four/Explore%202.png"
+                      alt="Flyer swiping exploration showing pagination and cross-browse variations."
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>Pagination and cross-browse explorations.</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <div class="case-study-explorations-carousel__controls">
+                <button
+                  type="button"
+                  class="case-study-explorations-carousel__button"
+                  data-carousel-prev
+                  aria-label="Previous exploration"
+                >
+                  <span class="material-symbols-outlined" aria-hidden="true">arrow_back</span>
+                </button>
+                <button
+                  type="button"
+                  class="case-study-explorations-carousel__button"
+                  data-carousel-next
+                  aria-label="Next exploration"
+                >
+                  <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                </button>
+              </div>
+            </div>
           </section>
 
           <a class="next-project next-project--editorial" href="/case-studies/project-five.html"></a>
