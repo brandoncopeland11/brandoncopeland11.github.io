@@ -2,6 +2,8 @@ import { getSupabaseClient, isSupabaseConfigured } from "./supabaseClient.js";
 
 const VISITOR_STORAGE_KEY = "portfolio.analytics.visitor";
 const SESSION_STORAGE_KEY = "portfolio.analytics.session";
+const ANALYTICS_OPTOUT_STORAGE_KEY = "portfolio.analytics.optOut";
+const ANALYTICS_QUERY_PARAM = "analytics";
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000;
 const FLUSH_INTERVAL_MS = 15_000;
 const SESSION_TABLE = "analytics_sessions";
@@ -18,6 +20,14 @@ const readStorage = (storage, key) => {
 const writeStorage = (storage, key, value) => {
   try {
     storage.setItem(key, value);
+  } catch {
+    // Ignore storage failures so the site still works.
+  }
+};
+
+const removeStorage = (storage, key) => {
+  try {
+    storage.removeItem(key);
   } catch {
     // Ignore storage failures so the site still works.
   }
@@ -40,9 +50,35 @@ const isLocalHost = () =>
 
 const shouldTrackLocally = () => import.meta.env.VITE_TRACK_LOCAL_ANALYTICS === "true";
 
+const setAnalyticsOptOut = (isOptedOut) => {
+  if (isOptedOut) {
+    writeStorage(window.localStorage, ANALYTICS_OPTOUT_STORAGE_KEY, "true");
+    removeStorage(window.localStorage, SESSION_STORAGE_KEY);
+    return;
+  }
+
+  removeStorage(window.localStorage, ANALYTICS_OPTOUT_STORAGE_KEY);
+};
+
+const isAnalyticsOptedOut = () =>
+  readStorage(window.localStorage, ANALYTICS_OPTOUT_STORAGE_KEY) === "true";
+
+const syncAnalyticsPreferenceFromUrl = () => {
+  const currentUrl = new URL(window.location.href);
+  const mode = currentUrl.searchParams.get(ANALYTICS_QUERY_PARAM);
+
+  if (mode !== "off" && mode !== "on") return;
+
+  setAnalyticsOptOut(mode === "off");
+  currentUrl.searchParams.delete(ANALYTICS_QUERY_PARAM);
+
+  window.history.replaceState({}, "", `${currentUrl.pathname}${currentUrl.search}${currentUrl.hash}`);
+};
+
 const shouldSkipAnalytics = () => {
   if (!isSupabaseConfigured()) return true;
   if (document.body?.dataset.analyticsOptOut === "true") return true;
+  if (isAnalyticsOptedOut()) return true;
   if (isLocalHost() && !shouldTrackLocally()) return true;
   return false;
 };
@@ -229,6 +265,15 @@ const roundSecondsMap = (areaTimesMs) =>
   );
 
 export const initSiteAnalytics = () => {
+  syncAnalyticsPreferenceFromUrl();
+
+  window.portfolioAnalytics = {
+    ...window.portfolioAnalytics,
+    optOut: () => setAnalyticsOptOut(true),
+    optIn: () => setAnalyticsOptOut(false),
+    isOptedOut: () => isAnalyticsOptedOut(),
+  };
+
   if (shouldSkipAnalytics()) return;
 
   const supabase = getSupabaseClient();

@@ -56,8 +56,8 @@ create index if not exists analytics_page_views_session_id_idx
   on public.analytics_page_views (session_id);
 
 grant usage on schema public to anon, authenticated;
-grant select, insert, update on public.analytics_sessions to anon, authenticated;
-grant select, insert, update on public.analytics_page_views to anon, authenticated;
+grant select, insert, update, delete on public.analytics_sessions to anon, authenticated;
+grant select, insert, update, delete on public.analytics_page_views to anon, authenticated;
 
 alter table public.analytics_sessions enable row level security;
 alter table public.analytics_page_views enable row level security;
@@ -84,6 +84,13 @@ create policy "owner_read_sessions"
   to authenticated
   using (public.is_analytics_owner());
 
+drop policy if exists "owner_delete_sessions" on public.analytics_sessions;
+create policy "owner_delete_sessions"
+  on public.analytics_sessions
+  for delete
+  to authenticated
+  using (public.is_analytics_owner());
+
 drop policy if exists "public_insert_page_views" on public.analytics_page_views;
 create policy "public_insert_page_views"
   on public.analytics_page_views
@@ -103,5 +110,12 @@ drop policy if exists "owner_read_page_views" on public.analytics_page_views;
 create policy "owner_read_page_views"
   on public.analytics_page_views
   for select
+  to authenticated
+  using (public.is_analytics_owner());
+
+drop policy if exists "owner_delete_page_views" on public.analytics_page_views;
+create policy "owner_delete_page_views"
+  on public.analytics_page_views
+  for delete
   to authenticated
   using (public.is_analytics_owner());

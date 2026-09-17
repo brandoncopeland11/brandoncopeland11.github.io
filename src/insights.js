@@ -5,6 +5,7 @@ import { getSupabaseClient, isSupabaseConfigured } from "./supabaseClient.js";
 
 const SESSION_TABLE = "analytics_sessions";
 const PAGE_VIEW_TABLE = "analytics_page_views";
+const VISITOR_STORAGE_KEY = "portfolio.analytics.visitor";
 const PAGE_SIZE = 1000;
 const DEFAULT_RANGE = "30";
 
@@ -14,7 +15,9 @@ const supabase = getSupabaseClient();
 const state = {
   session: null,
   loading: false,
+  purging: false,
   error: "",
+  message: "",
   range: DEFAULT_RANGE,
   sessions: [],
   pageViews: [],
@@ -115,6 +118,14 @@ const getSourceDetails = (session) => {
 };
 
 const normalizeClicks = (value) => (Array.isArray(value) ? value : []);
+
+const getCurrentBrowserVisitorId = () => {
+  try {
+    return window.localStorage.getItem(VISITOR_STORAGE_KEY) || "";
+  } catch {
+    return "";
+  }
+};
 
 const getCutoffDate = () => {
   if (state.range === "all") return null;
@@ -662,6 +673,8 @@ const renderRecentSessions = (recentSessions) => {
 };
 
 const renderShell = () => {
+  const currentVisitorId = getCurrentBrowserVisitorId();
+
   if (!isSupabaseConfigured()) {
     appEl.innerHTML = `
       <section class="insights-shell">
@@ -731,6 +744,7 @@ const renderShell = () => {
             <p class="insights-eyebrow">Private analytics dashboard</p>
             <h1>Visitor activity</h1>
             <p class="insights-note">Area attention is estimated from the section visible near the center of the viewport while the page is in focus.</p>
+            <p class="insights-note">This browser visitor ID: <code>${escapeHtml(currentVisitorId || "Not available")}</code></p>
           </div>
           <div class="insights-header__actions">
             <label class="insights-filter">
@@ -743,11 +757,20 @@ const renderShell = () => {
                 <option value="all" ${state.range === "all" ? "selected" : ""}>All time</option>
               </select>
             </label>
+            <button
+              id="insights-purge-current-visitor"
+              class="insights-secondary-button insights-secondary-button--danger"
+              type="button"
+              ${currentVisitorId ? "" : "disabled"}
+            >
+              ${state.purging ? "Removing your visits..." : "Remove this browser's visits"}
+            </button>
             <button id="insights-sign-out" class="insights-secondary-button" type="button">Sign out</button>
           </div>
         </header>
 
         ${state.loading ? '<p class="insights-status">Loading analytics...</p>' : ""}
+        ${state.message ? `<p class="insights-status">${escapeHtml(state.message)}</p>` : ""}
         ${state.error ? `<p class="insights-error">${escapeHtml(state.error)}</p>` : ""}
 
         <section class="insights-kpis">
@@ -845,6 +868,45 @@ const renderShell = () => {
   document.getElementById("insights-range")?.addEventListener("change", (event) => {
     state.range = event.currentTarget.value;
     renderShell();
+  });
+
+  document.getElementById("insights-purge-current-visitor")?.addEventListener("click", async () => {
+    const visitorId = getCurrentBrowserVisitorId();
+    if (!visitorId || state.purging) return;
+
+    const shouldDelete = window.confirm(
+      "Remove all analytics rows tied to this browser visitor ID? This cannot be undone."
+    );
+    if (!shouldDelete) return;
+
+    state.purging = true;
+    state.error = "";
+    state.message = "";
+    renderShell();
+
+    try {
+      const { error: pageViewError } = await supabase
+        .from(PAGE_VIEW_TABLE)
+        .delete()
+        .eq("visitor_id", visitorId);
+
+      if (pageViewError) throw pageViewError;
+
+      const { error: sessionError } = await supabase
+        .from(SESSION_TABLE)
+        .delete()
+        .eq("visitor_id", visitorId);
+
+      if (sessionError) throw sessionError;
+
+      state.message = `Removed analytics rows for visitor ${visitorId}.`;
+      await loadAnalytics();
+    } catch (error) {
+      state.error = error.message || "Unable to remove analytics for this browser.";
+    } finally {
+      state.purging = false;
+      renderShell();
+    }
   });
 
   document.getElementById("insights-sign-out")?.addEventListener("click", async () => {

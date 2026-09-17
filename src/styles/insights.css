@@ -84,6 +84,15 @@ html[data-theme="dark"] {
   border: 1px solid var(--insights-border);
 }
 
+.insights-secondary-button--danger {
+  color: var(--insights-danger);
+}
+
+.insights-secondary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .insights-eyebrow {
   margin: 0 0 0.65rem;
   color: var(--insights-accent);

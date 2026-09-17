@@ -31,6 +31,8 @@ It tracks:
 - Approximate section-level attention based on viewport focus
 - Returning visitors using a first-party visitor ID stored in local storage
 
+It does not store visitor IP addresses. Anonymous visits are identified with a browser-local visitor ID instead.
+
 ### Setup
 
 1. Create a Supabase project.
@@ -54,6 +56,24 @@ VITE_TRACK_LOCAL_ANALYTICS=false
 
 8. Restart the dev server or rebuild the site.
 9. Visit `/insights.html` and sign in.
+
+### Exclude your own browsing
+
+To stop your own browser from writing analytics events on production, visit the live site once with `?analytics=off` appended to the URL:
+
+```text
+https://brandoncopeland11.github.io/?analytics=off
+```
+
+That stores a persistent opt-out in your browser and removes the query parameter from the address bar right away. To re-enable analytics for that same browser later, visit:
+
+```text
+https://brandoncopeland11.github.io/?analytics=on
+```
+
+You can also toggle it from the console with `window.portfolioAnalytics.optOut()` and `window.portfolioAnalytics.optIn()`.
+
+To remove historical visits from the same browser, first re-run `supabase/analytics.sql` so the owner delete policies are applied. Then open `/insights.html`, sign in, and use the `Remove this browser's visits` button.
 
 For this portfolio, the current Supabase project URL and publishable key are also checked into `src/supabaseClient.js` as a GitHub Pages-safe fallback. The local `.env` values override those defaults if you rotate keys later.
 
