@@ -5,7 +5,7 @@ returns boolean
 language sql
 stable
 as $$
-  select coalesce(auth.jwt() ->> 'email', '') = 'brandoncopeland11@gmail.com'
+  select coalesce(auth.jwt() ->> 'email', '') = 'replace-with-your-email@example.com'
 $$;
 
 create table if not exists public.analytics_sessions (

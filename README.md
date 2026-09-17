@@ -5,7 +5,6 @@ One-page product designer portfolio with case study detail pages.
 ## Preview locally
 
 ```bash
-cd /Users/Brandon.Copeland/Desktop/Personal/Portfolio
 npm install
 npm run dev
 ```
