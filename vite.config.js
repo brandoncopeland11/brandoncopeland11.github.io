@@ -28,6 +28,14 @@ const cssBeforeJs = () => ({
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS && repositoryName && !isUserPage ? `/${repositoryName}/` : "/",
   plugins: [cssBeforeJs()],
+  server: {
+    watch: {
+      ignored: [
+        "**/case-studies/**/images/**",
+        "**/.tmp_*/**",
+      ],
+    },
+  },
   build: {
     rollupOptions: {
       input: {

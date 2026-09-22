@@ -1,6 +1,8 @@
+import { initAddToListPrototype } from "./prototypes/addToList.js";
 import { initCollectionAdsPrototype } from "./prototypes/collectionAds.js";
 
 const PROTOTYPES = {
+  "add-to-list": initAddToListPrototype,
   "collection-ads": initCollectionAdsPrototype,
 };
 

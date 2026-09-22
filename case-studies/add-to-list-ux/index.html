@@ -181,11 +181,12 @@
           <figure class="case-study-visual">
             <video
               class="case-study-video"
-              src="/case-studies/project-two/images/Overview1.mov"
+              data-src="/case-studies/project-two/images/Overview1.mov"
               autoplay
               loop
               muted
               playsinline
+              preload="none"
               aria-label="Add to list user flows across the app."
             ></video>
             <figcaption>Add to list user flows across the app.</figcaption>
@@ -594,6 +595,340 @@
                 </li>
               </ul>
             </div>
+
+            <figure class="case-study-visual case-study-visual--prototype">
+              <div
+                class="device-prototype"
+                data-device-prototype="add-to-list"
+              >
+                <div class="device-prototype__frame" aria-hidden="true"></div>
+                <div class="device-prototype__screen">
+                  <div
+                    class="add-to-list-shell"
+                    role="region"
+                    aria-label="Interactive add to list prototype. Add eggs from search results and adjust quantity."
+                  >
+                    <header class="add-to-list-nav">
+                      <div class="add-to-list-status" aria-hidden="true">
+                        <span class="add-to-list-status__time">9:41</span>
+                        <div class="add-to-list-status__levels">
+                          <img src="/case-studies/project-two/prototype/status-cellular.svg" alt="" width="19" height="12" decoding="async" />
+                          <img src="/case-studies/project-two/prototype/status-wifi.svg" alt="" width="17" height="12" decoding="async" />
+                          <span class="add-to-list-status__battery">
+                            <span class="add-to-list-status__battery-cap"></span>
+                            <span class="add-to-list-status__battery-fill"></span>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="add-to-list-search__bar">
+                        <img
+                          class="add-to-list-search__icon"
+                          src="/case-studies/project-two/prototype/search.svg"
+                          alt=""
+                          width="16"
+                          height="16"
+                          decoding="async"
+                        />
+                        <span class="add-to-list-search__query">Eggs</span>
+                        <img
+                          class="add-to-list-search__clear"
+                          src="/case-studies/project-two/prototype/clear.svg"
+                          alt=""
+                          width="20"
+                          height="20"
+                          decoding="async"
+                        />
+                      </div>
+                      <div class="add-to-list-search__filters">
+                        <span class="add-to-list-chip">
+                          <img src="/case-studies/project-two/prototype/filter.svg" alt="" width="18" height="18" decoding="async" />
+                          Filter
+                        </span>
+                        <span class="add-to-list-chip">
+                          <img src="/case-studies/project-two/prototype/sort.svg" alt="" width="18" height="18" decoding="async" />
+                          Sort by Relevance
+                        </span>
+                      </div>
+                    </header>
+
+                    <div class="add-to-list-feed" data-prototype-scroll-y>
+                      <p class="add-to-list-section-label">Deals (30)</p>
+
+                      <div class="add-to-list-cards">
+                        <section
+                          class="add-to-list-card"
+                          data-atl-row
+                          data-atl-state="add"
+                          data-item-name="Burnbrae Farms Omega-3 Eggs"
+                        >
+                          <header class="add-to-list-card__header">
+                            <div class="add-to-list-store__brand">
+                              <span class="add-to-list-store__logo">
+                                <img src="/case-studies/project-two/prototype/logo-farmboy.png" alt="" width="19" height="20" decoding="async" />
+                              </span>
+                              <p class="add-to-list-store__name">Farm Boy</p>
+                            </div>
+                            <button class="add-to-list-action add-to-list-action--add" type="button" data-atl-add>
+                              <span class="add-to-list-action__icon" aria-hidden="true">
+                                <img src="/case-studies/project-two/prototype/add-icon.svg" alt="" width="20" height="20" decoding="async" />
+                              </span>
+                              <span class="add-to-list-action__label">Add to list</span>
+                            </button>
+                            <p class="add-to-list-action add-to-list-action--added" data-atl-added hidden>
+                              <span class="add-to-list-action__icon add-to-list-action__icon--check" aria-hidden="true">
+                                <img src="/case-studies/project-two/prototype/icon-check-blue.svg" alt="" width="16" height="16" decoding="async" />
+                              </span>
+                              <span class="add-to-list-action__label">Added</span>
+                            </p>
+                            <div class="add-to-list-qty" data-atl-qty hidden>
+                              <button class="add-to-list-qty__btn" type="button" data-atl-decrease aria-label="Remove Burnbrae Farms Omega-3 Eggs from list">
+                                <span class="add-to-list-qty__icon" data-atl-icon-trash aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-trash.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                                <span class="add-to-list-qty__icon" data-atl-icon-minus hidden aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-minus-qty.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                              </button>
+                              <span class="add-to-list-qty__value" data-atl-qty-value>1</span>
+                              <button class="add-to-list-qty__btn" type="button" data-atl-increase aria-label="Increase quantity of Burnbrae Farms Omega-3 Eggs">
+                                <span class="add-to-list-qty__icon" aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-plus-qty.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                              </button>
+                            </div>
+                          </header>
+                          <div class="add-to-list-card__divider" aria-hidden="true"></div>
+                          <article class="add-to-list-item">
+                            <img
+                              class="add-to-list-item__image add-to-list-item__image--tall"
+                              src="/case-studies/project-two/prototype/thumb-farmboy.png"
+                              alt=""
+                              width="80"
+                              height="88"
+                              decoding="async"
+                            />
+                            <div class="add-to-list-item__copy">
+                              <p class="add-to-list-item__name">Burnbrae Farms Omega-3 Eggs</p>
+                              <p class="add-to-list-item__save">SAVE $0.71 - $1.41</p>
+                              <p class="add-to-list-item__price">$5.88 <span>/pkg</span></p>
+                              <p class="add-to-list-item__until">Until Wednesday</p>
+                            </div>
+                          </article>
+                        </section>
+
+                        <section
+                          class="add-to-list-card"
+                          data-atl-row
+                          data-atl-state="add"
+                          data-item-name="Rowe Farms Green Valley Eggs"
+                        >
+                          <header class="add-to-list-card__header">
+                            <div class="add-to-list-store__brand">
+                              <span class="add-to-list-store__logo add-to-list-store__logo--nofrills">
+                                <img src="/case-studies/project-two/prototype/logo-nofrills.svg" alt="" width="19" height="20" decoding="async" />
+                              </span>
+                              <p class="add-to-list-store__name">No Frills</p>
+                            </div>
+                            <button class="add-to-list-action add-to-list-action--add" type="button" data-atl-add>
+                              <span class="add-to-list-action__icon" aria-hidden="true">
+                                <img src="/case-studies/project-two/prototype/add-icon.svg" alt="" width="20" height="20" decoding="async" />
+                              </span>
+                              <span class="add-to-list-action__label">Add to list</span>
+                            </button>
+                            <p class="add-to-list-action add-to-list-action--added" data-atl-added hidden>
+                              <span class="add-to-list-action__icon add-to-list-action__icon--check" aria-hidden="true">
+                                <img src="/case-studies/project-two/prototype/icon-check-blue.svg" alt="" width="16" height="16" decoding="async" />
+                              </span>
+                              <span class="add-to-list-action__label">Added</span>
+                            </p>
+                            <div class="add-to-list-qty" data-atl-qty hidden>
+                              <button class="add-to-list-qty__btn" type="button" data-atl-decrease aria-label="Remove Rowe Farms Green Valley Eggs from list">
+                                <span class="add-to-list-qty__icon" data-atl-icon-trash aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-trash.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                                <span class="add-to-list-qty__icon" data-atl-icon-minus hidden aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-minus-qty.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                              </button>
+                              <span class="add-to-list-qty__value" data-atl-qty-value>1</span>
+                              <button class="add-to-list-qty__btn" type="button" data-atl-increase aria-label="Increase quantity of Rowe Farms Green Valley Eggs">
+                                <span class="add-to-list-qty__icon" aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-plus-qty.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                              </button>
+                            </div>
+                          </header>
+                          <div class="add-to-list-card__divider" aria-hidden="true"></div>
+                          <article class="add-to-list-item">
+                            <img
+                              class="add-to-list-item__image"
+                              src="/case-studies/project-two/prototype/thumb-nofrills.png"
+                              alt=""
+                              width="80"
+                              height="80"
+                              decoding="async"
+                            />
+                            <div class="add-to-list-item__copy">
+                              <p class="add-to-list-item__name">Rowe Farms, Green Valley Eggs Size Large Free Run Brown</p>
+                              <p class="add-to-list-item__price">$6.98 <span>ea</span></p>
+                              <p class="add-to-list-item__until">Until Wednesday</p>
+                            </div>
+                          </article>
+                        </section>
+
+                        <section
+                          class="add-to-list-card"
+                          data-atl-row
+                          data-atl-state="add"
+                          data-item-name="Burnbrae Farms Naturegg Omega Plus Eggs"
+                        >
+                          <header class="add-to-list-card__header">
+                            <div class="add-to-list-store__brand">
+                              <span class="add-to-list-store__logo">
+                                <img src="/case-studies/project-two/prototype/logo-loblaws.png" alt="" width="19" height="20" decoding="async" />
+                              </span>
+                              <div class="add-to-list-store__meta">
+                                <p class="add-to-list-store__name">Loblaws</p>
+                                <p class="add-to-list-store__address">3040 Wonderland Road South</p>
+                              </div>
+                            </div>
+                            <button class="add-to-list-action add-to-list-action--add" type="button" data-atl-add>
+                              <span class="add-to-list-action__icon" aria-hidden="true">
+                                <img src="/case-studies/project-two/prototype/add-icon.svg" alt="" width="20" height="20" decoding="async" />
+                              </span>
+                              <span class="add-to-list-action__label">Add to list</span>
+                            </button>
+                            <p class="add-to-list-action add-to-list-action--added" data-atl-added hidden>
+                              <span class="add-to-list-action__icon add-to-list-action__icon--check" aria-hidden="true">
+                                <img src="/case-studies/project-two/prototype/icon-check-blue.svg" alt="" width="16" height="16" decoding="async" />
+                              </span>
+                              <span class="add-to-list-action__label">Added</span>
+                            </p>
+                            <div class="add-to-list-qty" data-atl-qty hidden>
+                              <button class="add-to-list-qty__btn" type="button" data-atl-decrease aria-label="Remove Burnbrae Farms Naturegg Omega Plus Eggs from list">
+                                <span class="add-to-list-qty__icon" data-atl-icon-trash aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-trash.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                                <span class="add-to-list-qty__icon" data-atl-icon-minus hidden aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-minus-qty.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                              </button>
+                              <span class="add-to-list-qty__value" data-atl-qty-value>1</span>
+                              <button class="add-to-list-qty__btn" type="button" data-atl-increase aria-label="Increase quantity of Burnbrae Farms Naturegg Omega Plus Eggs">
+                                <span class="add-to-list-qty__icon" aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-plus-qty.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                              </button>
+                            </div>
+                          </header>
+                          <div class="add-to-list-card__divider" aria-hidden="true"></div>
+                          <article class="add-to-list-item">
+                            <img
+                              class="add-to-list-item__image add-to-list-item__image--wide"
+                              src="/case-studies/project-two/prototype/thumb-loblaws.png"
+                              alt=""
+                              width="96"
+                              height="80"
+                              decoding="async"
+                            />
+                            <div class="add-to-list-item__copy">
+                              <p class="add-to-list-item__name">Burnbrae Farms, Naturegg Omega Plus Solar Free Range Eggs, Large</p>
+                              <p class="add-to-list-item__price">$6.99 <span>ea</span></p>
+                            </div>
+                          </article>
+                        </section>
+
+                        <section
+                          class="add-to-list-card add-to-list-card--compact"
+                          data-atl-row
+                          data-atl-state="add"
+                          data-item-name="Burnbrae Farms Omega-3 Eggs"
+                        >
+                          <header class="add-to-list-card__header">
+                            <div class="add-to-list-store__brand">
+                              <span class="add-to-list-store__logo">
+                                <img src="/case-studies/project-two/prototype/logo-farmboy.png" alt="" width="19" height="20" decoding="async" />
+                              </span>
+                              <p class="add-to-list-store__name">Farm Boy</p>
+                            </div>
+                            <button class="add-to-list-action add-to-list-action--add add-to-list-action--compact" type="button" data-atl-add>
+                              <span class="add-to-list-action__icon" aria-hidden="true">
+                                <img src="/case-studies/project-two/prototype/add-icon-sm.svg" alt="" width="16" height="16" decoding="async" />
+                              </span>
+                              <span class="add-to-list-action__label">Add to list</span>
+                            </button>
+                            <p class="add-to-list-action add-to-list-action--added" data-atl-added hidden>
+                              <span class="add-to-list-action__icon add-to-list-action__icon--check" aria-hidden="true">
+                                <img src="/case-studies/project-two/prototype/icon-check-blue.svg" alt="" width="16" height="16" decoding="async" />
+                              </span>
+                              <span class="add-to-list-action__label">Added</span>
+                            </p>
+                            <div class="add-to-list-qty" data-atl-qty hidden>
+                              <button class="add-to-list-qty__btn" type="button" data-atl-decrease aria-label="Remove Burnbrae Farms Omega-3 Eggs from list">
+                                <span class="add-to-list-qty__icon" data-atl-icon-trash aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-trash.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                                <span class="add-to-list-qty__icon" data-atl-icon-minus hidden aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-minus-qty.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                              </button>
+                              <span class="add-to-list-qty__value" data-atl-qty-value>1</span>
+                              <button class="add-to-list-qty__btn" type="button" data-atl-increase aria-label="Increase quantity of Burnbrae Farms Omega-3 Eggs">
+                                <span class="add-to-list-qty__icon" aria-hidden="true">
+                                  <img src="/case-studies/project-two/prototype/icon-plus-qty.svg" alt="" width="20" height="20" decoding="async" />
+                                </span>
+                              </button>
+                            </div>
+                          </header>
+                          <div class="add-to-list-card__divider" aria-hidden="true"></div>
+                          <article class="add-to-list-item">
+                            <img
+                              class="add-to-list-item__image add-to-list-item__image--tall"
+                              src="/case-studies/project-two/prototype/thumb-farmboy.png"
+                              alt=""
+                              width="80"
+                              height="88"
+                              decoding="async"
+                            />
+                            <div class="add-to-list-item__copy">
+                              <p class="add-to-list-item__name">Burnbrae Farms Omega-3 Eggs</p>
+                              <p class="add-to-list-item__save">SAVE $0.71 - $1.41</p>
+                              <p class="add-to-list-item__price">$5.88 <span>/pkg</span></p>
+                              <p class="add-to-list-item__until">Until Wednesday</p>
+                            </div>
+                          </article>
+                        </section>
+                      </div>
+                    </div>
+
+                    <div class="add-to-list-fly" data-atl-fly aria-hidden="true">
+                      <img src="/case-studies/project-two/prototype/product-fly-item.png" alt="" width="80" height="48" decoding="async" />
+                    </div>
+
+                    <nav class="add-to-list-tabs" aria-label="App navigation">
+                      <button class="add-to-list-tabs__item" type="button">
+                        <img src="/case-studies/project-two/prototype/tab-browse.svg" alt="" width="24" height="24" decoding="async" />
+                        <span>Browse</span>
+                      </button>
+                      <button class="add-to-list-tabs__item is-active" type="button" aria-current="page">
+                        <img src="/case-studies/project-two/prototype/tab-search.svg" alt="" width="24" height="24" decoding="async" />
+                        <span>Search</span>
+                      </button>
+                      <button class="add-to-list-tabs__item" type="button" data-atl-lists-tab>
+                        <img src="/case-studies/project-two/prototype/tab-lists.svg" alt="" width="24" height="24" decoding="async" />
+                        <span>Lists</span>
+                        <span class="add-to-list-tabs__badge" data-atl-list-badge hidden>0</span>
+                      </button>
+                    </nav>
+                    <div class="add-to-list-home-indicator" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </div>
+              <figcaption>
+                Interactive prototype: add items from search, watch the list
+                feedback, and adjust quantity.
+              </figcaption>
+            </figure>
           </section>
 
           <figure class="case-study-visual case-study-visual--wide">

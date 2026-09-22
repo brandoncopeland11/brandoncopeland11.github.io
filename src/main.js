@@ -32,11 +32,12 @@ const scheduleReveal = () => {
 
   const run = () => window.setTimeout(revealPage, PAGE_REVEAL_MS);
 
-  if (document.readyState === "complete") {
-    run();
-  } else {
-    window.addEventListener("load", run, { once: true });
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run, { once: true });
+    return;
   }
+
+  run();
 };
 
 scheduleReveal();
@@ -1011,4 +1012,42 @@ if (navToggleBtn) {
   }
 }
 
+const initLazyCaseStudyVideos = () => {
+  const videos = document.querySelectorAll("video.case-study-video");
+  if (!videos.length) return;
+
+  const loadAndPlay = (video) => {
+    if (video.dataset.lazyLoaded === "true") return;
+    video.dataset.lazyLoaded = "true";
+
+    const deferredSrc = video.dataset.src;
+    if (deferredSrc && video.getAttribute("src") !== deferredSrc) {
+      video.src = deferredSrc;
+    }
+
+    video.preload = "auto";
+    video.load();
+    video.play().catch(() => {});
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    videos.forEach(loadAndPlay);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        loadAndPlay(entry.target);
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "240px 0px" }
+  );
+
+  videos.forEach((video) => observer.observe(video));
+};
+
+initLazyCaseStudyVideos();
 initScrollReveal(reducedMotionMql);
