@@ -3417,9 +3417,15 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   cursor: pointer;
 }
 
-.collection-ad__video-btn img {
-  width: 1.5rem;
-  height: 1.5rem;
+.collection-ad__video-icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.collection-ad__video-icon[hidden] {
+  display: none !important;
 }
 
 .collection-ad__video-btn--play {

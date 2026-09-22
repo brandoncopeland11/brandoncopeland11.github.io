@@ -11,17 +11,24 @@ export const initCollectionAdsPrototype = (root, { showToast }) => {
   const playBtn = root.querySelector("[data-ad-play]");
   const muteBtn = root.querySelector("[data-ad-mute]");
   const durationEl = root.querySelector("[data-ad-duration]");
-  const playIcon = playBtn?.querySelector("img");
-  const muteIcon = muteBtn?.querySelector("img");
+  const playIcon = playBtn?.querySelector("[data-ad-icon-play]");
+  const pauseIcon = playBtn?.querySelector("[data-ad-icon-pause]");
+  const muteIcon = muteBtn?.querySelector("[data-ad-icon-mute]");
+  const volumeIcon = muteBtn?.querySelector("[data-ad-icon-volume]");
 
-  if (!video || !media || !playBtn || !muteBtn || !durationEl || !playIcon || !muteIcon) {
+  if (
+    !video ||
+    !media ||
+    !playBtn ||
+    !muteBtn ||
+    !durationEl ||
+    !playIcon ||
+    !pauseIcon ||
+    !muteIcon ||
+    !volumeIcon
+  ) {
     return;
   }
-
-  const playSrc = playIcon.dataset.playSrc || playIcon.getAttribute("src");
-  const pauseSrc = playIcon.dataset.pauseSrc;
-  const muteSrc = muteIcon.dataset.muteSrc || muteIcon.getAttribute("src");
-  const volumeSrc = muteIcon.dataset.volumeSrc;
 
   let duration = 0;
   let playing = false;
@@ -34,7 +41,8 @@ export const initCollectionAdsPrototype = (root, { showToast }) => {
       "aria-label",
       playing ? "Pause sponsored video" : "Play sponsored video"
     );
-    playIcon.src = playing ? pauseSrc : playSrc;
+    playIcon.toggleAttribute("hidden", playing);
+    pauseIcon.toggleAttribute("hidden", !playing);
     video.classList.toggle("is-playing", playing);
   };
 
@@ -46,7 +54,8 @@ export const initCollectionAdsPrototype = (root, { showToast }) => {
       "aria-label",
       muted ? "Unmute sponsored video" : "Mute sponsored video"
     );
-    muteIcon.src = muted ? muteSrc : volumeSrc;
+    muteIcon.toggleAttribute("hidden", !muted);
+    volumeIcon.toggleAttribute("hidden", muted);
   };
 
   const setRemaining = (seconds) => {
