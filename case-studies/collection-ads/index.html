@@ -720,6 +720,277 @@
                 <figcaption>Collection Ads UI: muted video controls, sponsored labeling, and shoppable carousel.</figcaption>
               </figure>
             </div>
+
+            <figure class="case-study-visual case-study-visual--prototype">
+              <div
+                class="device-prototype"
+                data-device-prototype="collection-ads"
+              >
+                <div class="device-prototype__frame" aria-hidden="true"></div>
+                <div class="device-prototype__screen">
+                  <div
+                    class="device-prototype__body"
+                    role="region"
+                    aria-label="Interactive Collection Ads prototype. Play the video, swipe the carousel, and add items."
+                  >
+                    <div class="device-prototype__placeholders" aria-hidden="true">
+                      <article class="device-prototype__placeholder-card">
+                        <span class="device-prototype__shimmer device-prototype__shimmer--title"></span>
+                        <span class="device-prototype__shimmer device-prototype__shimmer--square"></span>
+                      </article>
+                    </div>
+
+                    <article class="collection-ad">
+                      <div class="collection-ad__card">
+                        <header class="collection-ad__top-bar">
+                          <button
+                            class="collection-ad__brand"
+                            type="button"
+                            data-ad-brand
+                            aria-label="Open Kraft brand page"
+                          >
+                            <img
+                              class="collection-ad__brand-logo"
+                              src="/case-studies/project-one/prototype/kraft-logo.png"
+                              alt=""
+                              width="20"
+                              height="20"
+                              decoding="async"
+                            />
+                            <span>Kraft</span>
+                            <img
+                              class="collection-ad__brand-chevron"
+                              src="/case-studies/project-one/prototype/chevron-outline.svg"
+                              alt=""
+                              width="4"
+                              height="8"
+                              decoding="async"
+                            />
+                          </button>
+                          <span class="collection-ad__tag">Sponsored</span>
+                        </header>
+
+                        <div class="collection-ad__video" data-ad-video>
+                          <video
+                            class="collection-ad__media"
+                            data-ad-media
+                            src="/case-studies/project-one/prototype/kraft-ad.mp4"
+                            poster="/case-studies/project-one/prototype/kraft-video.png"
+                            muted
+                            loop
+                            playsinline
+                            autoplay
+                            disablepictureinpicture
+                            controlslist="nodownload nofullscreen noremoteplayback"
+                          ></video>
+                          <span class="collection-ad__duration" data-ad-duration>0:00</span>
+                          <button
+                            class="collection-ad__video-btn collection-ad__video-btn--play"
+                            type="button"
+                            data-ad-play
+                            aria-pressed="false"
+                            aria-label="Play sponsored video"
+                          >
+                            <img
+                              src="/case-studies/project-one/prototype/play.svg"
+                              alt=""
+                              width="24"
+                              height="24"
+                              decoding="async"
+                              data-play-src="/case-studies/project-one/prototype/play.svg"
+                              data-pause-src="/case-studies/project-one/prototype/pause.svg"
+                            />
+                          </button>
+                          <button
+                            class="collection-ad__video-btn collection-ad__video-btn--mute"
+                            type="button"
+                            data-ad-mute
+                            aria-pressed="true"
+                            aria-label="Unmute sponsored video"
+                          >
+                            <img
+                              src="/case-studies/project-one/prototype/no-sound.svg"
+                              alt=""
+                              width="24"
+                              height="24"
+                              decoding="async"
+                              data-mute-src="/case-studies/project-one/prototype/no-sound.svg"
+                              data-volume-src="/case-studies/project-one/prototype/volume.svg"
+                            />
+                          </button>
+                        </div>
+                      </div>
+
+                      <div
+                        class="collection-ad__items"
+                        data-prototype-scroll-x
+                      >
+                        <article
+                          class="collection-ad__item"
+                          data-ad-item
+                          data-item-name="Smooth Peanut Butter 1kg"
+                        >
+                          <div class="collection-ad__merchant">
+                            <span class="collection-ad__merchant-logo collection-ad__merchant-logo--sobeys">
+                              <img
+                                src="/case-studies/project-one/prototype/sobeys-logo.png"
+                                alt=""
+                                width="20"
+                                height="8"
+                                decoding="async"
+                              />
+                            </span>
+                            <span>Sobeys</span>
+                          </div>
+                          <button
+                            class="collection-ad__clip"
+                            type="button"
+                            data-ad-clip
+                            data-item-name="Smooth Peanut Butter 1kg"
+                            aria-pressed="false"
+                            aria-label="Add Smooth Peanut Butter 1kg to list"
+                          >
+                            <img
+                              src="/case-studies/project-one/prototype/add-outline.svg"
+                              alt=""
+                              width="14"
+                              height="14"
+                              decoding="async"
+                              data-add-src="/case-studies/project-one/prototype/add-outline.svg"
+                              data-check-src="/case-studies/project-one/prototype/check.svg"
+                            />
+                          </button>
+                          <img
+                            class="collection-ad__product"
+                            src="/case-studies/project-one/prototype/product-smooth.png"
+                            alt=""
+                            width="88"
+                            height="80"
+                            decoding="async"
+                          />
+                          <div class="collection-ad__info">
+                            <p class="collection-ad__name">Smooth Peanut Butter 1kg</p>
+                            <p class="collection-ad__save">SAVE $1</p>
+                            <p class="collection-ad__price">$3.99</p>
+                          </div>
+                        </article>
+
+                        <article
+                          class="collection-ad__item"
+                          data-ad-item
+                          data-item-name="Crunchy Peanut Butter 1kg"
+                        >
+                          <div class="collection-ad__merchant">
+                            <span class="collection-ad__merchant-logo collection-ad__merchant-logo--nofrills">
+                              <img
+                                src="/case-studies/project-one/prototype/nofrills-wordmark-1.svg"
+                                alt=""
+                                width="18"
+                                height="4"
+                                decoding="async"
+                              />
+                            </span>
+                            <span>No Frills</span>
+                          </div>
+                          <button
+                            class="collection-ad__clip"
+                            type="button"
+                            data-ad-clip
+                            data-item-name="Crunchy Peanut Butter 1kg"
+                            aria-pressed="false"
+                            aria-label="Add Crunchy Peanut Butter 1kg to list"
+                          >
+                            <img
+                              src="/case-studies/project-one/prototype/add-outline.svg"
+                              alt=""
+                              width="14"
+                              height="14"
+                              decoding="async"
+                              data-add-src="/case-studies/project-one/prototype/add-outline.svg"
+                              data-check-src="/case-studies/project-one/prototype/check.svg"
+                            />
+                          </button>
+                          <img
+                            class="collection-ad__product"
+                            src="/case-studies/project-one/prototype/product-crunchy.png"
+                            alt=""
+                            width="80"
+                            height="80"
+                            decoding="async"
+                          />
+                          <div class="collection-ad__info">
+                            <p class="collection-ad__name">Crunchy Peanut Butter 1kg</p>
+                            <p class="collection-ad__save">SAVE $1</p>
+                            <p class="collection-ad__price">$3.99</p>
+                          </div>
+                        </article>
+
+                        <article
+                          class="collection-ad__item"
+                          data-ad-item
+                          data-item-name="Extra Roasted Peanut Butter 1kg"
+                        >
+                          <div class="collection-ad__merchant">
+                            <span class="collection-ad__merchant-logo collection-ad__merchant-logo--nofrills">
+                              <img
+                                src="/case-studies/project-one/prototype/nofrills-wordmark-1.svg"
+                                alt=""
+                                width="18"
+                                height="4"
+                                decoding="async"
+                              />
+                            </span>
+                            <span>No Frills</span>
+                          </div>
+                          <button
+                            class="collection-ad__clip"
+                            type="button"
+                            data-ad-clip
+                            data-item-name="Extra Roasted Peanut Butter 1kg"
+                            aria-pressed="false"
+                            aria-label="Add Extra Roasted Peanut Butter 1kg to list"
+                          >
+                            <img
+                              src="/case-studies/project-one/prototype/add-outline.svg"
+                              alt=""
+                              width="14"
+                              height="14"
+                              decoding="async"
+                              data-add-src="/case-studies/project-one/prototype/add-outline.svg"
+                              data-check-src="/case-studies/project-one/prototype/check.svg"
+                            />
+                          </button>
+                          <img
+                            class="collection-ad__product"
+                            src="/case-studies/project-one/prototype/product-extra-roasted.png"
+                            alt=""
+                            width="80"
+                            height="80"
+                            decoding="async"
+                          />
+                          <div class="collection-ad__info">
+                            <p class="collection-ad__name">Extra Roasted Peanut Butter 1kg</p>
+                            <p class="collection-ad__save">SAVE $1</p>
+                            <p class="collection-ad__price">$3.99</p>
+                          </div>
+                        </article>
+                      </div>
+                    </article>
+
+                    <div class="device-prototype__placeholders" aria-hidden="true">
+                      <article class="device-prototype__placeholder-card">
+                        <span class="device-prototype__shimmer device-prototype__shimmer--title"></span>
+                        <span class="device-prototype__shimmer device-prototype__shimmer--square"></span>
+                      </article>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption>
+                Interactive prototype: play the video, swipe the carousel, and
+                add items.
+              </figcaption>
+            </figure>
           </section>
 
           <div class="case-study-image-grid" aria-label="Design visuals">

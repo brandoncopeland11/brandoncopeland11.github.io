@@ -2,6 +2,7 @@ import { projects } from "./data/projects.js";
 import { experience } from "./data/experience.js";
 import { mountSiteLogo } from "./logo.js";
 import { initCaseStudyLightbox } from "./caseStudyLightbox.js";
+import { initDevicePrototypes } from "./devicePrototype.js";
 import { initScrollReveal } from "./scrollReveal.js";
 import { initSiteAnalytics } from "./siteAnalytics.js";
 
@@ -349,6 +350,7 @@ if (document.body.classList.contains("case-study-page")) {
 
   initCaseStudyLightbox();
   initExplorationsCarousel();
+  initDevicePrototypes();
 }
 
 const heroSectionEl = document.querySelector(".section--hero");

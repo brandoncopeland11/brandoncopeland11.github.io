@@ -3163,6 +3163,425 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   }
 }
 
+.case-study-visual--prototype {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  overflow: visible;
+}
+
+.device-prototype {
+  --device-radius: 2.75rem;
+  --device-bezel: 0.7rem;
+  --device-outline: var(--color-text);
+  position: relative;
+  width: min(24.375rem, 100%);
+  aspect-ratio: 390 / 780;
+  margin-inline: auto;
+  overflow: hidden;
+  color: var(--device-outline);
+}
+
+.device-prototype__frame {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border: 2px solid currentColor;
+  border-radius: var(--device-radius);
+  pointer-events: none;
+}
+
+.device-prototype__screen {
+  position: absolute;
+  inset: var(--device-bezel);
+  overflow: hidden;
+  border-radius: calc(var(--device-radius) - var(--device-bezel) + 0.1rem);
+  background: #f2f3f5;
+}
+
+.device-prototype__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  padding: 16px 0;
+  overflow: hidden;
+}
+
+.device-prototype.is-dragging .collection-ad__items {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.device-prototype__toast {
+  position: absolute;
+  left: 50%;
+  bottom: 1rem;
+  z-index: 4;
+  max-width: calc(100% - 2rem);
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: #1f2833;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  transform: translate(-50%, 0.5rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.device-prototype__toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.device-prototype__placeholders {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
+  padding-inline: 16px;
+  overflow: hidden;
+}
+
+.device-prototype__body > .device-prototype__placeholders:first-child {
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+}
+
+.device-prototype__body > .device-prototype__placeholders:last-child {
+  border-end-start-radius: inherit;
+  border-end-end-radius: inherit;
+}
+
+.device-prototype__placeholder-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 0;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  background: #fff;
+  box-shadow: 0 1px 2px #1f283333;
+}
+
+.device-prototype__shimmer {
+  display: block;
+  border-radius: 0.25rem;
+  background: #e4e7ec;
+  background-image: linear-gradient(
+    90deg,
+    #e4e7ec 0%,
+    #f4f5f7 46%,
+    #e4e7ec 100%
+  );
+  background-size: 200% 100%;
+  animation: device-prototype-shimmer 1.4s ease-in-out infinite;
+}
+
+.device-prototype__shimmer--title {
+  align-self: flex-start;
+  width: 55%;
+  height: 0.875rem;
+  flex-shrink: 0;
+}
+
+.device-prototype__shimmer--square {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+@keyframes device-prototype-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.collection-ad {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.collection-ad__card {
+  overflow: hidden;
+  margin-inline: 16px;
+  border-radius: 0.25rem;
+  background: #fff;
+  box-shadow: 0 1px 4px #1f283333;
+}
+
+.collection-ad__top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f2f3f5;
+}
+
+.collection-ad__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #1f2833;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+  cursor: pointer;
+}
+
+.collection-ad__brand-logo {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.collection-ad__brand-chevron {
+  width: 0.25rem;
+  height: 0.5rem;
+  margin-left: 0.05rem;
+}
+
+.collection-ad__tag {
+  display: inline-flex;
+  align-items: center;
+  height: 1.375rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  background: #f2f3f5;
+  color: #5d6f85;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+}
+
+.collection-ad__video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #111;
+}
+
+.collection-ad__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #111;
+  pointer-events: none;
+}
+
+.collection-ad__duration {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  z-index: 2;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1.125rem;
+  text-shadow: 0 0 4px #000000a3;
+}
+
+.collection-ad__video-btn {
+  position: absolute;
+  bottom: 1rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 100px;
+  background: #0000008f;
+  cursor: pointer;
+}
+
+.collection-ad__video-btn img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.collection-ad__video-btn--play {
+  left: 1rem;
+}
+
+.collection-ad__video-btn--mute {
+  right: 1rem;
+}
+
+.collection-ad__items {
+  display: flex;
+  gap: 0.5rem;
+  padding-inline: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.collection-ad__items::-webkit-scrollbar {
+  display: none;
+}
+
+.collection-ad__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  width: 9.25rem;
+  flex-shrink: 0;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  background: #fff;
+  box-shadow: 0 1px 2px #1f283333;
+  cursor: pointer;
+}
+
+.collection-ad__merchant {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: 100%;
+  height: 1.25rem;
+  padding-right: 2.25rem;
+  color: #1f2833;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+  white-space: nowrap;
+}
+
+.collection-ad__merchant-logo {
+  position: relative;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px #1f28331a;
+}
+
+.collection-ad__merchant-logo--sobeys {
+  background: #07875c;
+}
+
+.collection-ad__merchant-logo--sobeys img {
+  position: absolute;
+  left: 8.33%;
+  right: 8.33%;
+  top: 36.67%;
+  bottom: 36.67%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.collection-ad__merchant-logo--nofrills {
+  background: #ffda00;
+}
+
+.collection-ad__merchant-logo--nofrills img {
+  position: absolute;
+  left: 4.17%;
+  right: 0;
+  top: 40.83%;
+  bottom: 41.29%;
+  width: auto;
+  height: auto;
+}
+
+.collection-ad__clip {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50px;
+  background: #ebf4ff;
+  cursor: pointer;
+}
+
+.collection-ad__clip.is-added {
+  background: #dff7e3;
+}
+
+.collection-ad__product {
+  width: 5.5rem;
+  height: 5rem;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.collection-ad__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  width: 100%;
+}
+
+.collection-ad__name,
+.collection-ad__save,
+.collection-ad__price {
+  margin: 0;
+}
+
+.collection-ad__name {
+  height: 2.25rem;
+  overflow: hidden;
+  color: #1f2833;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+}
+
+.collection-ad__save {
+  color: #e42545;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.125rem;
+}
+
+.collection-ad__price {
+  color: #1f2833;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .device-prototype__shimmer,
+  .device-prototype__toast {
+    animation: none;
+    transition: none;
+  }
+}
+
 .case-study-page--project-one
   .case-study-section--explorations
   .case-study-copy
@@ -3510,7 +3929,7 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
 }
 
 .case-study-visual {
-  margin: 4rem 0;
+  margin: 1rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

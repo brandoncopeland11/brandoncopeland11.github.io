@@ -4,6 +4,7 @@ const LIGHTBOX_SELECTOR =
 const isZoomableImage = (img) => {
   if (!(img instanceof HTMLImageElement)) return false;
   if (img.closest(".case-study-company")) return false;
+  if (img.closest(".device-prototype")) return false;
   if (!img.src || img.src.startsWith("data:")) return false;
   return true;
 };
