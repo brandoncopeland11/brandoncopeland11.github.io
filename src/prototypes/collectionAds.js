@@ -129,7 +129,8 @@ export const initCollectionAdsPrototype = (root, { showToast }) => {
       const added = button.getAttribute("aria-pressed") === "true";
       const nextAdded = !added;
       const name = button.dataset.itemName || "item";
-      const icon = button.querySelector("img");
+      const addIcon = button.querySelector("[data-ad-icon-add]");
+      const checkIcon = button.querySelector("[data-ad-icon-check]");
 
       button.setAttribute("aria-pressed", String(nextAdded));
       button.setAttribute(
@@ -137,10 +138,8 @@ export const initCollectionAdsPrototype = (root, { showToast }) => {
         nextAdded ? `Remove ${name} from list` : `Add ${name} to list`
       );
       button.classList.toggle("is-added", nextAdded);
-
-      if (icon) {
-        icon.src = nextAdded ? icon.dataset.checkSrc : icon.dataset.addSrc;
-      }
+      addIcon?.toggleAttribute("hidden", nextAdded);
+      checkIcon?.toggleAttribute("hidden", !nextAdded);
     });
   });
 

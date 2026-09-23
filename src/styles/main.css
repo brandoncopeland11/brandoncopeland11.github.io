@@ -3429,11 +3429,35 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
 }
 
 .collection-ad__video-btn--play {
-  left: 1rem;
+  top: 50%;
+  left: 50%;
+  bottom: auto;
+  width: 48px;
+  height: 48px;
+  transform: translate(-50%, -50%);
+}
+
+.collection-ad__video:not(.is-playing) .collection-ad__video-btn--play .collection-ad__video-icon {
+  width: 32px;
+  height: 32px;
 }
 
 .collection-ad__video-btn--mute {
   right: 1rem;
+}
+
+.collection-ad__video:not(.is-playing) .collection-ad__duration,
+.collection-ad__video:not(.is-playing) .collection-ad__video-btn--mute {
+  display: none;
+}
+
+.collection-ad__video.is-playing .collection-ad__video-btn--play {
+  top: auto;
+  left: 1rem;
+  bottom: 1rem;
+  width: 2rem;
+  height: 2rem;
+  transform: none;
 }
 
 .collection-ad__items {
@@ -3538,6 +3562,16 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   background: #dff7e3;
 }
 
+.collection-ad__clip-icon {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+.collection-ad__clip-icon[hidden] {
+  display: none !important;
+}
+
 .collection-ad__product {
   width: 5.5rem;
   height: 5rem;
@@ -3605,72 +3639,10 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
 
 .add-to-list-nav {
   flex-shrink: 0;
-  padding: 0 1rem 0.75rem;
+  padding: 2rem 1rem 0.75rem;
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(25px);
   border-bottom: 0.333px solid rgba(0, 0, 0, 0.3);
-}
-
-.add-to-list-status {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 3.375rem;
-  margin: 0 -1rem;
-  padding: 0 1rem;
-}
-
-.add-to-list-status__time {
-  flex: 1 1 35%;
-  font-size: 1.0625rem;
-  font-weight: 600;
-  line-height: 1.375rem;
-  text-align: center;
-}
-
-.add-to-list-status__levels {
-  display: flex;
-  flex: 1 1 35%;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.375rem;
-}
-
-.add-to-list-status__battery {
-  position: relative;
-  width: 1.5625rem;
-  height: 0.75rem;
-}
-
-.add-to-list-status__battery::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 1px solid #000;
-  border-radius: 0.26875rem;
-  opacity: 0.35;
-}
-
-.add-to-list-status__battery-cap {
-  position: absolute;
-  top: 50%;
-  right: -0.083rem;
-  width: 0.083rem;
-  height: 0.25rem;
-  border-radius: 0 0.0625rem 0.0625rem 0;
-  background: #000;
-  opacity: 0.4;
-  transform: translateY(-50%);
-}
-
-.add-to-list-status__battery-fill {
-  position: absolute;
-  top: 0.125rem;
-  left: 0.125rem;
-  width: 1.3125rem;
-  height: 0.5rem;
-  border-radius: 0.15625rem;
-  background: #000;
 }
 
 .add-to-list-search__bar {
@@ -3726,8 +3698,8 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
 
 .add-to-list-chip img {
   display: block;
-  width: 1.125rem;
-  height: 1.125rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
   object-fit: contain;
 }
@@ -3763,7 +3735,7 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 0.5rem 1rem;
   background: #fff;
 }
 
@@ -4086,8 +4058,8 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
 
 .add-to-list-tabs__item img {
   display: block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   object-fit: contain;
 }
 
@@ -4112,8 +4084,9 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   justify-content: center;
   gap: 2.9375rem;
   flex-shrink: 0;
-  padding: 0.0625rem 0 0;
+  padding: 0.75rem 0 0.75rem;
   background: #fff;
+  box-shadow: 0 -2px 8px rgba(15, 23, 42, 0.06);
 }
 
 .add-to-list-tabs__item {
@@ -4127,7 +4100,7 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   border: 0;
   background: transparent;
   color: #5d6f85;
-  font-size: 0.625rem;
+  font-size: 0.8rem;
   line-height: normal;
   letter-spacing: 0.00625rem;
   cursor: pointer;
@@ -4135,6 +4108,7 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
 
 .add-to-list-tabs__item.is-active {
   color: #0f72ea;
+  font-weight: bold;
 }
 
 .add-to-list-tabs__badge {
@@ -4151,23 +4125,6 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   font-weight: 700;
   line-height: 1rem;
   text-align: center;
-}
-
-.add-to-list-home-indicator {
-  flex-shrink: 0;
-  height: 2.125rem;
-  background: #fff;
-}
-
-.add-to-list-home-indicator::after {
-  content: "";
-  display: block;
-  width: 8.6875rem;
-  height: 0.3125rem;
-  margin: 0 auto;
-  border-radius: 999px;
-  background: #000;
-  transform: translateY(0.5rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
