@@ -235,6 +235,65 @@ const setNavScrollState = () => {
 setNavScrollState();
 window.addEventListener("scroll", setNavScrollState, { passive: true });
 
+const initDecisionCarousel = () => {
+  const section = document.querySelector(".case-study-decision");
+  const viewport = section?.querySelector("dl");
+  if (!section || !viewport) return;
+
+  const slides = Array.from(viewport.children);
+  if (slides.length < 2) return;
+
+  const dotsEl = document.createElement("div");
+  dotsEl.className = "case-study-decision__dots";
+  dotsEl.setAttribute("role", "group");
+  dotsEl.setAttribute("aria-label", "At a glance");
+
+  const scrollBehavior = reducedMotionMql.matches ? "auto" : "smooth";
+
+  const dots = slides.map((slide, index) => {
+    const label = slide.querySelector("dt")?.textContent?.trim() || `Card ${index + 1}`;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "case-study-decision__dot";
+    button.setAttribute("aria-label", `Show ${label.toLowerCase()}`);
+    button.addEventListener("click", () => {
+      viewport.scrollTo({ left: slide.offsetLeft, behavior: scrollBehavior });
+    });
+    dotsEl.append(button);
+    return button;
+  });
+
+  section.append(dotsEl);
+
+  const getCurrentIndex = () => {
+    const { scrollLeft } = viewport;
+    return slides.reduce(
+      (closest, slide, index) => {
+        const dist = Math.abs(slide.offsetLeft - scrollLeft);
+        return dist < closest.dist ? { index, dist } : closest;
+      },
+      { index: 0, dist: Infinity }
+    ).index;
+  };
+
+  const updateDots = () => {
+    const index = getCurrentIndex();
+    dots.forEach((dot, i) => {
+      const isActive = i === index;
+      dot.classList.toggle("is-active", isActive);
+      if (isActive) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  viewport.addEventListener("scroll", updateDots, { passive: true });
+  window.addEventListener("resize", updateDots);
+  updateDots();
+};
+
 const initExplorationsCarousel = () => {
   const carousel = document.querySelector("[data-explorations-carousel]");
   if (!carousel) return;
@@ -350,6 +409,7 @@ if (document.body.classList.contains("case-study-page")) {
   window.addEventListener("pageshow", updateSubnavState);
 
   initCaseStudyLightbox();
+  initDecisionCarousel();
   initExplorationsCarousel();
   initDevicePrototypes();
 }
