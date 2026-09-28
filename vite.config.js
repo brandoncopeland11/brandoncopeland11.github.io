@@ -1,4 +1,5 @@
-import { resolve } from "path";
+import { cpSync, existsSync, mkdirSync, readFileSync } from "fs";
+import { dirname, resolve } from "path";
 import { defineConfig } from "vite";
 
 const repositoryName = process.env.GITHUB_REPOSITORY?.split("/")[1] ?? "";
@@ -25,9 +26,49 @@ const cssBeforeJs = () => ({
   },
 });
 
+const pages = {
+  main: resolve(__dirname, "index.html"),
+  insights: resolve(__dirname, "insights.html"),
+  "collection-ads": resolve(__dirname, "case-studies/collection-ads/index.html"),
+  "add-to-list-ux": resolve(__dirname, "case-studies/add-to-list-ux/index.html"),
+  "case-study-3": resolve(__dirname, "case-studies/project-three.html"),
+  "flyer-swiping": resolve(__dirname, "case-studies/flyer-swiping/index.html"),
+  "case-study-5": resolve(__dirname, "case-studies/project-five.html"),
+};
+
+// Vite rewrites src on images, but case-study videos use data-src so they stay
+// lazy. Those files are not imported anywhere else, so copy them into dist.
+const copyDataSrcAssets = () => ({
+  name: "copy-data-src-assets",
+  apply: "build",
+  closeBundle() {
+    const pattern = /data-src="([^"]+)"/g;
+    const copied = new Set();
+
+    for (const htmlFile of Object.values(pages)) {
+      const html = readFileSync(htmlFile, "utf8");
+      for (const match of html.matchAll(pattern)) {
+        const url = decodeURIComponent(match[1]);
+        if (!url.startsWith("/") || url.startsWith("//") || copied.has(url)) continue;
+
+        const relativePath = url.slice(1);
+        const sourcePath = resolve(__dirname, relativePath);
+        if (!existsSync(sourcePath)) {
+          throw new Error(`Missing file referenced by data-src: ${url}`);
+        }
+
+        const destinationPath = resolve(__dirname, "dist", relativePath);
+        mkdirSync(dirname(destinationPath), { recursive: true });
+        cpSync(sourcePath, destinationPath);
+        copied.add(url);
+      }
+    }
+  },
+});
+
 export default defineConfig({
   base: process.env.GITHUB_ACTIONS && repositoryName && !isUserPage ? `/${repositoryName}/` : "/",
-  plugins: [cssBeforeJs()],
+  plugins: [cssBeforeJs(), copyDataSrcAssets()],
   server: {
     watch: {
       ignored: [
@@ -38,15 +79,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, "index.html"),
-        insights: resolve(__dirname, "insights.html"),
-        "collection-ads": resolve(__dirname, "case-studies/collection-ads/index.html"),
-        "add-to-list-ux": resolve(__dirname, "case-studies/add-to-list-ux/index.html"),
-        "case-study-3": resolve(__dirname, "case-studies/project-three.html"),
-        "flyer-swiping": resolve(__dirname, "case-studies/flyer-swiping/index.html"),
-        "case-study-5": resolve(__dirname, "case-studies/project-five.html"),
-      },
+      input: pages,
     },
   },
 });
