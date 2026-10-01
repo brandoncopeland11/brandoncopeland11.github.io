@@ -10,7 +10,7 @@ const brandAndMortarLogo = "/assets/logos/brand-and-mortar.png";
 export const experience = [
   {
     company: "Flipp",
-    role: "Senior Product Designer",
+    role: "Lead Product Designer",
     years: "2023 - Present",
     logo: flippLogo,
   },
