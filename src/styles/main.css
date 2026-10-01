@@ -1112,7 +1112,7 @@ html[data-theme="dark"] .hero-status__company {
   color: var(--color-muted);
   font-size: clamp(0.975rem, 1.5vw, 1.0625rem);
   line-height: 1.5;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 html[data-hero-layout="overlap"] .hero-lede {
@@ -1356,6 +1356,7 @@ html[data-hero-layout="overlap"] .hero-content--classic {
   flex-direction: column;
   align-items: stretch;
   width: 100%;
+  container-type: inline-size;
 }
 
 html[data-hero-layout="overlap"] .hero-one-liner,
@@ -1417,6 +1418,31 @@ html[data-hero-layout="overlap"] .hero-status {
 
   html[data-hero-layout="overlap"] .hero-status {
     font-size: 1.0625rem;
+  }
+}
+
+/* Keep the overlap heading on three lines from laptop width up. */
+@media (min-width: 768px) {
+  html[data-hero-layout="overlap"] .hero-one-liner {
+    max-width: none;
+    font-size: min(70px, calc(100cqi / 15.4));
+  }
+
+  html[data-hero-layout="overlap"] .hero-line {
+    display: block;
+    white-space: nowrap;
+  }
+}
+
+/* Two supporting lines on larger laptops and desktops. */
+@media (min-width: 1200px) {
+  html[data-hero-layout="overlap"] .hero-lede {
+    max-width: none;
+  }
+
+  html[data-hero-layout="overlap"] .hero-lede__line {
+    display: block;
+    white-space: nowrap;
   }
 }
 
