@@ -1107,6 +1107,7 @@ html[data-theme="dark"] .hero-status__company {
 }
 
 .hero-lede {
+  display: none;
   margin: 1.15rem 0 0;
   max-width: var(--container-max);
   color: var(--color-muted);
