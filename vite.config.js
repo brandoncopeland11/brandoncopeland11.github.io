@@ -28,7 +28,6 @@ const cssBeforeJs = () => ({
 
 const pages = {
   main: resolve(__dirname, "index.html"),
-  insights: resolve(__dirname, "insights.html"),
   "collection-ads": resolve(__dirname, "case-studies/collection-ads/index.html"),
   "add-to-list-ux": resolve(__dirname, "case-studies/add-to-list-ux/index.html"),
   "case-study-3": resolve(__dirname, "case-studies/project-three.html"),

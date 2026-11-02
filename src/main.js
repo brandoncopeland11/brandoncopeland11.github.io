@@ -4,10 +4,8 @@ import { mountSiteLogo } from "./logo.js";
 import { initCaseStudyLightbox } from "./caseStudyLightbox.js";
 import { initDevicePrototypes } from "./devicePrototype.js";
 import { initScrollReveal } from "./scrollReveal.js";
-import { initSiteAnalytics } from "./siteAnalytics.js";
 
 mountSiteLogo();
-initSiteAnalytics();
 
 const masonryEl = document.getElementById("work-masonry");
 const yearEl = document.getElementById("year");

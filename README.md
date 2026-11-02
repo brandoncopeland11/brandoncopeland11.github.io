@@ -18,71 +18,6 @@ npm run build
 npm run preview
 ```
 
-## Private analytics dashboard
-
-This site now supports a private analytics dashboard at `https://brandoncopeland11.github.io/insights.html`.
-
-It tracks:
-
-- Daily unique visitors
-- Session duration
-- Page paths visited during each session
-- Approximate section-level attention based on viewport focus
-- Returning visitors using a first-party visitor ID stored in local storage
-
-It does not store visitor IP addresses. Anonymous visits are identified with a browser-local visitor ID instead.
-
-### Setup
-
-1. Create a Supabase project.
-2. Open `supabase/analytics.sql` in the Supabase SQL editor.
-3. Replace `replace-with-your-email@example.com` with the email address you will use to sign in.
-4. Run the SQL file.
-5. In Supabase Auth, create your user account with that same email address.
-6. Create a local `.env` file from `.env.example`.
-
-```bash
-cp .env.example .env
-```
-
-7. Fill in:
-
-```bash
-VITE_SUPABASE_URL=...
-VITE_SUPABASE_ANON_KEY=...
-VITE_TRACK_LOCAL_ANALYTICS=false
-```
-
-8. Restart the dev server or rebuild the site.
-9. Visit `/insights.html` and sign in.
-
-### Exclude your own browsing
-
-To stop your own browser from writing analytics events on production, visit the live site once with `?analytics=off` appended to the URL:
-
-```text
-https://brandoncopeland11.github.io/?analytics=off
-```
-
-That stores a persistent opt-out in your browser and removes the query parameter from the address bar right away. To re-enable analytics for that same browser later, visit:
-
-```text
-https://brandoncopeland11.github.io/?analytics=on
-```
-
-You can also toggle it from the console with `window.portfolioAnalytics.optOut()` and `window.portfolioAnalytics.optIn()`.
-
-To remove historical visits from the same browser, first re-run `supabase/analytics.sql` so the owner delete policies are applied. Then open `/insights.html`, sign in, and use the `Remove this browser's visits` button.
-
-For this portfolio, the current Supabase project URL and publishable key are also checked into `src/supabaseClient.js` as a GitHub Pages-safe fallback. The local `.env` values override those defaults if you rotate keys later.
-
-### Security model
-
-- The dashboard page is not linked anywhere in the site navigation.
-- Analytics writes are public so site visitors can create anonymous visit records.
-- Analytics reads are restricted by Supabase row-level security to the email you set in `supabase/analytics.sql`.
-- Because this is a static GitHub Pages site, this is a practical privacy layer for portfolio traffic, not a hardened analytics product for hostile traffic.
-
 ## Publish changes to GitHub Pages
 
 The live site is published from the `main` branch to:
@@ -119,14 +54,9 @@ If you want help publishing, ask Cursor to "check, commit, and push the portfoli
 | Path | Purpose |
 |------|---------|
 | `index.html` | One-page home: hero, work (featured + masonry grid), about, contact |
-| `insights.html` | Private analytics dashboard route |
-| `src/siteAnalytics.js` | Client-side visit, duration, and section tracking |
-| `src/insights.js` | Dashboard UI and analytics aggregation |
 | `src/data/projects.js` | Case studies for the masonry grid |
 | `src/styles/main.css` | Layout and structure styles |
-| `src/styles/insights.css` | Dashboard-specific styles |
 | `case-studies/*.html` | Individual case study pages |
-| `supabase/analytics.sql` | Supabase schema and row-level security policies |
 
 ## Customize content
 
