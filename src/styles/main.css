@@ -139,12 +139,6 @@
   --hero-accent-5: #ff9466;
 }
 
-@property --hero-cycle-color {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #f2fce2;
-}
-
 @property --hero-accent-color {
   syntax: "<color>";
   inherits: true;
@@ -793,181 +787,146 @@ main {
   isolation: isolate;
   overflow: hidden;
   padding-block: calc(var(--space-section) * 1.28);
-  background: var(--hero-cycle-color);
+  background: var(--color-bg);
 }
 
-@property --star-color {
+@property --hero-glow-c1 {
   syntax: "<color>";
   inherits: true;
-  initial-value: #cbe6a0;
+  initial-value: #a78bfa;
 }
 
-.hero-stars {
-  --star-color: var(--hero-accent-1);
+@property --hero-glow-c2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #f472b6;
+}
+
+@property --hero-glow-c3 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #38bdf8;
+}
+
+.hero-glow {
+  --hero-glow-opacity: 0.42;
+  --hero-glow-blend: normal;
   position: absolute;
   inset: 0;
   z-index: 0;
-  pointer-events: none;
   overflow: hidden;
-  animation: hero-star-cycle 32s ease-in-out infinite;
+  pointer-events: none;
+  animation: hero-glow-cycle 30s ease-in-out infinite;
 }
 
-.hero-stars__layer,
-.hero-stars__layer::after {
+:root[data-theme="dark"] .hero-glow {
+  --hero-glow-opacity: 0.55;
+  --hero-glow-blend: screen;
+}
+
+.hero-glow__blob {
   position: absolute;
-  top: 0;
-  left: 0;
+  width: 70vmax;
+  height: 70vmax;
   border-radius: 50%;
-  background: transparent;
-  content: "";
+  filter: blur(70px);
+  opacity: var(--hero-glow-opacity);
+  mix-blend-mode: var(--hero-glow-blend);
+  translate: calc(var(--hero-mouse-x) * var(--hero-glow-parallax))
+    calc(var(--hero-mouse-y) * var(--hero-glow-parallax));
+  transition: translate 0.9s var(--ease);
+  will-change: transform, translate;
 }
 
-.hero-stars__layer::after {
-  top: 2000px;
+.hero-glow__blob--one {
+  --hero-glow-parallax: -0.06;
+  top: -30vmax;
+  left: -18vmax;
+  background: radial-gradient(circle, var(--hero-glow-c1) 0%, transparent 65%);
+  animation: hero-glow-drift-one 18s ease-in-out infinite alternate;
 }
 
-.hero-stars__layer--sm,
-.hero-stars__layer--sm::after {
-  width: 1px;
-  height: 1px;
-  box-shadow: 663px 1941px var(--star-color), 308px 808px var(--star-color), 1333px 98px var(--star-color), 148px 1681px var(--star-color), 1097px 192px var(--star-color), 748px 1193px var(--star-color), 118px 1863px var(--star-color), 1039px 439px var(--star-color), 76px 176px var(--star-color), 888px 856px var(--star-color), 143px 492px var(--star-color), 185px 1128px var(--star-color), 869px 121px var(--star-color), 1693px 1158px var(--star-color), 253px 1940px var(--star-color), 457px 1291px var(--star-color), 1284px 1193px var(--star-color), 126px 1181px var(--star-color), 1199px 812px var(--star-color), 101px 1999px var(--star-color), 452px 95px var(--star-color), 1140px 1758px var(--star-color), 272px 593px var(--star-color), 858px 295px var(--star-color), 1107px 241px var(--star-color), 1169px 631px var(--star-color), 1147px 1671px var(--star-color), 1396px 370px var(--star-color), 211px 1191px var(--star-color), 1169px 1308px var(--star-color), 384px 762px var(--star-color), 199px 1121px var(--star-color), 1458px 128px var(--star-color), 1155px 122px var(--star-color), 1267px 421px var(--star-color), 1016px 1393px var(--star-color), 1088px 875px var(--star-color), 1591px 643px var(--star-color), 953px 1199px var(--star-color), 1891px 928px var(--star-color), 740px 613px var(--star-color), 508px 1626px var(--star-color), 368px 1431px var(--star-color), 1597px 499px var(--star-color), 167px 1176px var(--star-color), 614px 1075px var(--star-color), 1013px 1792px var(--star-color), 703px 1493px var(--star-color), 919px 589px var(--star-color), 1247px 149px var(--star-color), 241px 1048px var(--star-color), 856px 337px var(--star-color), 1550px 700px var(--star-color), 311px 1911px var(--star-color), 1001px 863px var(--star-color), 80px 1970px var(--star-color), 1368px 158px var(--star-color), 1565px 1142px var(--star-color), 1173px 1616px var(--star-color), 1792px 1675px var(--star-color), 642px 696px var(--star-color), 1423px 717px var(--star-color), 1217px 1017px var(--star-color), 1187px 1632px var(--star-color), 934px 140px var(--star-color), 1720px 191px var(--star-color), 552px 970px var(--star-color), 1427px 1360px var(--star-color), 133px 124px var(--star-color), 1497px 1436px var(--star-color), 634px 1325px var(--star-color), 1183px 1395px var(--star-color), 1683px 912px var(--star-color), 582px 1467px var(--star-color), 790px 1816px var(--star-color), 1369px 710px var(--star-color), 46px 1926px var(--star-color), 945px 727px var(--star-color), 344px 1251px var(--star-color), 239px 1011px var(--star-color), 120px 446px var(--star-color), 1573px 588px var(--star-color), 264px 1512px var(--star-color), 507px 814px var(--star-color), 800px 1877px var(--star-color), 1784px 1016px var(--star-color), 165px 340px var(--star-color), 919px 822px var(--star-color), 1125px 569px var(--star-color), 1809px 280px var(--star-color), 1677px 881px var(--star-color), 1769px 1126px var(--star-color), 570px 1446px var(--star-color), 850px 734px var(--star-color), 1398px 1810px var(--star-color), 779px 1961px var(--star-color), 472px 309px var(--star-color), 169px 360px var(--star-color), 309px 475px var(--star-color), 1348px 477px var(--star-color), 24px 993px var(--star-color), 1702px 1206px var(--star-color), 373px 538px var(--star-color), 577px 8px var(--star-color), 298px 858px var(--star-color), 1094px 756px var(--star-color), 1248px 1159px var(--star-color), 652px 1951px var(--star-color), 257px 1414px var(--star-color), 1759px 1055px var(--star-color), 1264px 1341px var(--star-color), 1384px 1515px var(--star-color), 110px 935px var(--star-color), 1842px 1783px var(--star-color), 1597px 1949px var(--star-color), 1791px 1393px var(--star-color), 1634px 1145px var(--star-color), 803px 815px var(--star-color), 817px 807px var(--star-color), 212px 986px var(--star-color), 1299px 820px var(--star-color), 127px 390px var(--star-color), 137px 427px var(--star-color), 902px 332px var(--star-color), 225px 696px var(--star-color), 1230px 107px var(--star-color), 209px 0px var(--star-color), 1160px 309px var(--star-color), 1098px 207px var(--star-color), 744px 1256px var(--star-color), 52px 144px var(--star-color), 1790px 425px var(--star-color), 1257px 770px var(--star-color), 304px 1299px var(--star-color), 516px 1956px var(--star-color), 711px 1233px var(--star-color), 745px 971px var(--star-color), 251px 236px var(--star-color), 1738px 999px var(--star-color), 954px 983px var(--star-color), 990px 638px var(--star-color), 175px 295px var(--star-color), 209px 1535px var(--star-color), 701px 1516px var(--star-color), 542px 980px var(--star-color), 1697px 1417px var(--star-color), 330px 1057px var(--star-color), 47px 420px var(--star-color), 1081px 740px var(--star-color), 300px 1413px var(--star-color), 1112px 1872px var(--star-color), 55px 1552px var(--star-color), 1081px 610px var(--star-color), 1316px 1768px var(--star-color), 186px 1425px var(--star-color), 1731px 534px var(--star-color), 1061px 751px var(--star-color), 1860px 342px var(--star-color), 728px 1580px var(--star-color), 456px 1090px var(--star-color), 1109px 1595px var(--star-color), 1029px 675px var(--star-color), 1303px 456px var(--star-color), 1255px 1661px var(--star-color), 1614px 1553px var(--star-color), 1746px 399px var(--star-color), 1650px 490px var(--star-color), 1675px 820px var(--star-color), 1515px 1645px var(--star-color), 464px 409px var(--star-color), 1060px 1009px var(--star-color), 728px 1497px var(--star-color), 59px 57px var(--star-color), 1618px 572px var(--star-color), 967px 530px var(--star-color), 396px 1418px var(--star-color), 1239px 1958px var(--star-color), 705px 915px var(--star-color), 1655px 1919px var(--star-color), 1480px 715px var(--star-color), 746px 164px var(--star-color), 451px 209px var(--star-color), 464px 962px var(--star-color), 402px 691px var(--star-color), 418px 988px var(--star-color), 1278px 1843px var(--star-color), 1249px 1721px var(--star-color), 3px 981px var(--star-color), 1862px 1337px var(--star-color), 704px 1637px var(--star-color), 1317px 173px var(--star-color), 1709px 1352px var(--star-color), 245px 1863px var(--star-color), 795px 1602px var(--star-color), 1457px 1536px var(--star-color), 408px 979px var(--star-color), 1820px 365px var(--star-color), 888px 1616px var(--star-color), 1302px 680px var(--star-color), 177px 1640px var(--star-color), 1478px 810px var(--star-color), 948px 822px var(--star-color), 1522px 1939px var(--star-color), 173px 1484px var(--star-color), 325px 348px var(--star-color), 260px 56px var(--star-color), 309px 1209px var(--star-color), 1853px 953px var(--star-color), 1651px 1343px var(--star-color), 299px 1252px var(--star-color), 1692px 1220px var(--star-color), 971px 1346px var(--star-color), 717px 319px var(--star-color), 1123px 1122px var(--star-color), 268px 43px var(--star-color), 29px 1637px var(--star-color), 1487px 1330px var(--star-color), 210px 1078px var(--star-color), 1534px 1912px var(--star-color), 285px 888px var(--star-color), 1785px 398px var(--star-color), 1691px 1789px var(--star-color), 432px 57px var(--star-color), 515px 435px var(--star-color), 599px 1026px var(--star-color), 492px 1564px var(--star-color), 1201px 667px var(--star-color), 531px 1114px var(--star-color), 858px 1708px var(--star-color), 268px 124px var(--star-color), 1863px 1515px var(--star-color), 724px 1838px var(--star-color), 938px 1356px var(--star-color), 1194px 1669px var(--star-color), 1851px 1058px var(--star-color), 861px 1693px var(--star-color), 1879px 1798px var(--star-color), 1027px 267px var(--star-color), 1089px 310px var(--star-color), 1072px 1045px var(--star-color), 38px 1787px var(--star-color), 901px 1590px var(--star-color), 375px 1246px var(--star-color), 8px 1589px var(--star-color), 1636px 306px var(--star-color), 352px 289px var(--star-color), 969px 1267px var(--star-color), 1485px 246px var(--star-color), 1139px 126px var(--star-color), 667px 1397px var(--star-color), 1061px 1086px var(--star-color), 1137px 988px var(--star-color), 1606px 1590px var(--star-color), 217px 1808px var(--star-color), 1147px 116px var(--star-color), 508px 391px var(--star-color), 567px 86px var(--star-color), 1581px 200px var(--star-color), 1039px 926px var(--star-color), 1150px 57px var(--star-color);
-  animation: hero-stars-drift 90s linear infinite;
+.hero-glow__blob--two {
+  --hero-glow-parallax: 0.05;
+  right: -26vmax;
+  bottom: -32vmax;
+  background: radial-gradient(circle, var(--hero-glow-c2) 0%, transparent 65%);
+  animation: hero-glow-drift-two 22s ease-in-out infinite alternate;
 }
 
-.hero-stars__layer--md,
-.hero-stars__layer--md::after {
-  width: 2px;
-  height: 2px;
-  box-shadow: 1556px 1830px var(--star-color), 1868px 129px var(--star-color), 907px 666px var(--star-color), 1254px 1993px var(--star-color), 1035px 1241px var(--star-color), 1048px 408px var(--star-color), 1418px 567px var(--star-color), 926px 1040px var(--star-color), 1092px 1653px var(--star-color), 979px 1039px var(--star-color), 507px 1431px var(--star-color), 1071px 1795px var(--star-color), 1794px 1929px var(--star-color), 1900px 531px var(--star-color), 1889px 1145px var(--star-color), 1828px 1931px var(--star-color), 414px 1720px var(--star-color), 916px 280px var(--star-color), 853px 249px var(--star-color), 803px 905px var(--star-color), 647px 148px var(--star-color), 1374px 492px var(--star-color), 877px 149px var(--star-color), 435px 1371px var(--star-color), 620px 1605px var(--star-color), 250px 1837px var(--star-color), 1591px 316px var(--star-color), 1466px 1317px var(--star-color), 1352px 749px var(--star-color), 292px 518px var(--star-color), 1808px 281px var(--star-color), 957px 449px var(--star-color), 1529px 1950px var(--star-color), 192px 815px var(--star-color), 1812px 997px var(--star-color), 333px 1367px var(--star-color), 1704px 458px var(--star-color), 330px 1446px var(--star-color), 883px 1055px var(--star-color), 827px 694px var(--star-color), 862px 400px var(--star-color), 730px 652px var(--star-color), 188px 1478px var(--star-color), 749px 39px var(--star-color), 692px 1134px var(--star-color), 939px 902px var(--star-color), 1440px 37px var(--star-color), 787px 678px var(--star-color), 1059px 1277px var(--star-color), 605px 1049px var(--star-color), 131px 231px var(--star-color), 1881px 1614px var(--star-color), 468px 1990px var(--star-color), 1794px 214px var(--star-color), 172px 543px var(--star-color), 556px 81px var(--star-color), 1855px 1595px var(--star-color), 371px 553px var(--star-color), 1547px 265px var(--star-color), 1678px 864px var(--star-color), 1739px 1866px var(--star-color), 1384px 1677px var(--star-color), 529px 831px var(--star-color), 305px 1098px var(--star-color), 1882px 1054px var(--star-color), 1168px 1012px var(--star-color), 1434px 669px var(--star-color), 183px 571px var(--star-color), 117px 1637px var(--star-color), 1409px 375px var(--star-color), 871px 1833px var(--star-color), 148px 550px var(--star-color), 34px 1299px var(--star-color), 181px 1641px var(--star-color), 533px 171px var(--star-color), 1245px 1753px var(--star-color), 455px 136px var(--star-color), 541px 1766px var(--star-color), 249px 929px var(--star-color), 23px 694px var(--star-color), 1132px 855px var(--star-color), 1897px 1874px var(--star-color), 548px 1273px var(--star-color), 264px 88px var(--star-color), 1079px 1453px var(--star-color), 488px 1921px var(--star-color), 224px 1984px var(--star-color), 330px 536px var(--star-color), 103px 370px var(--star-color), 413px 1909px var(--star-color);
-  animation: hero-stars-drift 130s linear infinite;
+.hero-glow__blob--three {
+  --hero-glow-parallax: -0.03;
+  top: 20%;
+  left: 30%;
+  width: 46vmax;
+  height: 46vmax;
+  background: radial-gradient(circle, var(--hero-glow-c3) 0%, transparent 65%);
+  opacity: calc(var(--hero-glow-opacity) * 0.75);
+  animation: hero-glow-drift-three 26s ease-in-out infinite alternate;
 }
 
-.hero-stars__layer--lg,
-.hero-stars__layer--lg::after {
-  width: 3px;
-  height: 3px;
-  box-shadow: 638px 1287px var(--star-color), 624px 1087px var(--star-color), 1555px 421px var(--star-color), 593px 912px var(--star-color), 1024px 1376px var(--star-color), 364px 554px var(--star-color), 710px 1645px var(--star-color), 37px 512px var(--star-color), 75px 31px var(--star-color), 37px 1501px var(--star-color), 1035px 1128px var(--star-color), 388px 1053px var(--star-color), 972px 503px var(--star-color), 915px 217px var(--star-color), 1348px 1677px var(--star-color), 1331px 885px var(--star-color), 1344px 1013px var(--star-color), 1118px 1709px var(--star-color), 1820px 805px var(--star-color), 1037px 630px var(--star-color), 1408px 440px var(--star-color), 470px 701px var(--star-color), 406px 1704px var(--star-color), 1806px 1447px var(--star-color), 1492px 1302px var(--star-color), 286px 828px var(--star-color), 711px 111px var(--star-color), 1714px 265px var(--star-color), 29px 144px var(--star-color), 1280px 1517px var(--star-color), 1801px 523px var(--star-color), 882px 334px var(--star-color), 113px 173px var(--star-color), 1362px 1722px var(--star-color), 780px 1782px var(--star-color), 1036px 1373px var(--star-color), 577px 1226px var(--star-color), 496px 1418px var(--star-color), 600px 92px var(--star-color), 940px 379px var(--star-color);
-  animation: hero-stars-drift 200s linear infinite;
-}
-
-.hero-stars__layer--sm {
-  opacity: 0.55;
-}
-
-.hero-stars__layer--md {
-  opacity: 0.45;
-}
-
-.hero-stars__layer--lg {
-  opacity: 0.38;
-}
-
-.hero-particles {
+.hero-glow__grain {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.hero-particles__svg {
-  position: absolute;
-  inset: -6%;
-  width: 112%;
-  height: 112%;
-}
-
-.hero-particles__group {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: hero-particles-drift 26s ease-in-out infinite;
-  will-change: transform;
-}
-
-.hero-particles__group--one {
-  animation-duration: 30s;
-}
-
-.hero-particles__group--two {
-  animation-duration: 24s;
-  animation-delay: -6s;
-  animation-direction: reverse;
-}
-
-.hero-particles__group--three {
-  animation-duration: 34s;
-  animation-delay: -12s;
-}
-
-.hero-particles__group--four {
-  animation-duration: 28s;
-  animation-delay: -4s;
-  animation-direction: reverse;
-}
-
-.hero-particles__group--five {
-  animation-duration: 38s;
-  animation-delay: -16s;
-}
-
-.hero-particle {
-  fill: var(--hero-accent-1);
-  stroke: none;
-  transform-box: fill-box;
-  transform-origin: center;
-  translate: calc(var(--hero-mouse-x) * var(--dx, 0))
-    calc(var(--hero-mouse-y) * var(--dy, 0));
-  transition: translate 0.55s var(--ease);
-  animation: hero-particle-cycle 32s ease-in-out infinite;
-  will-change: translate;
-}
-
-.hero-particle--ring {
-  opacity: 0.12;
-}
-
-.hero-particle--ring-accent {
-  opacity: 0.16;
-}
-
-.hero-particle--dot {
-  opacity: 0.22;
-}
-
-.hero-particle--dot-accent {
-  opacity: 0.26;
-}
-
-:root[data-theme="dark"] .hero-stars__layer--sm {
-  opacity: 0.28;
-}
-
-:root[data-theme="dark"] .hero-stars__layer--md {
-  opacity: 0.22;
-}
-
-:root[data-theme="dark"] .hero-stars__layer--lg {
-  opacity: 0.18;
-}
-
-:root[data-theme="dark"] .hero-particles {
-  opacity: 0.55;
-}
-
-:root[data-theme="dark"] .hero-particle--ring {
-  opacity: 0.03;
-}
-
-:root[data-theme="dark"] .hero-particle--ring-accent {
-  opacity: 0.04;
-}
-
-:root[data-theme="dark"] .hero-particle--dot {
-  opacity: 0.05;
-}
-
-:root[data-theme="dark"] .hero-particle--dot-accent {
   opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Each palette holds for ~3s, then blends into the next over ~3s. */
+@keyframes hero-glow-cycle {
+  0%,
+  10% {
+    --hero-glow-c1: #a78bfa;
+    --hero-glow-c2: #f472b6;
+    --hero-glow-c3: #38bdf8;
+  }
+  20%,
+  30% {
+    --hero-glow-c1: #38bdf8;
+    --hero-glow-c2: #818cf8;
+    --hero-glow-c3: #cbe6a0;
+  }
+  40%,
+  50% {
+    --hero-glow-c1: #ff9466;
+    --hero-glow-c2: #f472b6;
+    --hero-glow-c3: #a78bfa;
+  }
+  60%,
+  70% {
+    --hero-glow-c1: #cbe6a0;
+    --hero-glow-c2: #38bdf8;
+    --hero-glow-c3: #818cf8;
+  }
+  80%,
+  90% {
+    --hero-glow-c1: #f472b6;
+    --hero-glow-c2: #ff9466;
+    --hero-glow-c3: #a78bfa;
+  }
+  100% {
+    --hero-glow-c1: #a78bfa;
+    --hero-glow-c2: #f472b6;
+    --hero-glow-c3: #38bdf8;
+  }
+}
+
+@keyframes hero-glow-drift-one {
+  to {
+    transform: translate3d(14vmax, 10vmax, 0) scale(1.15);
+  }
+}
+
+@keyframes hero-glow-drift-two {
+  to {
+    transform: translate3d(-16vmax, -8vmax, 0) scale(0.9);
+  }
+}
+
+@keyframes hero-glow-drift-three {
+  to {
+    transform: translate3d(-20vmax, 12vmax, 0) scale(1.2);
+  }
 }
 
 .section--hero h1,
@@ -1229,6 +1188,136 @@ html[data-hero-layout="overlap"] .hero-actions__primary:focus-visible,
 html[data-hero-layout="overlap"] .hero-actions__secondary:focus-visible {
   outline: 0.1875rem solid var(--color-focus);
   outline-offset: 0.125rem;
+}
+
+@property --story-cta-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+html[data-hero-layout="overlap"] .hero-actions__primary.hero-story-cta {
+  --story-cta-gradient: conic-gradient(
+    from var(--story-cta-angle),
+    #a78bfa,
+    #f472b6,
+    #ff9466,
+    #cbe6a0,
+    #38bdf8,
+    #a78bfa
+  );
+  position: relative;
+  isolation: isolate;
+  gap: 0.625rem;
+  padding: 0.3125rem 1rem 0.3125rem 0.3125rem;
+  border: 0;
+  background: none;
+  color: var(--color-bg);
+  animation: story-cta-spin 4s linear infinite;
+}
+
+html[data-hero-layout="overlap"] .hero-story-cta::before,
+html[data-hero-layout="overlap"] .hero-story-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+html[data-hero-layout="overlap"] .hero-story-cta::before {
+  z-index: -2;
+  background: var(--story-cta-gradient);
+  filter: blur(14px);
+  opacity: 0.45;
+  transition: opacity 0.3s var(--ease), filter 0.3s var(--ease);
+}
+
+html[data-hero-layout="overlap"] .hero-story-cta::after {
+  z-index: -1;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--color-text), var(--color-text)) padding-box,
+    var(--story-cta-gradient) border-box;
+}
+
+.hero-story-cta__avatar {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2.125rem;
+  height: 2.125rem;
+  border-radius: 50%;
+  background: var(--story-cta-gradient);
+}
+
+.hero-story-cta__avatar img {
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.hero-story-cta__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  margin-right: -0.5rem;
+  padding: 0.25rem 0.625rem 0.25rem 0.375rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg) 16%, transparent);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  transition: background 0.3s var(--ease);
+}
+
+.hero-story-cta__icon {
+  font-size: 1.125rem;
+  font-variation-settings: "FILL" 1;
+  transition: transform 0.3s var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html[data-hero-layout="overlap"] .hero-actions__primary.hero-story-cta:hover {
+    background: none;
+    color: var(--color-bg);
+    box-shadow: none;
+  }
+
+  html[data-hero-layout="overlap"] .hero-story-cta:hover::before {
+    opacity: 0.85;
+    filter: blur(18px);
+  }
+
+  html[data-hero-layout="overlap"] .hero-story-cta:hover .hero-story-cta__badge {
+    background: color-mix(in srgb, var(--color-bg) 26%, transparent);
+  }
+
+  html[data-hero-layout="overlap"] .hero-story-cta:hover .hero-story-cta__icon {
+    transform: scale(1.15);
+  }
+}
+
+html[data-hero-layout="overlap"] .hero-actions__primary.hero-story-cta:focus-visible,
+html[data-hero-layout="overlap"] .hero-actions__primary.hero-story-cta:active {
+  background: none;
+  color: var(--color-bg);
+  box-shadow: none;
+}
+
+@keyframes story-cta-spin {
+  to {
+    --story-cta-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-hero-layout="overlap"] .hero-actions__primary.hero-story-cta {
+    animation: none;
+  }
 }
 
 .hero-one-liner.is-swapping {
@@ -1536,94 +1625,22 @@ html[data-hero-layout="overlap"] .work-masonry {
 
 @keyframes hero-bg-cycle {
   0% {
-    --hero-cycle-color: var(--hero-bg-1);
     --hero-accent-color: var(--hero-accent-1);
   }
   20% {
-    --hero-cycle-color: var(--hero-bg-2);
     --hero-accent-color: var(--hero-accent-2);
   }
   40% {
-    --hero-cycle-color: var(--hero-bg-3);
     --hero-accent-color: var(--hero-accent-3);
   }
   60% {
-    --hero-cycle-color: var(--hero-bg-4);
     --hero-accent-color: var(--hero-accent-4);
   }
   80% {
-    --hero-cycle-color: var(--hero-bg-5);
     --hero-accent-color: var(--hero-accent-5);
   }
   100% {
-    --hero-cycle-color: var(--hero-bg-1);
     --hero-accent-color: var(--hero-accent-1);
-  }
-}
-
-@keyframes hero-stars-drift {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-2000px);
-  }
-}
-
-@keyframes hero-particles-drift {
-  0% {
-    transform: translate(0, 0);
-  }
-  33% {
-    transform: translate(1.6%, -1.4%);
-  }
-  66% {
-    transform: translate(-1.3%, 1.2%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes hero-particle-cycle {
-  0% {
-    fill: var(--hero-accent-1);
-  }
-  20% {
-    fill: var(--hero-accent-2);
-  }
-  40% {
-    fill: var(--hero-accent-3);
-  }
-  60% {
-    fill: var(--hero-accent-4);
-  }
-  80% {
-    fill: var(--hero-accent-5);
-  }
-  100% {
-    fill: var(--hero-accent-1);
-  }
-}
-
-@keyframes hero-star-cycle {
-  0% {
-    --star-color: var(--hero-accent-1);
-  }
-  20% {
-    --star-color: var(--hero-accent-2);
-  }
-  40% {
-    --star-color: var(--hero-accent-3);
-  }
-  60% {
-    --star-color: var(--hero-accent-4);
-  }
-  80% {
-    --star-color: var(--hero-accent-5);
-  }
-  100% {
-    --star-color: var(--hero-accent-1);
   }
 }
 
@@ -1646,10 +1663,7 @@ html[data-hero-layout="overlap"] .work-masonry {
   html,
   body,
   .section--hero,
-  .hero-particles__group,
-  .hero-particle,
-  .hero-stars,
-  .hero-stars__layer,
+  .hero-glow__blob,
   .hero-caption__wave,
   .experience-strip__track,
   .hero-emoji--dance {

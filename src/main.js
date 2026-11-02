@@ -4,6 +4,7 @@ import { mountSiteLogo } from "./logo.js";
 import { initCaseStudyLightbox } from "./caseStudyLightbox.js";
 import { initDevicePrototypes } from "./devicePrototype.js";
 import { initScrollReveal } from "./scrollReveal.js";
+import { initStory } from "./story.js";
 
 mountSiteLogo();
 
@@ -406,6 +407,36 @@ if (document.body.classList.contains("case-study-page")) {
   window.addEventListener("pageshow", updateScrollProgress);
   window.addEventListener("pageshow", updateSubnavState);
 
+  // Lazy media above a deep-linked section loads mid-scroll and pushes it down,
+  // so keep the target pinned until layout settles or the visitor takes over.
+  const pinHashTarget = () => {
+    const targetId = decodeURIComponent(window.location.hash.slice(1));
+    const target = targetId ? document.getElementById(targetId) : null;
+    const contentEl = document.querySelector(".case-study-content");
+    if (!target || !contentEl || !("ResizeObserver" in window)) return;
+
+    let isPinned = true;
+    const align = () => {
+      if (isPinned) target.scrollIntoView({ behavior: "instant", block: "start" });
+    };
+    const release = () => {
+      isPinned = false;
+      resizeObserver.disconnect();
+      window.removeEventListener("scrollend", align);
+    };
+    const resizeObserver = new ResizeObserver(align);
+
+    resizeObserver.observe(contentEl);
+    window.addEventListener("scrollend", align);
+    window.addEventListener("load", align, { once: true });
+    ["wheel", "touchstart", "keydown", "pointerdown"].forEach((type) => {
+      window.addEventListener(type, release, { once: true, passive: true });
+    });
+    window.setTimeout(release, 4000);
+    align();
+  };
+
+  pinHashTarget();
   initCaseStudyLightbox();
   initDecisionCarousel();
   initExplorationsCarousel();
@@ -1130,3 +1161,4 @@ const initLazyCaseStudyVideos = () => {
 
 initLazyCaseStudyVideos();
 initScrollReveal(reducedMotionMql);
+initStory(reducedMotionMql);
