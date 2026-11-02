@@ -15,21 +15,23 @@ const innosoftLogo = "/assets/logos/innosoft.png";
  * Order here is the canonical project order (and the cycle order).
  * size: "feature" (big, top-left) | "wide-tall" | "tall" | "wide" | "default"
  * featured: shows a "Featured" tag on the tile.
- * method, device, type: shown under the title, separated by ·
+ * company, role, focus: shown under the title, separated by ·
  * image / imageHover: thumbnail pair for default and hover states.
  * imagePosition: object-position for the thumbnail (e.g. "top").
  * openInNewTab: work card opens in a new tab.
  * includeInNextProject: false omits the item from case study "next project" links.
+ * description, readTime: optional; shown only in the list view.
  */
 export const projects = [
   {
-    title: "Replaced legacy banners with shoppable ads",
+    title: "+71% ARPU with shoppable in-feed ads",
     company: "Flipp",
+    role: "Lead Product Designer",
+    focus: "Ads & Monetization",
+    description:
+      "Static banners earned revenue but only a 0.29% CTR. I designed a video and shoppable carousel format, validated it across 7 research rounds with 84 users, and lifted Search ARPU 71% and Browse CTR 32%.",
+    readTime: "7 min read",
     logo: flippLogo,
-    year: "2024",
-    method: "Product design",
-    device: "Mobile",
-    type: "Case study",
     href: "/case-studies/collection-ads/",
     headerImage: "/case-studies/project-one/thumbnail-default.png",
     size: "feature",
@@ -40,13 +42,14 @@ export const projects = [
       "Flipp Collection Ads: Search and Browse in-feed ad units with shoppable carousel",
   },
   {
-    title: "Unified add to list across the app",
+    title: "Unified add to list across Search, Browse, and flyers",
     company: "Flipp",
+    role: "Lead Product Designer",
+    focus: "Core UX",
+    description:
+      "57% of monthly users added items to their list, but only 38% ever opened it. I designed consistent add states, feedback that shows where items go, and quantity controls.",
+    readTime: "6 min read",
     logo: flippLogo,
-    year: "2025",
-    method: "Product design",
-    device: "Mobile",
-    type: "Case study",
     href: "/case-studies/add-to-list-ux/",
     headerImage: "/case-studies/project-two/images/Intro1.png",
     size: "default",
@@ -57,11 +60,11 @@ export const projects = [
   {
     title: "Reduced score entry friction",
     company: "Fusion",
+    role: "UX Design Lead",
+    focus: "Tablet UX",
+    description:
+      "A tablet scoring interface for Fusion, designed to make entering game scores faster and simpler.",
     logo: innosoftLogo,
-    year: "",
-    method: "Product design",
-    device: "Tablet",
-    type: "Case study",
     href: "https://dribbble.com/shots/22528454-Efficient-score-submission",
     openInNewTab: true,
     includeInNextProject: false,
@@ -71,13 +74,14 @@ export const projects = [
     imageAlt: "Fusion efficient score submission: tablet scoring interface",
   },
   {
-    title: "Increased cross-browse adoption by 9%",
+    title: "+9% cross-browse adoption with swipe education",
     company: "Flipp",
+    role: "Lead Product Designer",
+    focus: "Growth & Engagement",
+    description:
+      "Flyer recommendations hold 71% of session time but hadn't changed in 5 years. I added swipe education, a next-flyer peek, and pagination that lifted cross-browse adoption 9% and cross-browse ad clicks 44% per user.",
+    readTime: "3 min read",
     logo: flippLogo,
-    year: "",
-    method: "Product design",
-    device: "Strategy",
-    type: "Case study",
     href: "/case-studies/flyer-swiping/",
     headerImage: "/case-studies/project-four/thumbnail-default.webp",
     image: flyerSwipingThumbnail,
@@ -88,11 +92,11 @@ export const projects = [
   {
     title: "Launched a 0-to-1 product to 30k+ users",
     company: "Fusion",
+    role: "UX Design Lead",
+    focus: "0-to-1 Product",
+    description:
+      "Research and product design for Fusion Play, a new product taken from first concept to launch with more than 30,000 users.",
     logo: innosoftLogo,
-    year: "",
-    method: "Product design",
-    device: "0-1 Research",
-    type: "Case study",
     href: "https://dribbble.com/shots/21099716-Case-Study-Fusion-Play-Product-Overview",
     openInNewTab: true,
     includeInNextProject: false,

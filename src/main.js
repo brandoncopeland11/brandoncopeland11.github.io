@@ -522,7 +522,7 @@ if (heroHeadingEl && heroClassicCopyEl) {
 
 if (masonryEl) {
   const renderWorkCardMeta = (project) => {
-    const tags = [project.method, project.device, project.type].filter(Boolean);
+    const tags = [project.company, project.role, project.focus].filter(Boolean);
 
     if (!tags.length) {
       return "";
@@ -576,13 +576,26 @@ if (masonryEl) {
       const externalIcon = project.openInNewTab
         ? `<span class="material-symbols-rounded work-card__external-icon" aria-hidden="true">arrow_outward</span>`
         : "";
-      const cardAriaAttr = project.openInNewTab
-        ? ` aria-label="${project.title} (opens in a new tab)"`
+      const newTabNote = project.openInNewTab
+        ? `<span class="sr-only">(opens in a new tab)</span>`
+        : "";
+      const descriptionMarkup = project.description
+        ? `<p class="work-card__description">${project.description}</p>`
+        : "";
+      const readTimeMarkup = project.readTime
+        ? `<span class="work-card__read-time">${project.readTime}</span>`
+        : "";
+      const ctaMarkup = isClickable
+        ? `<span class="work-card__cta"><span class="work-card__cta-label" aria-hidden="true">${
+            project.openInNewTab
+              ? `<img class="work-card__cta-logo" src="https://cdn.simpleicons.org/dribbble" alt="" width="16" height="16" />Read on Dribbble ↗`
+              : "Read case study →"
+          }</span>${readTimeMarkup}</span>`
         : "";
 
       return `
     <li class="work-masonry__item work-masonry__item--${project.size}">
-      <${cardTag} class="${cardClass}"${cardHrefAttr}${cardAriaAttr}>
+      <${cardTag} class="${cardClass}"${cardHrefAttr}>
         <div class="work-card__media">
           ${media}
           ${badge}
@@ -590,8 +603,10 @@ if (masonryEl) {
         <div class="work-card__body">
           ${logoMarkup}
           <div class="work-card__copy">
-            <h3 class="work-card__title">${project.title}</h3>
+            <h3 class="work-card__title">${project.title}${newTabNote}</h3>
             ${renderWorkCardMeta(project)}
+            ${descriptionMarkup}
+            ${ctaMarkup}
           </div>
           ${externalIcon}
         </div>
@@ -600,6 +615,12 @@ if (masonryEl) {
   `;
     })
     .join("");
+}
+
+// The grid layout is kept for local reference only: open the dev server with ?view=grid.
+if (import.meta.env.DEV && masonryEl) {
+  const requestedView = new URLSearchParams(window.location.search).get("view");
+  masonryEl.classList.toggle("work-masonry--list", requestedView !== "grid");
 }
 
 const getNextProjectLogoClass = (project) =>
