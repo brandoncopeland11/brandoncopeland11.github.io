@@ -30,9 +30,7 @@ const pages = {
   main: resolve(__dirname, "index.html"),
   "collection-ads": resolve(__dirname, "case-studies/collection-ads/index.html"),
   "add-to-list-ux": resolve(__dirname, "case-studies/add-to-list-ux/index.html"),
-  "case-study-3": resolve(__dirname, "case-studies/project-three.html"),
   "flyer-swiping": resolve(__dirname, "case-studies/flyer-swiping/index.html"),
-  "case-study-5": resolve(__dirname, "case-studies/project-five.html"),
 };
 
 // Vite rewrites src on images, but case-study videos use data-src so they stay

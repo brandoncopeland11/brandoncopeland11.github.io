@@ -409,6 +409,7 @@ p:last-child {
   background: transparent;
   box-shadow: none;
   flex-shrink: 1;
+  margin-right: 0.75rem;
   color: var(--color-text);
   text-decoration: none;
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
@@ -441,11 +442,41 @@ p:last-child {
 }
 
 .site-nav__logo-title {
+  display: grid;
+  overflow: hidden;
   font-size: 0.75rem;
   line-height: 1.2;
   font-weight: 500;
   color: var(--color-text-tertiary);
   white-space: nowrap;
+}
+
+.site-nav__logo-title-item {
+  grid-area: 1 / 1;
+  white-space: normal;
+  text-wrap: balance;
+  opacity: 0;
+  transform: translateY(100%);
+  transition:
+    opacity 0.5s var(--ease),
+    transform 0.5s var(--ease);
+}
+
+.site-nav__logo-title-item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.site-nav__logo-title-item.is-exiting {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav__logo-title-item {
+    transform: none;
+    transition: opacity 0.3s linear;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -2513,6 +2544,13 @@ html[data-theme="light"] .work-card__external-icon {
   width: 1rem;
   height: 1rem;
   object-fit: contain;
+}
+
+.about-tools__chip-icon {
+  flex: none;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--color-muted);
 }
 
 :root[data-theme="dark"] .about-tools__chip-logo--cursor,
@@ -4703,17 +4741,9 @@ html[data-theme="dark"] .case-study-page--project-one .case-study-production-car
   }
 }
 
-.case-study-header--project-three {
-  background-color: #2b2233;
-}
-
 .case-study-header--project-four {
   background-color: #1f2b26;
   background-image: url("/case-studies/project-four/thumbnail-default.webp");
-}
-
-.case-study-header--project-five {
-  background-color: #2b2730;
 }
 
 .case-study-header--image .case-study-breadcrumb,

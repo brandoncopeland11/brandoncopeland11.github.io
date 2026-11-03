@@ -1,8 +1,8 @@
-# Portfolio
+# Brandon Copeland, Product Designer Portfolio
 
-One-page product designer portfolio with case study detail pages.
+Source for [brandoncopeland11.github.io](https://brandoncopeland11.github.io/). A one-page portfolio with case study detail pages, built with plain HTML, CSS, and JavaScript on [Vite](https://vite.dev/).
 
-## Preview locally
+## Local development
 
 ```bash
 npm install
@@ -11,56 +11,44 @@ npm run dev
 
 Open the URL Vite prints (usually `http://localhost:5173`).
 
-## Build for production
+To check the production build locally:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-## Publish changes to GitHub Pages
+## Deployment
 
-The live site is published from the `main` branch to:
+Every push to `main` builds the site and deploys `dist/` to GitHub Pages through `.github/workflows/deploy.yml`.
 
-```text
-https://brandoncopeland11.github.io/
-```
-
-Recommended process:
-
-1. Make edits locally.
-2. Preview them with `npm run dev`.
-3. When the site is in a good place, run:
-
-```bash
-npm run pages:check
-git status
-```
-
-4. If the build passes and the changed files look right, commit and push:
-
-```bash
-git add .
-git commit -m "Describe the change"
-git push
-```
-
-5. Wait for the GitHub Pages deployment to finish in GitHub Actions, then hard refresh the live site.
-
-If you want help publishing, ask Cursor to "check, commit, and push the portfolio changes." Cursor should run the build first, review the changed files, commit only the intended changes, push to `main`, and verify the live URL.
+1. Preview changes with `npm run dev`.
+2. Run `npm run build` to confirm the build passes.
+3. Commit and push to `main`.
+4. Wait for the "Deploy to GitHub Pages" action to finish, then hard refresh the live site.
 
 ## Project structure
 
 | Path | Purpose |
 |------|---------|
-| `index.html` | One-page home: hero, work (featured + masonry grid), about, contact |
-| `src/data/projects.js` | Case studies for the masonry grid |
-| `src/styles/main.css` | Layout and structure styles |
-| `case-studies/*.html` | Individual case study pages |
+| `index.html` | Home page: hero, work, about (experience, skills, tools), and contact |
+| `case-studies/<slug>/index.html` | Case study pages: `collection-ads`, `add-to-list-ux`, `flyer-swiping` |
+| `case-studies/project-*/` | Images and video for each case study |
+| `src/main.js` | Home page behaviour: work cards, experience cards, nav, theme |
+| `src/story.js`, `src/storyMusic.js` | "Get to know me" story overlay and its background music |
+| `src/data/projects.js` | Work cards and "next project" order |
+| `src/data/experience.js` | Work history cards |
+| `src/data/story.js` | Story slides |
+| `src/styles/main.css` | All site styles |
+| `public/assets/` | Static files served as-is: resume PDF, logos, profile photo |
+| `vite.config.js` | Build entry points for each page |
 
-## Customize content
+## Adding a case study
 
-1. Replace placeholder copy in `index.html` (name, bio, email, LinkedIn).
-2. Update the featured project link and copy at the top of the `#work` section.
-3. Edit `src/data/projects.js` to add/remove grid items and link to new case study HTML files.
-4. Add a photo at `src/assets/` and update the about section `img` `src`.
+1. Create `case-studies/<slug>/index.html`, using an existing case study as a template.
+2. Add the page to `pages` in `vite.config.js` so it's included in the build.
+3. Add an entry to `src/data/projects.js` to show it on the home page.
+
+## Content rules
+
+Site copy avoids em dashes. See `.cursor/rules/no-em-dashes.mdc`.
