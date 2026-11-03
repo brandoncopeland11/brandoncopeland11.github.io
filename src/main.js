@@ -11,7 +11,6 @@ mountSiteLogo();
 const masonryEl = document.getElementById("work-masonry");
 const yearEl = document.getElementById("year");
 const themeToggleBtns = Array.from(document.querySelectorAll("[data-theme-toggle]"));
-const themeMql = window.matchMedia("(prefers-color-scheme: dark)");
 const reducedMotionMql = window.matchMedia("(prefers-reduced-motion: reduce)");
 const rootEl = document.documentElement;
 
@@ -202,7 +201,7 @@ const setTheme = (theme, persist = false) => {
   if (persist) storeTheme(theme);
 };
 
-const initialTheme = getStoredTheme() || (themeMql.matches ? "dark" : "light");
+const initialTheme = getStoredTheme() || "dark";
 setTheme(initialTheme);
 
 themeToggleBtns.forEach((button) => {
@@ -212,16 +211,6 @@ themeToggleBtns.forEach((button) => {
     setTheme(nextTheme, true);
   });
 });
-
-const syncThemeToSystem = () => {
-  if (!getStoredTheme()) setTheme(themeMql.matches ? "dark" : "light");
-};
-
-if (themeMql.addEventListener) {
-  themeMql.addEventListener("change", syncThemeToSystem);
-} else {
-  themeMql.addListener(syncThemeToSystem);
-}
 
 if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());

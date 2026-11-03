@@ -38,14 +38,13 @@
     <script>
       (() => {
         document.documentElement.classList.add("is-loading");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         let storedTheme = null;
         try {
           storedTheme = localStorage.getItem("theme");
         } catch {
           storedTheme = null;
         }
-        document.documentElement.dataset.theme = storedTheme || (prefersDark ? "dark" : "light");
+        document.documentElement.dataset.theme = storedTheme || "dark";
         // Default overlap layout. Classic backup: dataset.heroLayout = "classic"
         document.documentElement.dataset.heroLayout = "overlap";
 
@@ -76,7 +75,7 @@
               class="theme-toggle theme-toggle--menu"
               type="button"
               data-theme-toggle
-              aria-label="Switch to dark mode"
+              aria-label="Switch to light mode"
             >
               <span class="theme-toggle__option theme-toggle__option--light" aria-hidden="true">
                 <span class="material-symbols-outlined">light_mode</span>
@@ -107,7 +106,7 @@
         class="theme-toggle theme-toggle--fixed"
         type="button"
         data-theme-toggle
-        aria-label="Switch to dark mode"
+        aria-label="Switch to light mode"
       >
         <span class="theme-toggle__option theme-toggle__option--light" aria-hidden="true">
           <span class="material-symbols-outlined">light_mode</span>
