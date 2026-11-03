@@ -1,5 +1,7 @@
 import { storySlides } from "./data/story.js";
 import { experience } from "./data/experience.js";
+import { createStoryMusic, readSoundPreference, writeSoundPreference } from "./storyMusic.js";
+import storyMusicSrc from "./assets/audio/story-music.mp3";
 import "./styles/story.css";
 
 const STORY_HASH = "#story";
@@ -204,6 +206,9 @@ const renderStory = () => `
         </span>
       </div>
       <div class="story__controls">
+        <button class="story__control story__control--sound" type="button" data-story-sound aria-label="Mute music">
+          <span class="material-symbols-rounded" aria-hidden="true">volume_up</span>
+        </button>
         <button class="story__control" type="button" data-story-toggle aria-label="Pause story">
           <span class="material-symbols-rounded" aria-hidden="true">pause</span>
         </button>
@@ -260,6 +265,57 @@ export const initStory = (reducedMotionMql) => {
   let timeTicker = null;
   let returnFocusEl = null;
   let hasStoryHistoryEntry = false;
+  let isSoundOn = readSoundPreference();
+  let isAwaitingSoundGesture = false;
+
+  const music = createStoryMusic({ src: storyMusicSrc });
+  const soundBtn = dialog.querySelector("[data-story-sound]");
+  const soundIcon = soundBtn.querySelector(".material-symbols-rounded");
+
+  const syncSoundButton = () => {
+    const isAudible = isSoundOn && !isAwaitingSoundGesture;
+    soundIcon.textContent = isAudible ? "volume_up" : "volume_off";
+    soundBtn.setAttribute("aria-label", isAudible ? "Mute music" : "Play music");
+    soundBtn.classList.toggle("is-awaiting", isAwaitingSoundGesture);
+  };
+
+  // Browsers block audio until the visitor interacts (e.g. landing on /#story directly).
+  const retryMusicOnGesture = () => {
+    if (isAwaitingSoundGesture) return;
+    isAwaitingSoundGesture = true;
+    syncSoundButton();
+
+    const retry = (event) => {
+      if (event.target instanceof Element && event.target.closest("[data-story-sound]")) return;
+      dialog.removeEventListener("pointerdown", retry);
+      dialog.removeEventListener("keydown", retry);
+      isAwaitingSoundGesture = false;
+      syncMusic();
+    };
+    dialog.addEventListener("pointerdown", retry);
+    dialog.addEventListener("keydown", retry);
+  };
+
+  const syncMusic = () => {
+    const shouldPlay = dialog.open && !isClosing && isSoundOn && !isPaused;
+    syncSoundButton();
+
+    if (!shouldPlay) {
+      music.pause();
+      return;
+    }
+
+    music.play().then((started) => {
+      if (!started) retryMusicOnGesture();
+    });
+  };
+
+  const setSoundOn = (on) => {
+    isSoundOn = on;
+    isAwaitingSoundGesture = false;
+    writeSoundPreference(on);
+    syncMusic();
+  };
 
   const activeFill = () => segmentEls[currentIndex]?.querySelector(".story__segment-fill");
 
@@ -371,6 +427,7 @@ export const initStory = (reducedMotionMql) => {
   const setPaused = (paused) => {
     isPaused = paused;
     syncPlayState();
+    syncMusic();
   };
 
   const clearStoryHash = () => {
@@ -399,6 +456,7 @@ export const initStory = (reducedMotionMql) => {
     }
 
     dialog.showModal();
+    if (startIndex === 0) music.restart();
     goTo(startIndex);
     setPaused(false);
     stage.focus({ preventScroll: true });
@@ -414,6 +472,7 @@ export const initStory = (reducedMotionMql) => {
     window.clearInterval(timeTicker);
     window.cancelAnimationFrame(countUpFrame);
     clearStoryHash();
+    syncMusic();
 
     const finish = () => {
       dialog.close();
@@ -435,6 +494,11 @@ export const initStory = (reducedMotionMql) => {
   // Triggers are plain #story links so Back closes the story.
   triggers.forEach((trigger) => {
     trigger.addEventListener("click", () => {
+      // Start audio inside the click so Safari counts it as user-initiated.
+      if (isSoundOn) {
+        music.restart();
+        music.play();
+      }
       if (window.location.hash === STORY_HASH) open();
     });
   });
@@ -455,12 +519,14 @@ export const initStory = (reducedMotionMql) => {
   dialog.querySelector("[data-story-prev]").addEventListener("click", prev);
   dialog.querySelector("[data-story-next]").addEventListener("click", next);
   toggleBtn.addEventListener("click", () => setPaused(!isPaused));
+  soundBtn.addEventListener("click", () => setSoundOn(!isSoundOn || isAwaitingSoundGesture));
 
   segmentEls.forEach((el) => {
     el.addEventListener("click", () => goTo(Number(el.dataset.storyGoto)));
   });
 
   dialog.querySelector("[data-story-replay]")?.addEventListener("click", () => {
+    music.restart();
     goTo(0);
     setPaused(false);
   });
@@ -504,6 +570,8 @@ export const initStory = (reducedMotionMql) => {
     } else if (event.key === " " || event.key === "k") {
       event.preventDefault();
       setPaused(!isPaused);
+    } else if (event.key === "m") {
+      setSoundOn(!isSoundOn || isAwaitingSoundGesture);
     }
   });
 

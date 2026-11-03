@@ -249,6 +249,20 @@ body.is-story-open {
   font-size: 1.375rem;
 }
 
+.story__control--sound.is-awaiting {
+  animation: story-sound-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes story-sound-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--story-c1) 55%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 0.5rem color-mix(in srgb, var(--story-c1) 0%, transparent);
+  }
+}
+
 .story__control:focus-visible,
 .story__nav:focus-visible,
 .story-link:focus-visible,
@@ -946,6 +960,7 @@ body.is-story-open {
   .story.is-closing,
   .story__glow,
   .story-portrait__ring,
+  .story__control--sound.is-awaiting,
   .story-slide.is-active [data-story-animate],
   .story-slide.is-active .story-visual img,
   .story-slide--intro .story-slide__title,
