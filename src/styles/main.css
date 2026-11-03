@@ -1,27 +1,7 @@
-/* Styling based on bryntaylor.co.uk (palette + type + interactions) */
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("https://www.bryntaylor.co.uk/fonts/NeueMontreal-Regular.woff2")
-    format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Neue Montreal";
-  src: url("https://www.bryntaylor.co.uk/fonts/neue_montreal_medium_500-webfont.woff2")
-    format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
 }
 
 :root {
@@ -157,7 +137,7 @@ body {
   margin: 0;
   width: 100%;
   overflow-x: clip;
-  font-family: "Neue Montreal", system-ui, -apple-system, sans-serif;
+  font-family: "Switzer", system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-size: 1rem;
   color: var(--color-text);
@@ -1546,7 +1526,7 @@ html[data-hero-layout="overlap"] .hero-status {
 @media (min-width: 768px) {
   html[data-hero-layout="overlap"] .hero-one-liner {
     max-width: none;
-    font-size: min(70px, calc(100cqi / 15.4));
+    font-size: min(70px, calc(100cqi / 16));
   }
 
   html[data-hero-layout="overlap"] .hero-line {
@@ -5502,7 +5482,7 @@ html[data-theme="dark"] .case-study-test-block--tone-2 {
   gap: 0.5rem;
   white-space: nowrap;
   color: var(--color-muted);
-  font-family: "Neue Montreal", sans-serif;
+  font-family: "Switzer", sans-serif;
   font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.3;
