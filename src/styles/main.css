@@ -1127,25 +1127,17 @@ html[data-hero-layout="overlap"] .hero-actions__secondary {
   align-items: center;
   justify-content: center;
   min-height: 2.75rem;
-  padding: 0.625rem 0.25rem;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--color-text) 24%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+  backdrop-filter: blur(8px);
   font-size: 0.9375rem;
   font-weight: 500;
   line-height: 1.2;
-  color: var(--color-muted);
-  transition: opacity 0.25s var(--ease), color 0.25s var(--ease);
-}
-
-html[data-hero-layout="overlap"] .hero-actions__secondary::after {
-  content: "";
-  position: absolute;
-  left: 0.25rem;
-  right: 0.25rem;
-  bottom: 0.625rem;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.25s var(--ease);
+  color: var(--color-text);
+  transition: transform 0.25s var(--ease), background 0.25s var(--ease),
+    border-color 0.25s var(--ease), color 0.25s var(--ease);
 }
 
 html[data-hero-layout="overlap"] .hero-actions__primary:focus-visible,
@@ -1167,12 +1159,9 @@ html[data-hero-layout="overlap"] .hero-actions__primary:active {
 
 html[data-hero-layout="overlap"] .hero-actions__secondary:focus-visible,
 html[data-hero-layout="overlap"] .hero-actions__secondary:active {
-  color: var(--color-text);
-}
-
-html[data-hero-layout="overlap"] .hero-actions__secondary:focus-visible::after,
-html[data-hero-layout="overlap"] .hero-actions__secondary:active::after {
-  transform: scaleX(1);
+  transform: translateY(-0.125rem);
+  border-color: var(--color-text);
+  background: color-mix(in srgb, var(--color-text) 8%, transparent);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1186,12 +1175,9 @@ html[data-hero-layout="overlap"] .hero-actions__secondary:active::after {
   }
 
   html[data-hero-layout="overlap"] .hero-actions__secondary:hover {
-    opacity: var(--opacity-hover);
-    color: var(--color-text);
-  }
-
-  html[data-hero-layout="overlap"] .hero-actions__secondary:hover::after {
-    transform: scaleX(1);
+    transform: translateY(-0.125rem);
+    border-color: var(--color-text);
+    background: color-mix(in srgb, var(--color-text) 8%, transparent);
   }
 }
 
@@ -1620,17 +1606,6 @@ html[data-hero-layout="overlap"] .work-masonry {
   html[data-hero-layout="overlap"] .hero-actions__primary,
   html[data-hero-layout="overlap"] .hero-actions__secondary {
     width: 100%;
-  }
-
-  html[data-hero-layout="overlap"] .hero-actions__secondary {
-    padding: 0.625rem 1.25rem;
-    border: 1px solid var(--color-border-default);
-    border-radius: 999px;
-    background: var(--color-surface);
-  }
-
-  html[data-hero-layout="overlap"] .hero-actions__secondary::after {
-    display: none;
   }
 }
 
